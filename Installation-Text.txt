@@ -1,0 +1,14 @@
+php artisan migrate
+
+php artisan db:seed --class=PermissionTableSeeder
+
+php artisan db:seed --class=CreateAdminUserSeeder
+
+php artisan db:seed --class=SubjectSeeder
+
+php artisan db:seed --class=DayOfWeekSeeder
+
+php artisan db:seed --class=InstitutionClassSeeder
+
+php artisan db:seed --class=ClassSectionSeeder
+
