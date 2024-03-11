@@ -43,6 +43,12 @@
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
+            <strong>Assign Class:</strong>
+            {!! Form::select('assign_class[]', ['' => 'Select One']+$institutionClass,'', array('id' => 'class', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required','multiple')) !!} 
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
             <strong>Phone:</strong>
             {!! Form::text('mobile_no', null, array('placeholder' => 'Phone','class' => 'form-control')) !!}
         </div>

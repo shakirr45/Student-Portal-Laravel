@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
 use Hash;
+use App\Models\ClassAssign;
+
   
 class AuthController extends Controller
 {
@@ -60,6 +62,25 @@ class AuthController extends Controller
             // if($currentLoginRoleInfo == "Student"){
 
             // }
+
+            $currentUserClass = Auth::user()->assign_class;
+
+            $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
+
+            $studentWiseClassShow = ClassAssign::where('class', $currentUserClass)->get();
+
+            // $studentWiseClassSubject = !empty($studentWiseClassShow->subjects) ? $studentWiseClassShow->subjects : " ";
+
+            // dd($data = $studentWiseClassShow->toArray());
+
+            // $data = $studentWiseClassShow->toArray();
+
+            // foreach($data as $d){
+
+            //     $reArrangeSIAndAsiUsers[$d['id']] = $d['subjects'];
+
+            // }
+            // dd($reArrangeSIAndAsiUsers);
 
             return redirect()->intended('dashboard')
             ->withSuccess('You have Successfully loggedin');

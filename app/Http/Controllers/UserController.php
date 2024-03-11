@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Models\InstitutionClass;
 use Spatie\Permission\Models\Role;
 use DB;
 use Hash;
 use Illuminate\Support\Arr;
 use Carbon\Carbon;
+
+
 class UserController extends Controller
 {    function __construct()
     {
@@ -40,7 +43,6 @@ class UserController extends Controller
         //     return "false";
         // }
 
-
         $data = User::orderBy('id','DESC')->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
@@ -53,8 +55,10 @@ class UserController extends Controller
      */
     public function create()
     {
+        $institutionClass = InstitutionClass::dataList();
+
         $roles = Role::pluck('name','name')->all();
-        return view('users.create',compact('roles'));
+        return view('users.create',compact('roles','institutionClass'));
     }
     
     /**
@@ -68,13 +72,17 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
+            'assign_class' => 'required',
             'user_id' => 'required|unique:users,user_id',
             'mobile_no' => 'required|unique:users,mobile_no',
             'password' => 'required|same:confirm-password',
             'roles' => 'required'
         ]);
-    
+
+       
         $input = $request->all();
+        $input['assign_class'] = json_encode($input['assign_class']);
+
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
@@ -104,11 +112,18 @@ class UserController extends Controller
      */
     public function edit($id)
     {
+
         $user = User::find($id);
+
+        $institutionClass = InstitutionClass::dataList();
+
+        $institutionClassSelected =  !empty( $user->assign_class ) ? json_decode( $user->assign_class ) : [];
+
         $roles = Role::pluck('name','name')->all();
+
         $userRole = $user->roles->pluck('name','name')->all();
     
-        return view('users.edit',compact('user','roles','userRole'));
+        return view('users.edit',compact('user','roles','userRole','institutionClass','institutionClassSelected'));
     }
     
     /**
@@ -122,6 +137,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+            'assign_class' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'user_id' => 'required|unique:users,user_id,'.$id,
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
@@ -137,7 +153,11 @@ class UserController extends Controller
         }
     
         $user = User::find($id);
+
+        $input['assign_class'] = json_encode($input['assign_class']);
+
         $user->update($input);
+        
         DB::table('model_has_roles')->where('model_id',$id)->delete();
     
         $user->assignRole($request->input('roles'));

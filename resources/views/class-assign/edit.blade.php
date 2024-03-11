@@ -61,7 +61,7 @@
         </div>
 
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+           {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Assign Teacher</label>
 
@@ -73,10 +73,10 @@
                     </span>
                 @enderror
             </div>
-        </div>
+        </div> --}}
 
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+       {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Subject</label>
 
@@ -88,10 +88,10 @@
                     </span>
                 @enderror
             </div>
-        </div>
+        </div> --}}
 
 
-        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+       {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Day</label>
 
@@ -103,7 +103,7 @@
                     </span>
                 @enderror
             </div>
-        </div>
+        </div>  --}}
 
 
 

@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_assigns', function (Blueprint $table) {
+        Schema::create('manage_students', function (Blueprint $table) {
             $table->id();
-            $table->string('class')->nullable();
-            $table->string('section')->nullable();
-            // $table->string('subjects')->nullable();
-            // $table->integer('assign_teacher_id')->default(0);
-            // $table->text('days')->nullable()->comment('Json Data');
             $table->timestamps();
         });
     }
@@ -27,6 +22,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_assigns');
+        Schema::dropIfExists('manage_students');
     }
 };

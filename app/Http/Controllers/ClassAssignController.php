@@ -42,8 +42,12 @@ class ClassAssignController extends Controller
         // }
         
 
+        // $classes = ClassAssign::latest()
+        // ->with(['userAsTeacher'])
+        // ->paginate(5);
+
+
         $classes = ClassAssign::latest()
-        ->with(['userAsTeacher'])
         ->paginate(5);
 
         // dd($classes);
@@ -61,20 +65,23 @@ class ClassAssignController extends Controller
 
         $classSection = ClassSection::dataList();
 
-        $days = DayOfWeek::dataList();
+        // $days = DayOfWeek::dataList();
 
-        $subjects = Subject::dataList();
+        // $subjects = Subject::dataList();
 
-        $isTeacher = User::whereHas('roles', function($q) {
-            $q->where(function ($query) {
-                $query->where('name', 'Teacher')
-                ->orWhere('name', 'Headmaster');
-            });
-        })->pluck('name', 'id')->toArray();
+        // $isTeacher = User::whereHas('roles', function($q) {
+        //     $q->where(function ($query) {
+        //         $query->where('name', 'Teacher')
+        //         ->orWhere('name', 'Headmaster');
+        //     });
+        // })->pluck('name', 'id')->toArray();
 
         // dd($institutionClass);
         
-        return view('class-assign.create',compact('institutionClass','classSection','classSection','isTeacher','subjects','days'));
+        // return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
+
+
+        return view('class-assign.create',compact('institutionClass','classSection'));
     }
 
     /**
@@ -89,11 +96,11 @@ class ClassAssignController extends Controller
 
             'section' => 'required',
 			
-            'assign_teacher_id' => 'required',
+            // 'assign_teacher_id' => 'required',
 			
-            'days' => 'required',
+            // 'days' => 'required',
 
-            'subjects' => 'required',
+            // 'subjects' => 'required',
 			
         ]);
 
@@ -110,7 +117,7 @@ class ClassAssignController extends Controller
         $user = ClassAssign::create($input);
 
         return redirect()->route('class-assign.index')
-                        ->with('success','Product updated successfully');
+                        ->with('success','Class Assign successfully');
     }
 
     /**
@@ -130,19 +137,21 @@ class ClassAssignController extends Controller
 
         $classSection = ClassSection::dataList();
 
-        $days = DayOfWeek::dataList();
+        // $days = DayOfWeek::dataList();
 
-        $subjects = Subject::dataList();
+        // $subjects = Subject::dataList();
 
-        $isTeacher = User::whereHas('roles', function($q) {
-            $q->where(function ($query) {
-                $query->where('name', 'Teacher')
-                ->orWhere('name', 'Headmaster');
-            });
-        })->pluck('name', 'id')->toArray();
+        // $isTeacher = User::whereHas('roles', function($q) {
+        //     $q->where(function ($query) {
+        //         $query->where('name', 'Teacher')
+        //         ->orWhere('name', 'Headmaster');
+        //     });
+        // })->pluck('name', 'id')->toArray();
 
 
-        return view('class-assign.edit',compact('classAssign'),compact('isTeacher','institutionClass','classSection','days','subjects'));
+        // return view('class-assign.edit',compact('classAssign'),compact('isTeacher','institutionClass','classSection','days','subjects'));
+
+        return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection'));
 
     }
 
@@ -158,11 +167,11 @@ class ClassAssignController extends Controller
 
             'section' => 'required',
 			
-            'assign_teacher_id' => 'required',
+            // 'assign_teacher_id' => 'required',
 			
-            'days' => 'required',
+            // 'days' => 'required',
 
-            'subjects' => 'required',
+            // 'subjects' => 'required',
 			
         ]);
     

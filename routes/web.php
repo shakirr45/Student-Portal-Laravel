@@ -8,6 +8,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassAssignController;
+use App\Http\Controllers\SubjectAssignController;
 
   
 /*
@@ -48,6 +49,6 @@ Route::group(['middleware' => ['auth']], function() {
 
     
     Route::resource('class-assign', ClassAssignController::class);
-
+    Route::resource('subject-assign', SubjectAssignController::class);
 
 });

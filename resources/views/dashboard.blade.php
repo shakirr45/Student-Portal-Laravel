@@ -14,7 +14,34 @@
                         </div>
                     @endif
   
-                    You are Logged In
+
+                    <div class="container">
+                        <div class="row">
+
+
+
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <h3>Welcome {{ Auth::user()->name }}</h3><br>
+                        </div>
+                        </div>
+
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                        <h4>Class : {{ !empty(json_decode(Auth::user()->assign_class)) ? implode(', ', json_decode(Auth::user()->assign_class)) : "" }}</h4>
+                        </div>
+                        </div>
+
+
+
+
+
+                        </div>
+                    </div>
+                
+
                 </div>
             </div>
         </div>

@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_assigns', function (Blueprint $table) {
+        Schema::create('subject_assigns', function (Blueprint $table) {
             $table->id();
-            $table->string('class')->nullable();
-            $table->string('section')->nullable();
-            // $table->string('subjects')->nullable();
-            // $table->integer('assign_teacher_id')->default(0);
-            // $table->text('days')->nullable()->comment('Json Data');
+            $table->integer('class_assign_id')->default(0);
+            $table->string('subjects')->nullable();
+            $table->string('days')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_assigns');
+        Schema::dropIfExists('subject_assigns');
     }
 };

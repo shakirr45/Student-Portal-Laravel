@@ -28,19 +28,19 @@
             <th>No</th>
             <th>Class</th>
             <th>Section</th>
-            <th>Assign Teacher</th>
-            <th>Subjects</th>
-            <th>Day</th>
+            {{-- <th>Assign Teacher</th> --}}
+            {{-- <th>Subjects</th> --}}
+            {{-- <th>Day</th> --}}
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($classes as $class)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ $class->class }}</td>
-	        <td>{{ $class->section }}</td>
-	        <td>{{ $class->userAsTeacher->name }}</td>
-	        <td>{{ $class->subjects}}</td>
-	        <td>{{ $class->days }}</td>
+	        <td>{{ !empty($class->class) ? $class->class : " " }}</td>
+	        <td>{{ !empty($class->section) ? $class->section : " " }}</td>
+	        {{-- <td>{{ !empty($class->userAsTeacher->name) ? $class->userAsTeacher->name : " " }}</td> --}}
+	        {{-- <td>{{ !empty($class->subjects) ? $class->subjects : " "}}</td> --}}
+	        {{-- <td>{{ !empty($class->days) ? $class->days : " " }}</td> --}}
 	        <td>
                 <form action="{{ route('class-assign.destroy',$class->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('class-assign.show',$class->id) }}">Show</a>

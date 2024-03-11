@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->string('mobile_no')->nullable()->unique();
             $table->string('user_id')->nullable()->unique();
+            $table->string('assign_class')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');

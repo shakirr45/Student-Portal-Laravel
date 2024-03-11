@@ -11,9 +11,9 @@ class ClassAssign extends Model
     protected $fillable = [
         'class', 
         'section', 
-        'subjects', 
-        'assign_teacher_id', 
-        'days', 
+        // 'subjects', 
+        // 'assign_teacher_id', 
+        // 'days', 
     ];
 
     public function userAsTeacher()

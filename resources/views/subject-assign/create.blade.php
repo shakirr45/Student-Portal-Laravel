@@ -8,7 +8,7 @@
                 <h2>Assign New Class</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('class-assign.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('subject-assign.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -26,59 +26,28 @@
     @endif
 
 
-    <form action="{{ route('class-assign.store') }}" method="POST">
+    <form action="{{ route('subject-assign.store') }}" method="POST">
     	@csrf
-
 
          <div class="row">
 
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label for="" class="form-label">Institution Class</label>
+                    <label for="" class="form-label">Section Wise Class</label>
                     
-                    {!! Form::select('class', ['' => 'Select One']+$institutionClass,'', array('id' => 'class', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
+                    {!! Form::select('class_assign_id', ['' => 'Select One']+$reArrangeClass,'', array('id' => 'class_assign_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
                     
-                    @error('roles')
+                    @error('class_assign_id')
                         <span class="invalid-feedback">
                             {{ $message }}
                         </span>
                     @enderror
                 </div>
-            </div>
+            </div> 
 
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="form-group">
-                    <label for="" class="form-label">Section</label>
-                    
-                    {!! Form::select('section', ['0' => 'Select One']+$classSection,'', array('id' => 'section', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
-                    
-                    @error('roles')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-            </div>
-
-
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
-                <div class="form-group">
-                    <label for="" class="form-label">Assign Teacher</label>
-                    
-                    {!! Form::select('assign_teacher_id', ['' => 'Select One']+$isTeacher,'', array('id' => 'assign_teacher_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
-                    
-                    @error('roles')
-                        <span class="invalid-feedback">
-                            {{ $message }}
-                        </span>
-                    @enderror
-                </div>
-            </div> --}} 
-
-
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Subjects</label>
                     
@@ -90,13 +59,10 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}} 
+            </div> 
 
 
-            
-
-
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Days</label>
                     
@@ -108,8 +74,7 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}} 
-
+            </div> 
 
 
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -119,6 +84,5 @@
 
 
     </form>
-
 
 @endsection
