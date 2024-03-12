@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('subject_assigns', function (Blueprint $table) {
             $table->id();
             $table->integer('class_assign_id')->default(0);
+            $table->integer('assign_teacher_id')->default(0);
             $table->string('subjects')->nullable();
             $table->string('days')->nullable();
             $table->timestamps();

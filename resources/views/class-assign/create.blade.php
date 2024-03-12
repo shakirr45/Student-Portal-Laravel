@@ -37,7 +37,7 @@
                 <div class="form-group">
                     <label for="" class="form-label">Institution Class</label>
                     
-                    {!! Form::select('class', ['' => 'Select One']+$institutionClass,'', array('id' => 'class', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
+                    {!! Form::select('class_id', ['' => 'Select One']+$institutionClass,'', array('id' => 'class_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
                     
                     @error('roles')
                         <span class="invalid-feedback">

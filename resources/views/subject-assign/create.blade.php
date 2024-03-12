@@ -46,6 +46,20 @@
                 </div>
             </div> 
 
+         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="" class="form-label">Section Wise Teacher</label>
+                    
+                    {!! Form::select('assign_teacher_id', ['' => 'Select One']+$assignTeacher,'', array('id' => 'assign_teacher_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    
+                    @error('assign_teacher_id')
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div> 
+
 
          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">

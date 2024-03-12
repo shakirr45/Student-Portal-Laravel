@@ -48,6 +48,7 @@ class ClassAssignController extends Controller
 
 
         $classes = ClassAssign::latest()
+        ->with(['institutionClass'])
         ->paginate(5);
 
         // dd($classes);
@@ -92,7 +93,7 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
-            'class' => 'required',
+            'class_id' => 'required',
 
             'section' => 'required',
 			
@@ -163,7 +164,7 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
-            'class' => 'required',
+            'class_id' => 'required',
 
             'section' => 'required',
 			

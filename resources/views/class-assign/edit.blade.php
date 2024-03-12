@@ -36,7 +36,7 @@
             <div class="form-group">
                 <label for="" class="form-label">Class</label>
 
-                {!! Form::select('class', ['' =>'Select One']+$institutionClass,$classAssign->class, array('id' => 'class', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                {!! Form::select('class_id', ['' =>'Select One']+$institutionClass,$classAssign->class_id, array('id' => 'class', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
                 
                 @error('class')
                     <span class="invalid-feedback" >

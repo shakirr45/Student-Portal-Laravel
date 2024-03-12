@@ -29,17 +29,17 @@
             <th>Class Section Wise</th>
             <th>Subject</th>
             <th>Days</th>
-            {{-- <th>Assign Teacher</th> --}}
+            <th>Assign Teacher</th>
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($subjectAssign as $subjects)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($subjects->class_assign_id) ? $subjects->class_assign_id : " " }}</td>
+	        <td>{{ !empty($subjects->classAssign->class ) ? $subjects->classAssign->class  : " " }}</td>
 	        <td>{{ !empty($subjects->subjects) ? $subjects->subjects : " " }}</td>
 	        <td>{{ !empty($subjects->days) ? $subjects->days : " " }}</td>
 
-            {{-- <td>{{ !empty($subjects->userAsTeacher->name) ? $subjects->userAsTeacher->name : " " }}</td> --}}
+            <td>{{ !empty($subjects->userList->name) ? $subjects->userList->name : " " }}</td>
 	        <td>
                 <form action="{{ route('subject-assign.destroy',$subjects->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('subject-assign.show',$subjects->id) }}">Show</a>

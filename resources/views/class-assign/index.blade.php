@@ -36,7 +36,7 @@
 	    @foreach ($classes as $class)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($class->class) ? $class->class : " " }}</td>
+	        <td>{{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }}</td>
 	        <td>{{ !empty($class->section) ? $class->section : " " }}</td>
 	        {{-- <td>{{ !empty($class->userAsTeacher->name) ? $class->userAsTeacher->name : " " }}</td> --}}
 	        {{-- <td>{{ !empty($class->subjects) ? $class->subjects : " "}}</td> --}}

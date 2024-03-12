@@ -47,6 +47,21 @@
         </div>
 
 
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+                <label for="" class="form-label">Teacher Section Wise</label>
+
+                {!! Form::select('assign_teacher_id', ['' =>'Select One']+$assignTeacher,$subjectAssign->assign_teacher_id, array('id' => 'assign_teacher_id', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                
+                @error('assign_teacher_id')
+                    <span class="invalid-feedback" >
+                        <b>{{ $message }}</b>
+                    </span>
+                @enderror
+            </div>
+        </div>
+
+
         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Subject</label>

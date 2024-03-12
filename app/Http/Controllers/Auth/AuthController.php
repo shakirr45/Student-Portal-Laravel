@@ -9,6 +9,7 @@ use Session;
 use App\Models\User;
 use Hash;
 use App\Models\ClassAssign;
+use App\Models\SubjectAssign;
 
   
 class AuthController extends Controller
@@ -67,7 +68,11 @@ class AuthController extends Controller
 
             $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
 
-            $studentWiseClassShow = ClassAssign::where('class', $currentUserClass)->get();
+            $studentWiseClassShow = SubjectAssign::where('class_assign_id', $currentUserClass)
+            ->get();
+
+
+            // dd($studentWiseClassShow);
 
             // $studentWiseClassSubject = !empty($studentWiseClassShow->subjects) ? $studentWiseClassShow->subjects : " ";
 
@@ -82,8 +87,10 @@ class AuthController extends Controller
             // }
             // dd($reArrangeSIAndAsiUsers);
 
-            return redirect()->intended('dashboard')
-            ->withSuccess('You have Successfully loggedin');
+            return view('dashboard',compact('studentWiseClassShow'))->withSuccess('You have Successfully loggedin');
+
+            // return redirect()->intended('dashboard')
+            // ->withSuccess('You have Successfully loggedin');
 
         }
   

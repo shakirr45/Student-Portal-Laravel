@@ -19,7 +19,7 @@
             <div class="form-group">
                 <strong>Class:</strong>
 
-                {{ !empty($classAssign->class) ? $classAssign->class : '' }}
+                {{ !empty($classAssign->institutionClass->name) ? $classAssign->institutionClass->name : '' }}
 
             </div>
         </div>

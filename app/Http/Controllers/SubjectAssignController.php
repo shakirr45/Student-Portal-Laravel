@@ -8,6 +8,7 @@ use App\Http\Requests\StoreSubjectAssignRequest;
 use App\Http\Requests\UpdateSubjectAssignRequest;
 use App\Models\DayOfWeek;
 use App\Models\Subject;
+use App\Models\User;
 use App\Models\ClassAssign;
 
 class SubjectAssignController extends Controller
@@ -26,6 +27,8 @@ class SubjectAssignController extends Controller
     {
 
         $subjectAssign = SubjectAssign::latest()
+        ->with(['classAssign'])
+        ->with(['userList'])
         ->paginate(5);
 
         // dd($subjectAssign);
@@ -39,6 +42,15 @@ class SubjectAssignController extends Controller
      */
     public function create()
     {
+
+        $assignTeacher = User::whereHas('roles', function($q) {
+            $q->where(function ($query) {
+                $query->where('name', 'Teacher')
+                ->orWhere('name', 'Headmaster');
+            });
+        })->pluck('name', 'id')->toArray();
+
+        // dd($assignTeacher);
 
         $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
 
@@ -58,7 +70,7 @@ class SubjectAssignController extends Controller
 
         $subjects = Subject::dataList();
 
-        return view('subject-assign.create',compact('days','subjects','reArrangeClass'));
+        return view('subject-assign.create',compact('days','subjects','reArrangeClass','assignTeacher'));
 
     }
 
@@ -73,6 +85,8 @@ class SubjectAssignController extends Controller
         $this->validate($request, [
 
             'class_assign_id' => 'required',
+
+            'assign_teacher_id' => 'required',
 
             'subjects' => 'required',
 			
@@ -106,6 +120,17 @@ class SubjectAssignController extends Controller
     public function edit(SubjectAssign $subjectAssign)
     {
         //
+        $assignTeacher = User::whereHas('roles', function($q) {
+            $q->where(function ($query) {
+                $query->where('name', 'Teacher')
+                ->orWhere('name', 'Headmaster');
+            });
+        })->pluck('name', 'id')->toArray();
+
+        // dd($assignTeacher);
+
+        $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
+        
 
         $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
 
@@ -126,7 +151,7 @@ class SubjectAssignController extends Controller
         $days = DayOfWeek::dataList();
 
 
-        return view('subject-assign.edit',compact('subjectAssign','reArrangeClass','subjects','days'));
+        return view('subject-assign.edit',compact('subjectAssign','assignTeacher','reArrangeClass','subjects','days'));
 
     }
 
@@ -141,6 +166,8 @@ class SubjectAssignController extends Controller
         $this->validate($request, [
 
             'class_assign_id' => 'required',
+
+            'assign_teacher_id' => 'required',
 
             'subjects' => 'required',
 			

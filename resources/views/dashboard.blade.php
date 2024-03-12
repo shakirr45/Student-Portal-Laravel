@@ -30,7 +30,11 @@
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                        <h4>Class : {{ !empty(json_decode(Auth::user()->assign_class)) ? implode(', ', json_decode(Auth::user()->assign_class)) : "" }}</h4>
+                       {{-- <h4>Class : {{ !empty(json_decode(Auth::user()->assign_class)) ? implode(', ', json_decode(Auth::user()->assign_class)) : "" }}</h4> --}}
+
+                       @foreach($studentWiseClassShow as $class)
+                            <h3>Class - {{ !empty( $class->class_assign_id ) ? $class->class_assign_id : " " }} Teacher - {{ !empty( $class->assign_teacher_id ) ? $class->assign_teacher_id : " " }}</h3>
+                       @endforeach
                         </div>
                         </div>
 

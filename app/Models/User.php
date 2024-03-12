@@ -52,4 +52,9 @@ class User extends Authenticatable
     {
         return $this->hasOne('App\Models\ClassAssign');
     }
+
+    public function subjectAssign()
+    {
+        return $this->hasOne('App\Models\SubjectAssign');
+    }
 }
