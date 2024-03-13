@@ -23,22 +23,36 @@
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                            <h3>Welcome {{ Auth::user()->name }}</h3><br>
+                            <h3>Welcome {{ !empty(Auth::user()->name) ? Auth::user()->name : " " }}</h3><br>
+                        </div>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="form-group">
+                            <h3>Section {{ !empty(Auth::user()->section_id) ? Auth::user()->section_id : " " }}</h3><br>
                         </div>
                         </div>
 
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                       {{-- <h4>Class : {{ !empty(json_decode(Auth::user()->assign_class)) ? implode(', ', json_decode(Auth::user()->assign_class)) : "" }}</h4> --}}
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Class</th>
+                                    <th>Teacher</th>
+                                    <th>Subject</th>
+                                </tr>
+                                @foreach($studentWiseClassShow as $class)
+                                <tr>
+                                    <td>{{ !empty( $class->class_assign_id ) ? $class->class_assign_id : " " }}</td>
+                                    <td>{{ !empty( $class->assign_teacher_id ) ? $class->assign_teacher_id : " " }}</td>
+                                    <td>{{ !empty( $class->subjects ) ? $class->subjects : " " }}</td>
+                                </tr>
+                                @endforeach
 
-                       @foreach($studentWiseClassShow as $class)
-                            <h3>Class - {{ !empty( $class->class_assign_id ) ? $class->class_assign_id : " " }} Teacher - {{ !empty( $class->assign_teacher_id ) ? $class->assign_teacher_id : " " }}</h3>
-                       @endforeach
+                            </table>
                         </div>
                         </div>
-
-
 
 
 

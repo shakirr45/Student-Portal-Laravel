@@ -32,10 +32,10 @@ class PermissionTableSeeder extends Seeder
            'class-edit',
            'class-delete',
 
-           'subject-list',
-           'subject-create',
-           'subject-edit',
-           'subject-delete'
+           'class-wise-subject-list',
+           'class-wise-subject-create',
+           'class-wise-subject-edit',
+           'class-wise-subject-delete'
         ];
      
         foreach ($permissions as $permission) {

@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class ManageStudent extends Model
 {
     use HasFactory;
+    // protected $hidden = [
+    //     'user_id',
+    //     'section_id',
+    // ];
 }

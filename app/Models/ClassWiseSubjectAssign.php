@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class SubjectAssign extends Model
+class ClassWiseSubjectAssign extends Model
 {
     use HasFactory;
 
@@ -26,5 +26,4 @@ class SubjectAssign extends Model
     {
         return $this->belongsTo('App\Models\User', 'assign_teacher_id');
     }
-    
 }

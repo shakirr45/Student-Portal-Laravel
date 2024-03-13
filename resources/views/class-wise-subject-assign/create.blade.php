@@ -8,12 +8,12 @@
                 <h2>Assign New Class</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('subject-assign.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('class-wise-subject-assign.index') }}"> Back</a>
             </div>
         </div>
     </div>
 
-
+    
     @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('subject-assign.store') }}" method="POST">
+    <form action="{{ route('class-wise-subject-assign.store') }}" method="POST">
     	@csrf
 
          <div class="row">
@@ -34,9 +34,9 @@
 
          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
-                    <label for="" class="form-label">Section Wise Class</label>
+                    <label for="" class="form-label">Class</label>
                     
-                    {!! Form::select('class_assign_id', ['' => 'Select One']+$reArrangeClass,'', array('id' => 'class_assign_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    {!! Form::select('class_assign_id', ['' => 'Select One']+$institutionClass,'', array('id' => 'class_assign_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
                     
                     @error('class_assign_id')
                         <span class="invalid-feedback">
@@ -45,6 +45,23 @@
                     @enderror
                 </div>
             </div> 
+
+
+         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="" class="form-label">Section</label>
+                    
+                    {!! Form::select('section_assign_id', ['' => 'Select One']+$classSection,'', array('id' => 'section_assign_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    
+                    @error('section_assign_id')
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div> 
+
+            
 
          <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">

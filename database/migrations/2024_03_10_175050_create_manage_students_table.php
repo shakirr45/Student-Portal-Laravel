@@ -13,9 +13,12 @@ return new class extends Migration
     {
         Schema::create('manage_students', function (Blueprint $table) {
             $table->id();
+            // $table->integer('user_id')->default(0);
+            // $table->integer('section')->default(0);
             $table->timestamps();
         });
     }
+    
 
     /**
      * Reverse the migrations.

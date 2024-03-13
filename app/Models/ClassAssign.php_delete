@@ -21,10 +21,10 @@ class ClassAssign extends Model
         return $this->belongsTo('App\Models\User', 'assign_teacher_id');
     }
 
-    public function subjectAssign()
-    {
-        return $this->hasOne('App\Models\SubjectAssign');
-    }
+    // public function subjectAssign()
+    // {
+    //     return $this->hasOne('App\Models\SubjectAssign');
+    // }
 
     public function institutionClass()
     {

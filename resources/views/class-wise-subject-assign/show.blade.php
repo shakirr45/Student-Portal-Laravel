@@ -8,18 +8,28 @@
                 <h2> Show Assign Subject Details</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('subject-assign.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('class-wise-subject-assign.index') }}"> Back</a>
             </div>
         </div>
     </div>
 
 
     <div class="row">
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Class:</strong>
 
-                {{ !empty($subjectAssign->class_assign_id) ? $subjectAssign->class_assign_id : '' }}
+                {{ !empty($classWiseSubjectAssign->class_assign_id) ? $classWiseSubjectAssign->class_assign_id : '' }}
+
+            </div>
+        </div>
+
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Section:</strong>
+
+                {{ !empty($classWiseSubjectAssign->section_assign_id) ? $classWiseSubjectAssign->section_assign_id : '' }}
 
             </div>
         </div>
@@ -29,7 +39,7 @@
             <div class="form-group">
                 <strong>Assign Teacher:</strong>
 
-                {{ !empty($subjectAssign->assign_teacher_id) ? $subjectAssign->assign_teacher_id : '' }}
+                {{ !empty($classWiseSubjectAssign->assign_teacher_id) ? $classWiseSubjectAssign->assign_teacher_id : '' }}
 
             </div>
         </div>
@@ -38,7 +48,7 @@
        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Subjects:</strong>
-                {{ !empty($subjectAssign->subjects) ? $subjectAssign->subjects : '' }}
+                {{ !empty($classWiseSubjectAssign->subjects) ? $classWiseSubjectAssign->subjects : '' }}
 
             </div>
         </div>  
@@ -47,7 +57,7 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Days:</strong>
-                {{ !empty($subjectAssign->days) ? $subjectAssign->days : '' }}
+                {{ !empty($classWiseSubjectAssign->days) ? $classWiseSubjectAssign->days : '' }}
             </div>
         </div>
 

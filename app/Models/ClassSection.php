@@ -14,7 +14,7 @@ class ClassSection extends Model
 
     protected function dataList( )
 	{
-		$data = ClassSection::orderBy('id', 'ASC')->pluck('name', 'name')->toArray();
+		$data = ClassSection::orderBy('id', 'ASC')->pluck('name', 'id')->toArray();
 		
 		return $data;
 	}

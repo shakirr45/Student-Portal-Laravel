@@ -9,7 +9,7 @@ use Session;
 use App\Models\User;
 use Hash;
 use App\Models\ClassAssign;
-use App\Models\SubjectAssign;
+use App\Models\ClassWiseSubjectAssign;
 
   
 class AuthController extends Controller
@@ -64,12 +64,20 @@ class AuthController extends Controller
 
             // }
 
-            $currentUserClass = Auth::user()->assign_class;
+            $currentUserClass = !empty(Auth::user()->assign_class) ? Auth::user()->assign_class : "";
+
+            $currentUserSectionId = !empty(Auth::user()->section_id) ? Auth::user()->section_id : "" ;
 
             $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
 
-            $studentWiseClassShow = SubjectAssign::where('class_assign_id', $currentUserClass)
+            $studentWiseClassShow = ClassWiseSubjectAssign::where('class_assign_id', $currentUserClass)
+            ->where('section_assign_id', $currentUserSectionId)
             ->get();
+
+
+            // $studentWiseClassShow = ClassWiseSubjectAssign::where('class_assign_id', $currentUserClass)
+            // ->with(['classAssign'])
+            // ->get();
 
 
             // dd($studentWiseClassShow);
@@ -87,10 +95,16 @@ class AuthController extends Controller
             // }
             // dd($reArrangeSIAndAsiUsers);
 
-            return view('dashboard',compact('studentWiseClassShow'))->withSuccess('You have Successfully loggedin');
+            // return view('dashboard',compact('studentWiseClassShow'))->withSuccess('You have Successfully loggedin');
 
             // return redirect()->intended('dashboard')
             // ->withSuccess('You have Successfully loggedin');
+
+
+            // return redirect()->intended('dashboard')->with(compact('currentUserClass'))->withSuccess('You have Successfully logged in');
+
+            return view('dashboard', compact('studentWiseClassShow'));
+
 
         }
   

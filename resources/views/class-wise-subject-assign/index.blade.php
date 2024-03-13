@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 @can('class-create')
-                <a class="btn btn-success" href="{{ route('subject-assign.create') }}"> Create New Class Wise Subject</a>
+                <a class="btn btn-success" href="{{ route('class-wise-subject-assign.create') }}"> Create New Class Wise Subject</a>
                 @endcan
             </div>
         </div>
@@ -26,31 +26,37 @@
     <table class="table table-bordered">
         <tr>
             <th>No</th>
-            <th>Class Section Wise</th>
+            <th>Class</th>
+            <th>Section</th>
             <th>Subject</th>
             <th>Days</th>
             <th>Assign Teacher</th>
             <th width="280px">Action</th>
         </tr>
-	    @foreach ($subjectAssign as $subjects)
+	    @foreach ($classWiseSubjectAssign as $subjects)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($subjects->classAssign->class ) ? $subjects->classAssign->class  : " " }}</td>
+	        <td>
+                {{ !empty($subjects->class_assign_id ) ? $subjects->class_assign_id  : " " }}
+               {{-- {{ !empty($subjects->institutionClass->name ) ? $subjects->institutionClass->name  : " " }} --}}
+
+            </td>
+	        <td>{{ !empty($subjects->section_assign_id) ? $subjects->section_assign_id : " " }}</td>
 	        <td>{{ !empty($subjects->subjects) ? $subjects->subjects : " " }}</td>
 	        <td>{{ !empty($subjects->days) ? $subjects->days : " " }}</td>
 
             <td>{{ !empty($subjects->userList->name) ? $subjects->userList->name : " " }}</td>
 	        <td>
-                <form action="{{ route('subject-assign.destroy',$subjects->id) }}" method="POST">
-                    <a class="btn btn-info" href="{{ route('subject-assign.show',$subjects->id) }}">Show</a>
-                    @can('subject-edit')
-                    <a class="btn btn-primary" href="{{ route('subject-assign.edit',$subjects->id) }}">Edit</a>
+                <form action="{{ route('class-wise-subject-assign.destroy',$subjects->id) }}" method="POST">
+                    <a class="btn btn-info" href="{{ route('class-wise-subject-assign.show',$subjects->id) }}">Show</a>
+                    @can('class-wise-subject-edit')
+                    <a class="btn btn-primary" href="{{ route('class-wise-subject-assign.edit',$subjects->id) }}">Edit</a>
                     @endcan
 
 
                     @csrf
                     @method('DELETE')
-                    @can('subject-delete')
+                    @can('class-wise-subject-delete')
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
@@ -60,7 +66,7 @@
     </table>
 
 
-    {!! $subjectAssign->links() !!}
+    {!! $classWiseSubjectAssign->links() !!}
 
 
 @endsection

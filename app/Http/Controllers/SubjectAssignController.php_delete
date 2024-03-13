@@ -9,7 +9,9 @@ use App\Http\Requests\UpdateSubjectAssignRequest;
 use App\Models\DayOfWeek;
 use App\Models\Subject;
 use App\Models\User;
-use App\Models\ClassAssign;
+// use App\Models\ClassAssign;
+use App\Models\InstitutionClass;
+use App\Models\ClassSection;
 
 class SubjectAssignController extends Controller
 {
@@ -27,13 +29,14 @@ class SubjectAssignController extends Controller
     {
 
         $subjectAssign = SubjectAssign::latest()
-        ->with(['classAssign'])
+        ->with(['institutionClass'])
         ->with(['userList'])
         ->paginate(5);
+        
 
         // dd($subjectAssign);
 
-        return view('subject-assign.index',compact('subjectAssign'))
+        return view('class-wise-subject-assign.index',compact('subjectAssign'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -52,25 +55,30 @@ class SubjectAssignController extends Controller
 
         // dd($assignTeacher);
 
-        $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
+        // $classAssign = ClassAssign::get(['class_id', 'section'])->toArray();
 
-        $reArrangeClass = [];
+        // $reArrangeClass = [];
         
-        if (!empty($classAssign)) {
+        // if (!empty($classAssign)) {
 
-            foreach ($classAssign as $value) {
+        //     foreach ($classAssign as $value) {
 
-                $reArrangeClass[$value['id']] = ' Class -- '.$value['class'] . ' -- Section: ' . $value['section'];
+        //         $reArrangeClass[$value['class_id']] = ' Class -- '.$value['class_id'] . ' -- Section: ' . $value['section'];
 
-            }
-            // dd($reArrangeClass);
-        }
+
+        //     }
+        //     // dd($reArrangeClass->id);
+        // }
+
+        $institutionClass = InstitutionClass::dataList();
+
+        $classSection = ClassSection::dataList();
 
         $days = DayOfWeek::dataList();
 
         $subjects = Subject::dataList();
 
-        return view('subject-assign.create',compact('days','subjects','reArrangeClass','assignTeacher'));
+        return view('class-wise-subject-assign.create',compact('days','subjects','institutionClass','classSection','assignTeacher'));
 
     }
 
@@ -85,6 +93,8 @@ class SubjectAssignController extends Controller
         $this->validate($request, [
 
             'class_assign_id' => 'required',
+
+            'section_assign_id' => 'required',
 
             'assign_teacher_id' => 'required',
 
@@ -101,7 +111,7 @@ class SubjectAssignController extends Controller
 
         SubjectAssign::create($input);
 
-        return redirect()->route('subject-assign.index')
+        return redirect()->route('class-wise-subject-assign.index')
                         ->with('success','Subject Assign successfully');
     }
 
@@ -111,7 +121,7 @@ class SubjectAssignController extends Controller
     public function show(SubjectAssign $subjectAssign)
     {
         //
-        return view('subject-assign.show',compact('subjectAssign'));
+        return view('class-wise-subject-assign.show',compact('subjectAssign'));
     }
 
     /**
@@ -129,29 +139,31 @@ class SubjectAssignController extends Controller
 
         // dd($assignTeacher);
 
-        $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
+        // $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
+
+        // $reArrangeClass = [];
         
+        // if (!empty($classAssign)) {
 
-        $classAssign = ClassAssign::get(['id', 'class', 'section'])->toArray();
+        //     foreach ($classAssign as $value) {
 
-        $reArrangeClass = [];
+        //         $reArrangeClass[$value['id']] = ' Class -- '.$value['class'] . ' -- Section: ' . $value['section'];
+
+        //     }
+        //     // dd($reArrangeClass);
+        // }
+
         
-        if (!empty($classAssign)) {
+        $institutionClass = InstitutionClass::dataList();
 
-            foreach ($classAssign as $value) {
+        $classSection = ClassSection::dataList();
 
-                $reArrangeClass[$value['id']] = ' Class -- '.$value['class'] . ' -- Section: ' . $value['section'];
-
-            }
-            // dd($reArrangeClass);
-        }
-
-         $subjects = Subject::dataList();
+        $subjects = Subject::dataList();
 
         $days = DayOfWeek::dataList();
 
 
-        return view('subject-assign.edit',compact('subjectAssign','assignTeacher','reArrangeClass','subjects','days'));
+        return view('class-wise-subject-assign.edit',compact('subjectAssign','assignTeacher','institutionClass','classSection','subjects','days'));
 
     }
 
@@ -167,6 +179,8 @@ class SubjectAssignController extends Controller
 
             'class_assign_id' => 'required',
 
+            'section_assign_id' => 'required',
+
             'assign_teacher_id' => 'required',
 
             'subjects' => 'required',
@@ -181,7 +195,7 @@ class SubjectAssignController extends Controller
 
         $updateData->update($input);
 
-        return redirect()->route('subject-assign.index')
+        return redirect()->route('class-wise-subject-assign.index')
                         ->with('success','Subject Updated successfully');
     }
 
@@ -193,7 +207,7 @@ class SubjectAssignController extends Controller
         //
         $subjectAssign->delete();
     
-        return redirect()->route('subject-assign.index')
+        return redirect()->route('class-wise-subject-assign.index')
                         ->with('success','Assigned Subject deleted successfully');
     }
 }

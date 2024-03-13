@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'mobile_no',
         'user_id',
+        'section_id',
         'assign_class',
     ];
 
@@ -53,8 +54,8 @@ class User extends Authenticatable
         return $this->hasOne('App\Models\ClassAssign');
     }
 
-    public function subjectAssign()
+    public function classWiseSubjectAssign()
     {
-        return $this->hasOne('App\Models\SubjectAssign');
+        return $this->hasOne('App\Models\ClassWiseSubjectAssign');
     }
 }

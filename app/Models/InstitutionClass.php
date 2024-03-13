@@ -24,4 +24,10 @@ class InstitutionClass extends Model
     {
         return $this->hasOne('App\Models\ClassAssign');
     }
+
+    public function classWiseSubjectAssign()
+    {
+        return $this->hasOne('App\Models\ClassWiseSubjectAssign');
+    }
+
 }
