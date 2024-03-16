@@ -106,6 +106,24 @@
         </div>  
 
 
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="form-group">
+                <label for="" class="form-label">class_schedule</label>
+
+                {!! Form::text('class_schedule', $classAssign->class_schedule, ['placeholder'  => 'Class Schedule','class' => 'form-control']) !!}
+
+
+                @error('class_schedule')
+                    <span class="invalid-feedback" >
+                        <b>{{ $message }}</b>
+                    </span>
+                @enderror
+            </div>
+        </div>  
+
+
+
+
 
 
 		    <div class="col-xs-12 col-sm-12 col-md-12 text-center">

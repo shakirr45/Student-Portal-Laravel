@@ -54,7 +54,6 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('class-wise-subject-assign', SubjectAssignController::class);
 
     Route::resource('manage-students', ManageStudentController::class);
-    // Route::resource('class-wise-subject-assign', ClassWiseSubjectAssignController::class);
 
     Route::get('pagination-search', [HomeController::class, 'pagination'])->name('pagination-search');
 

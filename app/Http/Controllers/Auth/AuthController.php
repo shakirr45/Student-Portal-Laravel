@@ -59,6 +59,8 @@ class AuthController extends Controller
 
             $currentUserClass = !empty(Auth::user()->assign_class) ? Auth::user()->assign_class : "";
 
+            $currentUserId = !empty(Auth::user()->id) ? Auth::user()->id : "";
+
             $currentUserSectionId = !empty(Auth::user()->section_id) ? Auth::user()->section_id : "" ;
 
             $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
@@ -78,7 +80,8 @@ class AuthController extends Controller
             // dd($studentWiseClassShow);
 
 
-        $currentDate = Carbon::now();
+        // $currentDate = Carbon::now();
+        $currentDate = Carbon::now()->setTimezone('Asia/Dhaka');
         $dayOfWeekForToday = $currentDate->format('l'); // Get the current day of the week in full lowercase (e.g., "sunday")
 
             // dd($dayOfWeekForToday);
@@ -183,8 +186,19 @@ class AuthController extends Controller
 
 
         }elseif($currentLoginRoleInfo == "Teacher"){
-            return redirect()->intended('dashboard')
-            ->withSuccess('You have Successfully loggedin');
+
+            $teachertWiseClassShow = ClassAssign::where('user_id', $currentUserId)
+            ->get();
+
+            $currentDateDaysClass = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', $dayOfWeekForToday)
+            ->get();
+
+            // dd($teachertWiseClassShow);
+
+            return view('teachers.index',compact('teachertWiseClassShow','dayOfWeekForToday','currentDateDaysClass'));
+            // return redirect()->intended('dashboard')
+            // ->withSuccess('You have Successfully loggedin');
         }
 
 

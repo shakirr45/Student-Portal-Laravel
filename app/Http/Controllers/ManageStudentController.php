@@ -22,15 +22,29 @@ class ManageStudentController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $serchCondition  = [];
+
+        if ( !empty($request->user_id ) )
+		{
+
+			 $serchCondition['user_id']  = $request->user_id;
+
+		}
+        
+
         $manageStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
-        })->latest()->paginate(5);
-        
-        return view('manage-students.index',compact('manageStudents'))
-            ->with('i', (request()->input('page', 1) - 1) * 5);
+        })->where($serchCondition)->latest()->paginate(5);
+
+    // Check if no students are found
+    if ($manageStudents->isEmpty()) {
+        return view('manage-students.index')->with('noDataFound', true);
+    }
+
+    return view('manage-students.index', compact('manageStudents'))
+        ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
     /**

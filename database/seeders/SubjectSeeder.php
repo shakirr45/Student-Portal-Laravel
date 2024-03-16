@@ -28,6 +28,7 @@ class SubjectSeeder extends Seeder
         $data["Bangladesh & World"] =  150;
         $data["Agriculture Studies"] =  134;
         $data["Home Science"] =  151;
+        $data["Off Time"] =  00;
         
         foreach ($data as $key => $value) {
             

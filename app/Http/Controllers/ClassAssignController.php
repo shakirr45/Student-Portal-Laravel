@@ -90,6 +90,9 @@ class ClassAssignController extends Controller
     public function store(Request $request)
     {
 
+        // dd($request->all());
+        
+        
         $this->validate($request, [
 
             'user_id' => 'required',
@@ -101,9 +104,16 @@ class ClassAssignController extends Controller
             'days' => 'required',
 
             'subjects' => 'required',
+
+            'time_start' => 'required',
+
+            'time_end' => 'required',
+
+            'pm_or_am' => 'required',
 			
             // 'assign_teacher_id' => 'required',
 			
+
 
 			
         ]);
@@ -114,7 +124,8 @@ class ClassAssignController extends Controller
         $input = $request->all();
 
         
-		// $input['section'] = json_encode($input['section']);
+        $input['class_schedule'] = $input['time_start']. " - " . $input['time_end'] . "   " . $input['pm_or_am'];
+
 		// $input['days'] = json_encode($input['days']);
 		// $input['subjects'] = json_encode($input['subjects']);
 
@@ -176,6 +187,8 @@ class ClassAssignController extends Controller
             'days' => 'required',
 
             'subjects' => 'required',
+
+            'class_schedule' => 'required',
 			
             // 'assign_teacher_id' => 'required',
 			

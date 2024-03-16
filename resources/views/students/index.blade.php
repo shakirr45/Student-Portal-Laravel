@@ -34,7 +34,7 @@
                         </div>
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xs-12 col-sm-12 col-md-8 col-lg-8">
                         <div class="form-group">
                             <table class="table table-bordered">
                                 <tr>
@@ -42,15 +42,15 @@
                                     <th>Teacher</th>
                                     <th>Subject</th>
                                     <th>Days</th>
+                                    <th>Class Schedule</th>
                                 </tr>
                                @foreach($studentWiseClassShow as $class)
                                 <tr>
                                     <td>{{ !empty( $class->class_id ) ? $class->class_id : " " }}</td>
                                     <td>{{ !empty( $class->user_id ) ? $class->user_id : " " }}</td>
                                     <td>{{ !empty( $class->subjects ) ? $class->subjects : " " }}</td>
-                                    <td>
-                                          {{ !empty( $class->days ) ? $class->days : " " }}
-                                    </td>
+                                    <td>{{ !empty( $class->days ) ? $class->days : " " }}</td>
+                                    <td>{{ !empty( $class->class_schedule ) ? $class->class_schedule : " " }}</td>
                                 </tr>
                                 @endforeach 
 
@@ -59,13 +59,13 @@
                         </div>
 
 
-                        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                        <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
                         <div class="form-group">
 
-                            <h4>Today( {{ $dayOfWeekForToday }} )  Class: </h4><br>
+                            <h5>Today( {{ $dayOfWeekForToday }} )  Class: </h5><br>
                             @foreach($currentDateDaysdata as  $data)
 
-                            <h6>{{ $data->subjects }}</h6>
+                            <h6>{{ $data->subjects }} {{ $data->class_schedule }}</h6>
 
                             @endforeach
 
@@ -78,42 +78,42 @@
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
 
-                            <h6>Saturday Class: </h6>
+                            <h5>Saturday Class: </h5>
                             @foreach($saturdaysdata as $saturday)
-                              <span>Subjects: {{ $saturday->subjects }}</span><br>
+                              <span>Subjects: {{ $saturday->subjects }} Time: {{ $saturday->class_schedule }}</span><br>
                             @endforeach
 
 
-                            <h6>Sunday Class: </h6>
+                            <h5>Sunday Class: </h5>
                             @foreach($sundaysdata as $sunday)
-                              <span>Subjects: {{ $sunday->subjects }}</span><br>
+                              <span>Subjects: {{ $sunday->subjects }} Time: {{ $sunday->class_schedule }}</span><br>
                             @endforeach
 
 
-                            <h6>Monday Class: </h6>
+                            <h5>Monday Class: </h5>
                             @foreach($mondaysdata as $monday)
-                              <span>Subjects: {{ $monday->subjects }}</span><br>
+                              <span>Subjects: {{ $monday->subjects }} Time: {{ $monday->class_schedule }}</span><br>
                             @endforeach
 
-                            <h6>Tuesday Class: </h6>
+                            <h5>Tuesday Class: </h5>
                             @foreach($tuesdaysdata as $tuesday)
-                              <span>Subjects: {{ $tuesday->subjects }}</span><br>
+                              <span>Subjects: {{ $tuesday->subjects }} Time: {{ $tuesday->class_schedule }}</span><br>
                             @endforeach
 
 
-                            <h6>Wednesday Class: </h6>
+                            <h5>Wednesday Class: </h5>
                             @foreach($wednesdaysdata as $wednesday)
-                              <span>Subjects: {{ $wednesday->subjects }}</span><br>
+                              <span>Subjects: {{ $wednesday->subjects }} Time: {{ $wednesday->class_schedule }}</span><br>
                             @endforeach
 
-                            <h6>Thursday Class: </h6>
+                            <h5>Thursday Class: </h5>
                             @foreach($thursdaysdata as $thursday)
-                              <span>Subjects: {{ $thursday->subjects }}</span><br>
+                              <span>Subjects: {{ $thursday->subjects }} Time: {{ $thursday->class_schedule }}</span><br>
                             @endforeach
 
-                            <h6>Friday Class: </h6>
+                            <h5>Friday Class: </h5>
                             @foreach($fridaysdata as $friday)
-                              <span>Subjects: {{ $friday->subjects }}</span><br>
+                              <span>Subjects: {{ $friday->subjects }} Time: {{ $friday->class_schedule }}</span><br>
                             @endforeach
 
 

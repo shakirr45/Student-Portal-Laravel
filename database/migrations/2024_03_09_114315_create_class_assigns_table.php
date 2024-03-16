@@ -18,6 +18,7 @@ return new class extends Migration
             $table->integer('section_id')->default(0);
             $table->string('subjects')->nullable();
             $table->string('days')->nullable();
+            $table->string('class_schedule')->nullable();
             // $table->integer('assign_teacher_id')->default(0);
             // $table->text('days')->nullable()->comment('Json Data');
             $table->timestamps();

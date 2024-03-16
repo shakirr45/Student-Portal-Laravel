@@ -57,4 +57,11 @@
                 {{ !empty($classAssign->days) ? $classAssign->days : '' }}
             </div>
         </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Class Schedule:</strong>
+                {{ !empty($classAssign->class_schedule) ? $classAssign->class_schedule : '' }}
+            </div>
+        </div>
 @endsection

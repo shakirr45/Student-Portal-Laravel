@@ -14,7 +14,7 @@ class ClassAssign extends Model
         'section_id', 
         'subjects', 
         'days',
-        // 'assign_teacher_id', 
+        'class_schedule', 
     ];
 
     // public function userAsTeacher()

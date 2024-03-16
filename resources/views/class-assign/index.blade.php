@@ -31,6 +31,7 @@
             <th>Assign Teacher</th> 
              <th>Subjects</th>  
              <th>Day</th>   
+             <th>Class Schedule</th>   
             <th width="280px">Action</th>
         </tr>
 	    @foreach ($classes as $class)
@@ -41,6 +42,7 @@
 	        <td>{{ !empty($class->user_id) ? $class->user_id : " " }}</td> 
 	         <td>{{ !empty($class->subjects) ? $class->subjects : " "}}</td>    
 	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
+	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
 	        <td>
                 <form action="{{ route('class-assign.destroy',$class->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('class-assign.show',$class->id) }}">Show</a>
