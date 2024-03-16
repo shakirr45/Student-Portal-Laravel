@@ -40,4 +40,8 @@ class HomeController extends Controller
         return view('home');
         
     }
+
+    public function pagination(){
+        return view('pagination.index');
+    }
 }

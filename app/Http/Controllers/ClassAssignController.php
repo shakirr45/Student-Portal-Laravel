@@ -27,7 +27,6 @@ class ClassAssignController extends Controller
      */
     public function index()
     {
-
         // $currentDate = \Carbon\Carbon::now();
         // $tomorrowDate = $currentDate->addDay(); // Add one day to get tomorrow's date
         // $tomorrowDate = $currentDate->addDay(); // Add one day to get tomorrow's date
@@ -66,23 +65,23 @@ class ClassAssignController extends Controller
 
         $classSection = ClassSection::dataList();
 
-        // $days = DayOfWeek::dataList();
+        $days = DayOfWeek::dataList();
 
-        // $subjects = Subject::dataList();
+        $subjects = Subject::dataList();
 
-        // $isTeacher = User::whereHas('roles', function($q) {
-        //     $q->where(function ($query) {
-        //         $query->where('name', 'Teacher')
-        //         ->orWhere('name', 'Headmaster');
-        //     });
-        // })->pluck('name', 'id')->toArray();
+        $isTeacher = User::whereHas('roles', function($q) {
+            $q->where(function ($query) {
+                $query->where('name', 'Teacher')
+                ->orWhere('name', 'Headmaster');
+            });
+        })->pluck('name', 'id')->toArray();
 
-        // dd($institutionClass);
+        // dd($isTeacher);
         
         // return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
 
 
-        return view('class-assign.create',compact('institutionClass','classSection'));
+        return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
     }
 
     /**
@@ -93,15 +92,19 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
+            'user_id' => 'required',
+
             'class_id' => 'required',
 
-            'section' => 'required',
+            'section_id' => 'required',
+
+            'days' => 'required',
+
+            'subjects' => 'required',
 			
             // 'assign_teacher_id' => 'required',
 			
-            // 'days' => 'required',
 
-            // 'subjects' => 'required',
 			
         ]);
 
@@ -138,21 +141,21 @@ class ClassAssignController extends Controller
 
         $classSection = ClassSection::dataList();
 
-        // $days = DayOfWeek::dataList();
+        $days = DayOfWeek::dataList();
 
-        // $subjects = Subject::dataList();
+        $subjects = Subject::dataList();
 
-        // $isTeacher = User::whereHas('roles', function($q) {
-        //     $q->where(function ($query) {
-        //         $query->where('name', 'Teacher')
-        //         ->orWhere('name', 'Headmaster');
-        //     });
-        // })->pluck('name', 'id')->toArray();
+        $isTeacher = User::whereHas('roles', function($q) {
+            $q->where(function ($query) {
+                $query->where('name', 'Teacher')
+                ->orWhere('name', 'Headmaster');
+            });
+        })->pluck('name', 'id')->toArray();
 
 
         // return view('class-assign.edit',compact('classAssign'),compact('isTeacher','institutionClass','classSection','days','subjects'));
 
-        return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection'));
+        return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection','isTeacher','subjects','days'));
 
     }
 
@@ -164,9 +167,15 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
+            'user_id' => 'required',
+            
             'class_id' => 'required',
+            
+            'section_id' => 'required',
+            // 
+            'days' => 'required',
 
-            'section' => 'required',
+            'subjects' => 'required',
 			
             // 'assign_teacher_id' => 'required',
 			

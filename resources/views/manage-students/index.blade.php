@@ -26,7 +26,56 @@
 
 
 
-    {!! $studentDetails->links() !!}
+<!-- ================================================================= -->
+<!-- ================================================================= -->
+<!-- ================================================================= -->
+
+<!-- ================================================================= -->
+<!-- ================================================================= -->
+<!-- ================================================================= -->
+
+
+
+
+    <table class="table table-bordered">
+        <tr>
+            <th>No</th>
+            <th>User Id</th>
+            <th>Class</th>
+            <th>Section</th>
+            <th width="280px">Action</th>
+        </tr>
+	    @foreach ($manageStudents as $students)
+	    <tr>
+	        <td>{{ ++$i }}</td>
+	        <td>{{ !empty($students->user_id ) ? $students->user_id  : " " }}</td>
+	        <td>{{ !empty($students->assign_class) ? $students->assign_class : " " }}</td>
+	        <td>{{ !empty($students->section_id) ? $students->section_id : " " }}</td> 
+	        <td>
+            <a class="btn btn-info" href="{{ route('manage-students.show',$students->id) }}">Show</a>
+
+            {{-- <form action="{{ route('manage-students.destroy',$students->id) }}" method="POST">
+
+                    @can('manage-student-edit')
+                    <a class="btn btn-primary" href="{{ route('manage-students.edit',$students->id) }}">Edit</a>
+                    @endcan
+
+                   
+
+
+                    @csrf
+                    @method('DELETE')
+                    @can('manage-student-delete')
+                    <button type="submit" class="btn btn-danger">Delete</button>
+                    @endcan
+                </form>--}}
+	        </td> 
+	    </tr>
+	    @endforeach
+    </table>
+
+
+    {!! $manageStudents->links() !!}
 
 
 @endsection

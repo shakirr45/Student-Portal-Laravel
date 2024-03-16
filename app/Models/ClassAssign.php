@@ -9,17 +9,18 @@ class ClassAssign extends Model
 {
     use HasFactory;
     protected $fillable = [
+        'user_id', 
         'class_id', 
-        'section', 
-        // 'subjects', 
+        'section_id', 
+        'subjects', 
+        'days',
         // 'assign_teacher_id', 
-        // 'days', 
     ];
 
-    public function userAsTeacher()
-    {
-        return $this->belongsTo('App\Models\User', 'assign_teacher_id');
-    }
+    // public function userAsTeacher()
+    // {
+    //     return $this->belongsTo('App\Models\User', 'assign_teacher_id');
+    // }
 
     // public function subjectAssign()
     // {

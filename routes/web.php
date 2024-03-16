@@ -7,10 +7,10 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
-// use App\Http\Controllers\ClassAssignController;
+use App\Http\Controllers\ClassAssignController;
 // use App\Http\Controllers\SubjectAssignController;
 use App\Http\Controllers\ManageStudentController;
-use App\Http\Controllers\ClassWiseSubjectAssignController;
+// use App\Http\Controllers\ClassWiseSubjectAssignController;
 
   
 /*
@@ -50,10 +50,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('products', ProductController::class);
 
     
-    // Route::resource('class-assign', ClassAssignController::class);
+    Route::resource('class-assign', ClassAssignController::class);
     // Route::resource('class-wise-subject-assign', SubjectAssignController::class);
 
     Route::resource('manage-students', ManageStudentController::class);
-    Route::resource('class-wise-subject-assign', ClassWiseSubjectAssignController::class);
+    // Route::resource('class-wise-subject-assign', ClassWiseSubjectAssignController::class);
+
+    Route::get('pagination-search', [HomeController::class, 'pagination'])->name('pagination-search');
 
 });
+
+

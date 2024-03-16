@@ -72,7 +72,7 @@ class UserController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            'assign_class' => 'required',
+            // 'assign_class' => 'required',
             'user_id' => 'required|unique:users,user_id',
             'mobile_no' => 'required|unique:users,mobile_no',
             'password' => 'required|same:confirm-password',
@@ -81,7 +81,7 @@ class UserController extends Controller
 
        
         $input = $request->all();
-        $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class'] = json_encode($input['assign_class']);
 
         $input['password'] = Hash::make($input['password']);
     
@@ -137,7 +137,7 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'assign_class' => 'required',
+            // 'assign_class' => 'required',
             'email' => 'required|email|unique:users,email,'.$id,
             'user_id' => 'required|unique:users,user_id,'.$id,
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
@@ -154,7 +154,7 @@ class UserController extends Controller
     
         $user = User::find($id);
 
-        $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class'] = json_encode($input['assign_class']);
 
         $user->update($input);
         

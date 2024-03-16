@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label for="" class="form-label">Section</label>
                     
-                    {!! Form::select('section', ['0' => 'Select One']+$classSection,'', array('id' => 'section', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    {!! Form::select('section_id', ['0' => 'Select One']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
                     
                     @error('roles')
                         <span class="invalid-feedback">
@@ -63,11 +63,11 @@
             </div>
 
 
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Assign Teacher</label>
                     
-                    {!! Form::select('assign_teacher_id', ['' => 'Select One']+$isTeacher,'', array('id' => 'assign_teacher_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
+                    {!! Form::select('user_id', ['' => 'Select One']+$isTeacher,'', array('id' => 'user_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
                     
                     @error('roles')
                         <span class="invalid-feedback">
@@ -75,10 +75,10 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}} 
+            </div> 
 
 
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Subjects</label>
                     
@@ -90,13 +90,13 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}} 
+            </div>  
 
 
             
 
 
-            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+             <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Days</label>
                     
@@ -108,7 +108,7 @@
                         </span>
                     @enderror
                 </div>
-            </div> --}} 
+            </div>  
 
 
 

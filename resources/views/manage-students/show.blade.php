@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Show Assign Class</h2>
+                <h2>Manage Students</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('class-assign.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-students.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -17,43 +17,63 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
-                <strong>Class:</strong>
+                <strong>User ID:</strong>
 
-                {{ !empty($classAssign->institutionClass->name) ? $classAssign->institutionClass->name : '' }}
+                {{ !empty($manageStudents->user_id) ? $manageStudents->user_id : '' }}
 
             </div>
         </div>
+
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Name:</strong>
+
+                {{ !empty($manageStudents->name) ? $manageStudents->name : '' }}
+
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Mobile:</strong>
+
+                {{ !empty($manageStudents->mobile) ? $manageStudents->mobile : '' }}
+
+            </div>
+        </div>
+
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Email:</strong>
+
+                {{ !empty($manageStudents->email) ? $manageStudents->email : '' }}
+
+            </div>
+        </div>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Class:</strong>
+
+                {{ !empty($manageStudents->assign_class) ? $manageStudents->assign_class : '' }}
+
+            </div>
+        </div>
+
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Section:</strong>
-                {{ !empty($classAssign->section) ? $classAssign->section : '' }}
+                {{ !empty($manageStudents->section_id) ? $manageStudents->section_id : '' }}
 
             </div>
         </div>
+        
 
 
 
-       {{--<div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Subjects:</strong>
-                {{ !empty($classAssign->subjects) ? $classAssign->subjects : '' }}
 
-            </div>
-        </div> --}} 
-
-      {{--  <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Assign Teacher:</strong>
-                {{ !empty($classAssign->userAsTeacher->name) ? $classAssign->userAsTeacher->name : '' }}
-
-            </div>
-        </div>
-    </div> --}} 
-
-    {{--  <div class="col-xs-12 col-sm-12 col-md-12">
-            <div class="form-group">
-                <strong>Days:</strong>
-                {{ !empty($classAssign->days) ? $classAssign->days : '' }}
-            </div>
-        </div>--}} 
 @endsection

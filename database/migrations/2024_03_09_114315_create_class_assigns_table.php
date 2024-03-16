@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('class_assigns', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id')->default(0);
             $table->integer('class_id')->default(0);
-            $table->string('section')->nullable();
-            // $table->string('subjects')->nullable();
+            $table->integer('section_id')->default(0);
+            $table->string('subjects')->nullable();
+            $table->string('days')->nullable();
             // $table->integer('assign_teacher_id')->default(0);
             // $table->text('days')->nullable()->comment('Json Data');
             $table->timestamps();

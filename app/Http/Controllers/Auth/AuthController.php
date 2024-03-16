@@ -10,6 +10,7 @@ use App\Models\User;
 use Hash;
 use App\Models\ClassAssign;
 use App\Models\ClassWiseSubjectAssign;
+use Carbon\Carbon;
 
   
 class AuthController extends Controller
@@ -54,15 +55,7 @@ class AuthController extends Controller
             Auth::attempt(['user_id' => $input['user_id'], 'password' => $input['password']]) ||
             Auth::attempt(['email' => $input['user_id'], 'password' => $input['password']])) {
 
-            //  return redirect()->route('dashboard');
-            $currentLoginRoleInfo = Auth::user()->roles()->get()->toArray();
-			$currentLoginRoleInfo = !empty($currentLoginRoleInfo[0]['name']) ? $currentLoginRoleInfo[0]['name'] : '' ;
 
-            // dd($currentLoginRoleInfo);
-
-            // if($currentLoginRoleInfo == "Student"){
-
-            // }
 
             $currentUserClass = !empty(Auth::user()->assign_class) ? Auth::user()->assign_class : "";
 
@@ -70,10 +63,12 @@ class AuthController extends Controller
 
             $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
 
-            $studentWiseClassShow = ClassWiseSubjectAssign::where('class_assign_id', $currentUserClass)
-            ->where('section_assign_id', $currentUserSectionId)
+            $studentWiseClassShow = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
             ->get();
+            
 
+            // dd($currentUserClass);
 
             // $studentWiseClassShow = ClassWiseSubjectAssign::where('class_assign_id', $currentUserClass)
             // ->with(['classAssign'])
@@ -81,6 +76,134 @@ class AuthController extends Controller
 
 
             // dd($studentWiseClassShow);
+
+
+        $currentDate = Carbon::now();
+        $dayOfWeekForToday = $currentDate->format('l'); // Get the current day of the week in full lowercase (e.g., "sunday")
+
+            // dd($dayOfWeekForToday);
+
+            //  return redirect()->route('dashboard');
+            $currentLoginRoleInfo = Auth::user()->roles()->get()->toArray();
+			$currentLoginRoleInfo = !empty($currentLoginRoleInfo[0]['name']) ? $currentLoginRoleInfo[0]['name'] : '' ;
+
+            // dd($currentLoginRoleInfo);
+
+            
+            $saturdaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Saturday')
+            ->get();
+            $sundaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Sunday')
+            ->get();
+            $mondaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Monday')
+            ->get();
+            $tuesdaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Tuesday')
+            ->get();
+            $wednesdaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Wednesday')
+            ->get();
+            $thursdaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Thursday')
+            ->get();
+            $fridaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Friday')
+            ->get();
+
+
+
+        if($currentLoginRoleInfo == "Student"){
+
+                
+        if($dayOfWeekForToday == "Saturday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Saturday')
+            ->get();
+
+
+        }elseif($dayOfWeekForToday == "Sunday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Sunday')
+            ->get();
+
+        }elseif($dayOfWeekForToday == "Monday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Monday')
+            ->get();
+
+        }elseif($dayOfWeekForToday == "Tuesday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Tuesday')
+            ->get();
+
+        }elseif($dayOfWeekForToday == "Wednesday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Wednesday')
+            ->get();
+
+        }elseif($dayOfWeekForToday == "Thursday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Thursday')
+            ->get();
+
+            // dd($thursdayWiseClass->toArray());
+
+        }elseif($dayOfWeekForToday == "Friday"){
+
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->where('days', 'Friday')
+            ->get();
+
+        }else{
+            return "No Data";
+        }
+        return view('students.index', compact('studentWiseClassShow','currentDateDaysdata','dayOfWeekForToday','saturdaysdata','sundaysdata','mondaysdata','tuesdaysdata','wednesdaysdata','thursdaysdata','fridaysdata'));
+
+
+        }elseif($currentLoginRoleInfo == "Teacher"){
+            return redirect()->intended('dashboard')
+            ->withSuccess('You have Successfully loggedin');
+        }
+
+
+        // dd($dayOfWeekForToday);
+            
+        // // dd($dayOfWeekForToday);
+        // if ($dayOfWeekForToday == 'Saturday') {
+        //     // dd("true");
+        //     return "true";
+        // } else {
+        //     // dd("false");
+        //     return "false";
+        // }
+
+        // if($dayOfWeekForToday == "Thursday"){
+
+        // }
+
+
 
             // $studentWiseClassSubject = !empty($studentWiseClassShow->subjects) ? $studentWiseClassShow->subjects : " ";
 
@@ -97,15 +220,20 @@ class AuthController extends Controller
 
             // return view('dashboard',compact('studentWiseClassShow'))->withSuccess('You have Successfully loggedin');
 
-            // return redirect()->intended('dashboard')
-            // ->withSuccess('You have Successfully loggedin');
+            return redirect()->intended('dashboard')
+            ->withSuccess('You have Successfully loggedin');
 
 
             // return redirect()->intended('dashboard')->with(compact('currentUserClass'))->withSuccess('You have Successfully logged in');
 
-            return view('dashboard', compact('studentWiseClassShow'));
 
-
+            
+            
+            
+            
+            
+            
+            
         }
   
         return redirect("student-login")->withSuccess('Oppes! You have entered invalid credentials');

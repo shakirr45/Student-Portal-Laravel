@@ -43,14 +43,23 @@
     </div>
 
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+ {{--   <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>User Id:</strong>
 
             {!! Form::select('assign_class[]', ['0' => 'Select One']+$institutionClass,$institutionClassSelected, array('id' => 'police_station', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'multiple' => '')) !!}
             
         </div>
-    </div>
+    </div>--}}
+
+   {{-- <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Assign class:</strong>
+
+            {!! Form::select('assign_class', ['0' => 'Select One']+$institutionClass,$institutionClassSelected, array('id' => 'police_station', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
+            
+        </div>
+    </div> --}}
 
 
      

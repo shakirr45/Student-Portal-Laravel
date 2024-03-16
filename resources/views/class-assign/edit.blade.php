@@ -38,7 +38,7 @@
 
                 {!! Form::select('class_id', ['' =>'Select One']+$institutionClass,$classAssign->class_id, array('id' => 'class', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
                 
-                @error('class')
+                @error('class_id')
                     <span class="invalid-feedback" >
                         <b>{{ $message }}</b>
                     </span>
@@ -50,9 +50,9 @@
             <div class="form-group">
                 <label for="" class="form-label">Section</label>
 
-                {!! Form::select('section', ['' =>'Select One']+$classSection,$classAssign->section, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                {!! Form::select('section_id', ['' =>'Select One']+$classSection,$classAssign->section_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
                 
-                @error('class')
+                @error('section_id')
                     <span class="invalid-feedback" >
                         <b>{{ $message }}</b>
                     </span>
@@ -61,22 +61,22 @@
         </div>
 
 
-           {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+           <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Assign Teacher</label>
 
-                {!! Form::select('assign_teacher_id', ['' =>'Select One']+$isTeacher,$classAssign->assign_teacher_id, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                {!! Form::select('user_id', ['' =>'Select One']+$isTeacher,$classAssign->user_id, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
 
-                @error('assign_teacher_id')
+                @error('user_id')
                     <span class="invalid-feedback" >
                         <b>{{ $message }}</b>
                     </span>
                 @enderror
             </div>
-        </div> --}}
+        </div> 
 
 
-       {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
                 <label for="" class="form-label">Subject</label>
 
@@ -88,12 +88,12 @@
                     </span>
                 @enderror
             </div>
-        </div> --}}
+        </div> 
 
 
-       {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+        <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
             <div class="form-group">
-                <label for="" class="form-label">Day</label>
+                <label for="" class="form-label">Days</label>
 
                 {!! Form::select('days', ['' =>'Select One']+$days,$classAssign->days, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
 
@@ -103,7 +103,7 @@
                     </span>
                 @enderror
             </div>
-        </div>  --}}
+        </div>  
 
 
 

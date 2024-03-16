@@ -28,10 +28,18 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+{{--   <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Assign Class:</strong>
             {{ !empty(json_decode($user->assign_class)) ? implode(', ', json_decode($user->assign_class)) : "" }}
+
+        </div>
+    </div>--}}
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Assign Class:</strong>
+            {{ !empty($user->assign_class) ? $user->assign_class : "" }}
 
         </div>
     </div>
