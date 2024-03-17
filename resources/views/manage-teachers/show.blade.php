@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Manage Students</h2>
+                <h2>Manage Teachers</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('manage-students.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-teachers.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -19,7 +19,7 @@
             <div class="form-group">
                 <strong>User ID:</strong>
 
-                {{ !empty($manageStudents->user_id) ? $manageStudents->user_id : '' }}
+                {{ !empty($manageTeachers->user_id) ? $manageTeachers->user_id : '' }}
 
             </div>
         </div>
@@ -29,7 +29,7 @@
             <div class="form-group">
                 <strong>Name:</strong>
 
-                {{ !empty($manageStudents->name) ? $manageStudents->name : '' }}
+                {{ !empty($manageTeachers->name) ? $manageTeachers->name : '' }}
 
             </div>
         </div>
@@ -39,7 +39,7 @@
             <div class="form-group">
                 <strong>Mobile:</strong>
 
-                {{ !empty($manageStudents->mobile_no) ? $manageStudents->mobile_no : '' }}
+                {{ !empty($manageTeachers->mobile_no) ? $manageTeachers->mobile_no : '' }}
 
             </div>
         </div>
@@ -49,28 +49,30 @@
             <div class="form-group">
                 <strong>Email:</strong>
 
-                {{ !empty($manageStudents->email) ? $manageStudents->email : '' }}
+                {{ !empty($manageTeachers->email) ? $manageTeachers->email : '' }}
 
             </div>
         </div>
 
-    <div class="row">
+    {{-- <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Class:</strong>
 
-                {{ !empty($manageStudents->InstitutionClass->name) ? $manageStudents->InstitutionClass->name : '' }}
+                {{ !empty($manageTeachers->InstitutionClass->name) ? $manageTeachers->InstitutionClass->name : '' }}
 
             </div>
-        </div>
+        </div> --}}
 
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{-- <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Section:</strong>
-                {{ !empty($manageStudents->classSection->name) ? $manageStudents->classSection->name : '' }}
+                {{ !empty($manageTeachers->classSection->name) ? $manageTeachers->classSection->name : '' }}
 
             </div>
-        </div>
+        </div> --}}
+        
+
 
 
 

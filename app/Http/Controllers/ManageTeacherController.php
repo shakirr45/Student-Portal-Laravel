@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
-use App\Models\ManageStudent;
-use App\Http\Requests\StoreManageStudentRequest;
-use App\Http\Requests\UpdateManageStudentRequest;
+use App\Models\ManageTeachers;
+use App\Http\Requests\StoreManageTeachersRequest;
+use App\Http\Requests\UpdateManageTeachersRequest;
+
 use App\Models\User;
 use App\Models\ClassSection;
 use App\Models\InstitutionClass;
@@ -13,15 +14,14 @@ use Hash;
 use Illuminate\Support\Arr;
 use DB;
 
-
-class ManageStudentController extends Controller
+class ManageTeacherController extends Controller
 {
     function __construct()
     {
-         $this->middleware('permission:manage-student-list|manage-student-create|manage-student-edit|manage-student-delete', ['only' => ['index','show']]);
-         $this->middleware('permission:manage-student-create', ['only' => ['create','store']]);
-         $this->middleware('permission:manage-student-edit', ['only' => ['edit','update']]);
-         $this->middleware('permission:manage-student-delete', ['only' => ['destroy']]);
+         $this->middleware('permission:manage-teacher-list|manage-teacher-create|manage-teacher-edit|manage-teacher-delete', ['only' => ['index','show']]);
+         $this->middleware('permission:manage-teacher-create', ['only' => ['create','store']]);
+         $this->middleware('permission:manage-teacher-edit', ['only' => ['edit','update']]);
+         $this->middleware('permission:manage-teacher-delete', ['only' => ['destroy']]);
     }
     /**
      * Display a listing of the resource.
@@ -38,19 +38,20 @@ class ManageStudentController extends Controller
 		}
         
 
-        $manageStudents = User::whereHas('roles', function ($query){
-            $query->where('name', 'Student');
-        })->where($serchCondition)
-        ->with(['InstitutionClass'])
-        ->with(['classSection'])
+        $manageTeachers = User::whereHas('roles', function ($query){
+            $query->where('name', 'Teacher');
+        })
+        ->where($serchCondition)
+        // ->with(['InstitutionClass'])
+        // ->with(['classSection'])
         ->latest()->paginate(5);
 
     // Check if no students are found
-    if ($manageStudents->isEmpty()) {
-        return view('manage-students.index')->with('noDataFound', true);
+    if ($manageTeachers->isEmpty()) {
+        return view('manage-teachers.index')->with('noDataFound', true);
     }
 
-    return view('manage-students.index', compact('manageStudents'))
+    return view('manage-teachers.index', compact('manageTeachers'))
         ->with('i', ($request->input('page', 1) - 1) * 5);
     }
 
@@ -66,7 +67,7 @@ class ManageStudentController extends Controller
 
         // dd($institutionClass);
 
-        return view('manage-students.create',compact('institutionClass','classSection'));
+        return view('manage-teachers.create',compact('institutionClass','classSection'));
     }
 
     /**
@@ -81,8 +82,8 @@ class ManageStudentController extends Controller
             'user_id' => 'required|unique:users,user_id',
             'mobile_no' => 'required|unique:users,mobile_no',
             'password' => 'required|same:confirm-password',
-            'assign_class' => 'required',
-            'section_id' => 'required',
+            // 'assign_class' => 'required',
+            // 'section_id' => 'required',
             // 'roles' => 'required'
             // 'assign_class' => 'required'
             // 'roles' => 'required'
@@ -97,10 +98,10 @@ class ManageStudentController extends Controller
         $input['password'] = Hash::make($input['password']);
     
         $user = User::create($input);
-        $user->assignRole('Student');
+        $user->assignRole('Teacher');
 
-        return redirect()->route('manage-students.index')
-                        ->with('success','User created successfully');
+        return redirect()->route('manage-teachers.index')
+                        ->with('success','teachers created successfully');
 
 
     }
@@ -108,23 +109,20 @@ class ManageStudentController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show( $studentId )
+    public function show( $teacherId )
     {
-        // $manageStudents = User::find($studentId);
-
-
-        $manageStudents = User::where('id',$studentId)
-        ->with(['InstitutionClass'])
-        ->with(['classSection'])->first();
+        $manageTeachers = User::where('id',$teacherId)
+        // ->with(['InstitutionClass'])
+        // ->with(['classSection'])
+        ->first();
         
-        // dd($manageStudents);
+        // dd($manageTeachers->toArray());
 
-        return view('manage-students.show',compact('manageStudents'));
+        return view('manage-teachers.show',compact('manageTeachers'));
     }
-
-    // /**
-    //  * Show the form for editing the specified resource.
-    //  */
+    /**
+     * Show the form for editing the specified resource.
+     */
     public function edit($id)
     {
 
@@ -137,12 +135,11 @@ class ManageStudentController extends Controller
 
         $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
 
-        return view('manage-students.edit',compact('user','institutionClass','institutionClassSelected','classSections'));
+        return view('manage-teachers.edit',compact('user','institutionClass','institutionClassSelected','classSections'));
     }
-
-    // /**
-    //  * Update the specified resource in storage.
-    //  */
+    /**
+     * Update the specified resource in storage.
+     */
     public function update(Request $request, $id)
     {
         $this->validate($request, [
@@ -153,8 +150,8 @@ class ManageStudentController extends Controller
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
             'password' => 'same:confirm-password',
             // 'roles' => 'required',
-            'assign_class' => 'required',
-            'section_id' => 'required',
+            // 'assign_class' => 'required',
+            // 'section_id' => 'required',
         ]);
     
         $input = $request->all();
@@ -171,21 +168,20 @@ class ManageStudentController extends Controller
         $user->update($input);
         
         DB::table('model_has_roles')->where('model_id',$id)->delete();
-        $user->assignRole('Student');
+        $user->assignRole('Teacher');
 
 
     
-        return redirect()->route('manage-students.index')
-                        ->with('success','User updated successfully');
+        return redirect()->route('manage-teachers.index')
+                        ->with('success','teachers updated successfully');
     }
-
-    // /**
-    //  * Remove the specified resource from storage.
-    //  */
+    /**
+     * Remove the specified resource from storage.
+     */
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('manage-students.index')
-                        ->with('success','User deleted successfully');
+        return redirect()->route('manage-teachers.index')
+                        ->with('success','teachers deleted successfully');
     }
 }

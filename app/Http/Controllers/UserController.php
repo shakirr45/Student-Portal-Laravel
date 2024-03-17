@@ -43,7 +43,10 @@ class UserController extends Controller
         //     return "false";
         // }
 
-        $data = User::orderBy('id','DESC')->paginate(5);
+        $data = User::orderBy('id','DESC')
+        ->with(['InstitutionClass'])
+        ->with(['classSection'])
+        ->paginate(5);
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -100,7 +103,12 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        $user = User::find($id);
+        // $user = User::find($id);
+
+        $user = User::where('id',$id)
+        ->with(['InstitutionClass'])
+        ->with(['classSection'])->first();
+
         return view('users.show',compact('user'));
     }
     
@@ -117,7 +125,8 @@ class UserController extends Controller
 
         $institutionClass = InstitutionClass::dataList();
 
-        $institutionClassSelected =  !empty( $user->assign_class ) ? json_decode( $user->assign_class ) : [];
+        // $institutionClassSelected =  !empty( $user->assign_class ) ? json_decode( $user->assign_class ) : [];
+        $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
 
         $roles = Role::pluck('name','name')->all();
 

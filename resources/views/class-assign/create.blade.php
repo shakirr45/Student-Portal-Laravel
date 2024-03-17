@@ -52,7 +52,7 @@
                 <div class="form-group">
                     <label for="" class="form-label">Section</label>
                     
-                    {!! Form::select('section_id', ['0' => 'Select One']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    {!! Form::select('section_id', ['' => 'Select One']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
                     
                     @error('roles')
                         <span class="invalid-feedback">
@@ -118,7 +118,7 @@
                 <div class="form-group">
                     <label for="" class="form-label">Days</label>
                     
-                    {!! Form::select('days', ['0' => 'Select One']+$days,'', array('id' => 'days', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+                    {!! Form::select('days', ['' => 'Select One']+$days,'', array('id' => 'days', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
                     
                     @error('roles')
                         <span class="invalid-feedback">

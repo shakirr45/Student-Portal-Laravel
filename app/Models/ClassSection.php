@@ -18,4 +18,14 @@ class ClassSection extends Model
 		
 		return $data;
 	}
+
+    public function userList()
+    {
+        return $this->hasOne('App\Models\User');
+    }
+
+    public function classAssign()
+    {
+        return $this->hasOne('App\Models\ClassAssign');
+    }
 }

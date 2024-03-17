@@ -38,8 +38,8 @@
                                 </tr>
                                @foreach($teachertWiseClassShow as $class)
                                 <tr>
-                                    <td>{{ !empty( $class->class_id ) ? $class->class_id : " " }}</td>
-                                    <td>{{ !empty( $class->section_id ) ? $class->section_id : " " }}</td>
+                                    <td>{{ !empty( $class->institutionClass->name ) ? $class->institutionClass->name : " " }}</td>
+                                    <td>{{ !empty( $class->classSection->name ) ? $class->classSection->name : " " }}</td>
                                     <td>{{ !empty( $class->subjects ) ? $class->subjects : " " }}</td>
                                     <td>{{ !empty( $class->class_schedule ) ? $class->class_schedule : " " }}</td>
                                     <td>
@@ -58,8 +58,9 @@
 
                             <h4>Today( {{ $dayOfWeekForToday }} )  Class: </h4><br>
                             @foreach($currentDateDaysClass as  $class)
+                            
+                            <span>Subject: {{ !empty($class->subjects) ? $class->subjects : " " }} ----- Class: {{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }} ---- Section: {{ !empty($class->classSection->name) ? $class->classSection->name : " " }} --- Time: {{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</span><br>
 
-                            <span>Subject: {{ $class->subjects }}  ----- Class: {{ $class->class_id }} ---- Section: {{ $class->section_id }} --- Time: {{ $class->class_schedule }}</span><br>
                             <h6></h6>
 
                             @endforeach

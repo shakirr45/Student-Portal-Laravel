@@ -39,7 +39,15 @@
     <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Assign Class:</strong>
-            {{ !empty($user->assign_class) ? $user->assign_class : "" }}
+            {{ !empty($user->InstitutionClass->name) ? $user->InstitutionClass->name : "" }}
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Section Class:</strong>
+            {{ !empty($user->classSection->name) ? $user->classSection->name : "" }}
 
         </div>
     </div>

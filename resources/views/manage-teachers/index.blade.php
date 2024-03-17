@@ -9,7 +9,7 @@
             </div>
             <div class="pull-right">
                 @can('class-create')
-                <a class="btn btn-success" href="{{ route('manage-students.create') }}"> Create New Class</a>
+                <a class="btn btn-success" href="{{ route('manage-teachers.create') }}"> Create New Class</a>
                 @endcan
             </div>
         </div>
@@ -38,7 +38,7 @@
     <div id="demo" class="collapse">
     
 
-            {!! Form::open(array('url' => 'manage-students', 'method' => 'get', 'id'=>'searchform', 'autocomplete' => 'off', 'name'  => 'searchform', 'class' => 'needs-validation', 'novalidate')) !!}
+            {!! Form::open(array('url' => 'manage-teachers', 'method' => 'get', 'id'=>'searchform', 'autocomplete' => 'off', 'name'  => 'searchform', 'class' => 'needs-validation', 'novalidate')) !!}
                 
                 <div class="row">
                 
@@ -79,8 +79,8 @@
         <tr>
             <th>No</th>
             <th>User Id</th>
-            <th>Class</th>
-            <th>Section</th>
+           {{--  <th>Class</th>--}}
+            {{-- <th>Section</th> --}}
             <th width="280px">Action</th>
         </tr>
 
@@ -89,21 +89,20 @@
             No data found for the provided user ID.
         </div>
         @else
-        
 
-	    @foreach ($manageStudents as $students)
+	    @foreach ($manageTeachers as $teachers)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($students->user_id ) ? $students->user_id  : " " }}</td>
-	        <td>{{ !empty($students->InstitutionClass->name) ? $students->InstitutionClass->name : " " }}</td>
-	        <td>{{ !empty($students->classSection->name) ? $students->classSection->name : " " }}</td> 
+	        <td>{{ !empty($teachers->user_id ) ? $teachers->user_id  : " " }}</td>
+	        {{--<td>{{ !empty($teachers->InstitutionClass->name) ? $teachers->InstitutionClass->name : " " }}</td>--}}
+	        {{--<td>{{ !empty($teachers->classSection->name) ? $teachers->classSection->name : " " }}</td> --}}
 	        <td>
-            <a class="btn btn-info" href="{{ route('manage-students.show',$students->id) }}">Show</a>
+            <a class="btn btn-info" href="{{ route('manage-teachers.show',$teachers->id) }}">Show</a>
 
-            <form action="{{ route('manage-students.destroy',$students->id) }}" method="POST">
+            <form action="{{ route('manage-teachers.destroy',$teachers->id) }}" method="POST">
 
                     @can('manage-student-edit')
-                    <a class="btn btn-primary" href="{{ route('manage-students.edit',$students->id) }}">Edit</a>
+                    <a class="btn btn-primary" href="{{ route('manage-teachers.edit',$teachers->id) }}">Edit</a>
                     @endcan
 
                    
@@ -121,7 +120,7 @@
     </table>
 
 
-    {!! $manageStudents->links() !!}
+    {!! $manageTeachers->links() !!}
 
     @endif
 

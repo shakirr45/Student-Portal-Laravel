@@ -49,13 +49,31 @@ class User extends Authenticatable
     ];
 
 
+    // public function classAssign()
+    // {
+    //     return $this->hasOne('App\Models\ClassAssign');
+    // }
+
+    // public function classWiseSubjectAssign()
+    // {
+    //     return $this->hasOne('App\Models\ClassWiseSubjectAssign');
+    // }
+
+    public function InstitutionClass()
+    {
+        return $this->belongsTo('App\Models\InstitutionClass', 'assign_class');
+    }
+
+    public function classSection()
+    {
+        return $this->belongsTo('App\Models\ClassSection', 'section_id');
+    }
+
+
     public function classAssign()
     {
         return $this->hasOne('App\Models\ClassAssign');
     }
 
-    public function classWiseSubjectAssign()
-    {
-        return $this->hasOne('App\Models\ClassWiseSubjectAssign');
-    }
+
 }

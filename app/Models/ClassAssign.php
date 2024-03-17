@@ -27,10 +27,28 @@ class ClassAssign extends Model
     //     return $this->hasOne('App\Models\SubjectAssign');
     // }
 
+    // public function institutionClass()
+    // {
+    //     return $this->belongsTo('App\Models\InstitutionClass', 'class_id');
+    // }
+
+
     public function institutionClass()
     {
         return $this->belongsTo('App\Models\InstitutionClass', 'class_id');
     }
+
+    public function classSection()
+    {
+        return $this->belongsTo('App\Models\ClassSection', 'section_id');
+    }
+
+
+    public function userList()
+    {
+        return $this->belongsTo('App\Models\User', 'user_id');
+    }
+
 }
 
 

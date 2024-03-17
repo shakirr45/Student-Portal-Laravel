@@ -67,6 +67,8 @@ class AuthController extends Controller
 
             $studentWiseClassShow = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
+            ->with(['institutionClass'])
+            ->with(['userList'])
             ->get();
             
 
@@ -188,9 +190,13 @@ class AuthController extends Controller
         }elseif($currentLoginRoleInfo == "Teacher"){
 
             $teachertWiseClassShow = ClassAssign::where('user_id', $currentUserId)
+            ->with(['institutionClass'])
+            ->with(['classSection'])
             ->get();
 
             $currentDateDaysClass = ClassAssign::where('user_id', $currentUserId)
+            ->with(['institutionClass'])
+            ->with(['classSection'])
             ->where('days', $dayOfWeekForToday)
             ->get();
 

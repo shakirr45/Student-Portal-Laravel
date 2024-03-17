@@ -8,7 +8,7 @@
                 <h2>Assign Student Section</h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('manage-students.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-teachers.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('manage-students.store') }}" method="POST">
+    <form action="{{ route('manage-teachers.store') }}" method="POST">
     	@csrf
 
 
@@ -80,7 +80,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+    {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Institution Class</label>
 
@@ -92,12 +92,12 @@
                         </span>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             
             
 
-            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+            {{-- <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                 <div class="form-group">
                     <label for="" class="form-label">Section</label>
                     
@@ -110,7 +110,7 @@
                         </span>
                     @enderror
                 </div>
-            </div>
+            </div> --}}
 
             
 

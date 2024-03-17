@@ -43,7 +43,8 @@
                             <li><a class="nav-link" href="{{ route('users.index') }}">Manage Users</a></li>
                             <li><a class="nav-link" href="{{ route('roles.index') }}">Manage Role</a></li>
                             <li><a class="nav-link" href="{{ route('products.index') }}">Manage Product</a></li>
-                            <li><a class="nav-link" href="{{ route('class-assign.index') }}">Class Assign for teacher Product</a></li>
+                            <li><a class="nav-link" href="{{ route('manage-teachers.index') }}">Manage Teachers</a></li>
+                            <li><a class="nav-link" href="{{ route('class-assign.index') }}">Class/Section Assign for School</a></li>
                             <li><a class="nav-link" href="{{ route('manage-students.index') }}">Manage Students</a></li>
                             {{-- <li><a class="nav-link" href="{{ route('class-wise-subject-assign.index') }}">Manage Class wise Subjects  </a></li> --}}
                              <li><a class="nav-link btn btn-info" href="{{ route('pagination-search') }}">pagination with search</a></li> 

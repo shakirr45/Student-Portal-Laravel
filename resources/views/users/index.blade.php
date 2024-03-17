@@ -27,15 +27,17 @@
    <th>Name</th>
    <th>Email</th>
    <th>Class</th>
+   <th>Section</th>
    <th>Roles</th>
    <th width="280px">Action</th>
  </tr>
  @foreach ($data as $key => $user)
   <tr>
     <td>{{ ++$i }}</td>
-    <td>{{ $user->name }}</td>
-    <td>{{ $user->email }}</td>
-    <td>{{ $user->assign_class }}</td>
+    <td>{{ !empty($user->name) ? $user->name : " " }}</td>
+    <td>{{ !empty($user->email) ? $user->email : " " }}</td>
+    <td>{{!empty($user->InstitutionClass->name) ?  $user->InstitutionClass->name : " " }}</td>
+    <td>{{!empty($user->classSection->name) ?  $user->classSection->name : " " }}</td>
     <td>
       @if(!empty($user->getRoleNames()))
         @foreach($user->getRoleNames() as $v)

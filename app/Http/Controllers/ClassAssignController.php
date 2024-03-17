@@ -48,6 +48,8 @@ class ClassAssignController extends Controller
 
         $classes = ClassAssign::latest()
         ->with(['institutionClass'])
+        ->with(['classSection'])
+        ->with(['userList'])
         ->paginate(5);
 
         // dd($classes);
@@ -112,9 +114,6 @@ class ClassAssignController extends Controller
             'pm_or_am' => 'required',
 			
             // 'assign_teacher_id' => 'required',
-			
-
-
 			
         ]);
 

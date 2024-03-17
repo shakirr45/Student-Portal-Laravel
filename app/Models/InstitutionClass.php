@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class InstitutionClass extends Model
 {
     use HasFactory;
-    protected $hidden = [
+    protected $fillable = [
         'name',
         'code',
     ];
@@ -20,14 +20,25 @@ class InstitutionClass extends Model
 		return $data;
 	}
 
+    // public function classAssign()
+    // {
+    //     return $this->hasOne('App\Models\ClassAssign');
+    // }
+
+    // public function classWiseSubjectAssign()
+    // {
+    //     return $this->hasOne('App\Models\ClassWiseSubjectAssign');
+    // }
+
+
+    public function userList()
+    {
+        return $this->hasOne('App\Models\User');
+    }
+
     public function classAssign()
     {
         return $this->hasOne('App\Models\ClassAssign');
-    }
-
-    public function classWiseSubjectAssign()
-    {
-        return $this->hasOne('App\Models\ClassWiseSubjectAssign');
     }
 
 }

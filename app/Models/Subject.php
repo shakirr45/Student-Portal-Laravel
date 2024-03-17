@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
-    protected $hidden = [
+    protected $fillable = [
         'name',
         'sub_code',
     ];

@@ -19,7 +19,7 @@
             <div class="form-group">
                 <strong>Class:</strong>
 
-                {{ !empty($classAssign->class_id) ? $classAssign->class_id : '' }}
+                {{ !empty($classAssign->institutionClass->name) ? $classAssign->institutionClass->name : '' }}
 
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Section:</strong>
-                {{ !empty($classAssign->section_id) ? $classAssign->section_id : '' }}
+                {{ !empty($classAssign->classSection->name) ? $classAssign->classSection->name : '' }}
 
             </div>
         </div>
@@ -45,7 +45,7 @@
        <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Assign Teacher:</strong>
-                {{ !empty($classAssign->user_id) ? $classAssign->user_id : '' }}
+                {{ !empty($classAssign->userList->name) ? $classAssign->userList->name : '' }}
 
             </div>
         </div>

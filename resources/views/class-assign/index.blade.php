@@ -37,9 +37,9 @@
 	    @foreach ($classes as $class)
 	    <tr>
 	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($class->class_id) ? $class->class_id : " " }}</td>
-	        <td>{{ !empty($class->section_id) ? $class->section_id : " " }}</td>
-	        <td>{{ !empty($class->user_id) ? $class->user_id : " " }}</td> 
+	        <td>{{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }}</td>
+	        <td>{{ !empty($class->classSection->name) ? $class->classSection->name : " " }}</td>
+	        <td>{{ !empty($class->userList->name) ? $class->userList->name : " " }}</td> 
 	         <td>{{ !empty($class->subjects) ? $class->subjects : " "}}</td>    
 	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
 	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
