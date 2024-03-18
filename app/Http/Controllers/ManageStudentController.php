@@ -32,11 +32,8 @@ class ManageStudentController extends Controller
 
         if ( !empty($request->user_id ) )
 		{
-
 			 $serchCondition['user_id']  = $request->user_id;
-
 		}
-        
 
         $manageStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
@@ -77,21 +74,19 @@ class ManageStudentController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'email' => 'required|email|unique:users,email',
-            // 'assign_class' => 'required',
             'user_id' => 'required|unique:users,user_id',
             'mobile_no' => 'required|unique:users,mobile_no',
             'password' => 'required|same:confirm-password',
             'assign_class' => 'required',
             'section_id' => 'required',
-            // 'roles' => 'required'
-            // 'assign_class' => 'required'
-            // 'roles' => 'required'
+
         ]);
 
        
         
 
         $input = $request->all();
+
         // $input['assign_class'] = json_encode($input['assign_class']);
 
         $input['password'] = Hash::make($input['password']);
@@ -110,9 +105,6 @@ class ManageStudentController extends Controller
      */
     public function show( $studentId )
     {
-        // $manageStudents = User::find($studentId);
-
-
         $manageStudents = User::where('id',$studentId)
         ->with(['InstitutionClass'])
         ->with(['classSection'])->first();
@@ -147,14 +139,19 @@ class ManageStudentController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            // 'assign_class' => 'required',
+            
             'email' => 'required|email|unique:users,email,'.$id,
+            
             'user_id' => 'required|unique:users,user_id,'.$id,
+            
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
+            
             'password' => 'same:confirm-password',
-            // 'roles' => 'required',
+            
             'assign_class' => 'required',
+            
             'section_id' => 'required',
+            
         ]);
     
         $input = $request->all();

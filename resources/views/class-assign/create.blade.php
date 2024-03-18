@@ -98,9 +98,13 @@
                     <label for="" class="form-label">Class Schedule</label>
                     
                     {!! Form::text('time_start', null, array('placeholder' => 'time start. Ex( 01.00 )','class' => 'form-control')) !!}
+                    
+                    {!! Form::select('pm_or_am_first', ['PM' => 'PM', 'AM' => 'AM'], null, ['class' => 'form-control']) !!}
+                    
+                    
                     {!! Form::text('time_end', null, array('placeholder' => 'time end. Ex( 01.00 )','class' => 'form-control')) !!}
 
-                    {!! Form::select('pm_or_am', ['PM' => 'PM', 'AM' => 'AM'], null, ['class' => 'form-control']) !!}
+                    {!! Form::select('pm_or_am_second', ['PM' => 'PM', 'AM' => 'AM'], null, ['class' => 'form-control']) !!}
 
                     @error('roles')
                         <span class="invalid-feedback">

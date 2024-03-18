@@ -63,11 +63,17 @@
                         <div class="form-group">
 
                             <h5>Today( {{ $dayOfWeekForToday }} )  Class: </h5><br>
+                            @if(count($currentDateDaysdata) > 0)
                             @foreach($currentDateDaysdata as  $data)
 
-                            <h6>{{ $data->subjects }} {{ $data->class_schedule }}</h6>
+                            <h6>{{ !empty($data->subjects) ? $data->subjects : " " }} {{ !empty($data->class_schedule) ? $data->class_schedule : " " }}</h6>
 
                             @endforeach
+
+                            @else
+                            <span>No class today.</span>
+
+                            @endif
 
 
 

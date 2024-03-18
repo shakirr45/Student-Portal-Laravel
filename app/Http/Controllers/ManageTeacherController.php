@@ -32,9 +32,7 @@ class ManageTeacherController extends Controller
 
         if ( !empty($request->user_id ) )
 		{
-
 			 $serchCondition['user_id']  = $request->user_id;
-
 		}
         
 
@@ -42,12 +40,11 @@ class ManageTeacherController extends Controller
             $query->where('name', 'Teacher');
         })
         ->where($serchCondition)
-        // ->with(['InstitutionClass'])
-        // ->with(['classSection'])
         ->latest()->paginate(5);
 
     // Check if no students are found
     if ($manageTeachers->isEmpty()) {
+
         return view('manage-teachers.index')->with('noDataFound', true);
     }
 
@@ -60,7 +57,6 @@ class ManageTeacherController extends Controller
      */
     public function create()
     {
-        //
         $institutionClass = InstitutionClass::dataList();
 
         $classSection = ClassSection::dataList();
@@ -77,16 +73,15 @@ class ManageTeacherController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+
             'email' => 'required|email|unique:users,email',
-            // 'assign_class' => 'required',
+
             'user_id' => 'required|unique:users,user_id',
+
             'mobile_no' => 'required|unique:users,mobile_no',
+
             'password' => 'required|same:confirm-password',
-            // 'assign_class' => 'required',
-            // 'section_id' => 'required',
-            // 'roles' => 'required'
-            // 'assign_class' => 'required'
-            // 'roles' => 'required'
+
         ]);
 
        
@@ -112,8 +107,6 @@ class ManageTeacherController extends Controller
     public function show( $teacherId )
     {
         $manageTeachers = User::where('id',$teacherId)
-        // ->with(['InstitutionClass'])
-        // ->with(['classSection'])
         ->first();
         
         // dd($manageTeachers->toArray());
@@ -132,7 +125,6 @@ class ManageTeacherController extends Controller
 
         $classSections = ClassSection::dataList();
 
-
         $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
 
         return view('manage-teachers.edit',compact('user','institutionClass','institutionClassSelected','classSections'));
@@ -143,15 +135,17 @@ class ManageTeacherController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
+
             'name' => 'required',
-            // 'assign_class' => 'required',
+
             'email' => 'required|email|unique:users,email,'.$id,
+
             'user_id' => 'required|unique:users,user_id,'.$id,
+
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
+
             'password' => 'same:confirm-password',
-            // 'roles' => 'required',
-            // 'assign_class' => 'required',
-            // 'section_id' => 'required',
+
         ]);
     
         $input = $request->all();

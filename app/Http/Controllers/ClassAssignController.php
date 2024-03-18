@@ -27,25 +27,6 @@ class ClassAssignController extends Controller
      */
     public function index()
     {
-        // $currentDate = \Carbon\Carbon::now();
-        // $tomorrowDate = $currentDate->addDay(); // Add one day to get tomorrow's date
-        // $tomorrowDate = $currentDate->addDay(); // Add one day to get tomorrow's date
-        // $dayOfWeek = $tomorrowDate->format('l'); // Get the day of the week for tomorrow
-        // dd($dayOfWeek);
-        // if ($dayOfWeek == 'Saturday') {
-        //     // dd("true");
-        //     return "true";
-        // } else {
-        //     // dd("false");
-        //     return "false";
-        // }
-        
-
-        // $classes = ClassAssign::latest()
-        // ->with(['userAsTeacher'])
-        // ->paginate(5);
-
-
         $classes = ClassAssign::latest()
         ->with(['institutionClass'])
         ->with(['classSection'])
@@ -80,9 +61,6 @@ class ClassAssignController extends Controller
 
         // dd($isTeacher);
         
-        // return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
-
-
         return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
     }
 
@@ -111,22 +89,17 @@ class ClassAssignController extends Controller
 
             'time_end' => 'required',
 
-            'pm_or_am' => 'required',
-			
-            // 'assign_teacher_id' => 'required',
+            'pm_or_am_first' => 'required',
+
+            'pm_or_am_second' => 'required',
 			
         ]);
-
-
 
         // dd($input = $request->all());
         $input = $request->all();
 
         
-        $input['class_schedule'] = $input['time_start']. " - " . $input['time_end'] . "   " . $input['pm_or_am'];
-
-		// $input['days'] = json_encode($input['days']);
-		// $input['subjects'] = json_encode($input['subjects']);
+        $input['class_schedule'] = $input['time_start'] . "   " . $input['pm_or_am_first']. " - " . $input['time_end'] . "   " . $input['pm_or_am_second'];
 
         $user = ClassAssign::create($input);
 
@@ -162,9 +135,6 @@ class ClassAssignController extends Controller
             });
         })->pluck('name', 'id')->toArray();
 
-
-        // return view('class-assign.edit',compact('classAssign'),compact('isTeacher','institutionClass','classSection','days','subjects'));
-
         return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection','isTeacher','subjects','days'));
 
     }
@@ -182,19 +152,13 @@ class ClassAssignController extends Controller
             'class_id' => 'required',
             
             'section_id' => 'required',
-            // 
+
             'days' => 'required',
 
             'subjects' => 'required',
 
             'class_schedule' => 'required',
-			
-            // 'assign_teacher_id' => 'required',
-			
-            // 'days' => 'required',
 
-            // 'subjects' => 'required',
-			
         ]);
     
 		$input = $request->all();

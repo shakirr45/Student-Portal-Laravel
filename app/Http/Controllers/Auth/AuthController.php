@@ -64,23 +64,7 @@ class AuthController extends Controller
             $currentUserSectionId = !empty(Auth::user()->section_id) ? Auth::user()->section_id : "" ;
 
             $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
-
-            $studentWiseClassShow = ClassAssign::where('class_id', $currentUserClass)
-            ->where('section_id', $currentUserSectionId)
-            ->with(['institutionClass'])
-            ->with(['userList'])
-            ->get();
             
-
-            // dd($currentUserClass);
-
-            // $studentWiseClassShow = ClassWiseSubjectAssign::where('class_assign_id', $currentUserClass)
-            // ->with(['classAssign'])
-            // ->get();
-
-
-            // dd($studentWiseClassShow);
-
 
         // $currentDate = Carbon::now();
         $currentDate = Carbon::now()->setTimezone('Asia/Dhaka');
@@ -88,13 +72,12 @@ class AuthController extends Controller
 
             // dd($dayOfWeekForToday);
 
-            //  return redirect()->route('dashboard');
             $currentLoginRoleInfo = Auth::user()->roles()->get()->toArray();
 			$currentLoginRoleInfo = !empty($currentLoginRoleInfo[0]['name']) ? $currentLoginRoleInfo[0]['name'] : '' ;
 
             // dd($currentLoginRoleInfo);
 
-            
+            // For students ===========>
             $saturdaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Saturday')
@@ -125,8 +108,41 @@ class AuthController extends Controller
             ->get();
 
 
+            // For Teachers ===========>
+
+            $saturdaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Saturday')
+            ->get();
+            $sundaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Sunday')
+            ->get();
+            $mondaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Monday')
+            ->get();
+            $tuesdaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Tuesday')
+            ->get();
+            $wednesdaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Wednesday')
+            ->get();
+            $thursdaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Thursday')
+            ->get();
+            $fridaysdataForTeachers = ClassAssign::where('user_id', $currentUserId)
+            ->where('days', 'Friday')
+            ->get();
+
+
+
 
         if($currentLoginRoleInfo == "Student"){
+
+
+            $studentWiseClassShow = ClassAssign::where('class_id', $currentUserClass)
+            ->where('section_id', $currentUserSectionId)
+            ->with(['institutionClass'])
+            ->with(['userList'])
+            ->get();
 
                 
         if($dayOfWeekForToday == "Saturday"){
@@ -200,58 +216,17 @@ class AuthController extends Controller
             ->where('days', $dayOfWeekForToday)
             ->get();
 
-            // dd($teachertWiseClassShow);
+            // dd($sundaysdata);
 
-            return view('teachers.index',compact('teachertWiseClassShow','dayOfWeekForToday','currentDateDaysClass'));
-            // return redirect()->intended('dashboard')
-            // ->withSuccess('You have Successfully loggedin');
+            return view('teachers.index',compact('teachertWiseClassShow','dayOfWeekForToday','currentDateDaysClass','saturdaysdataForTeachers','sundaysdataForTeachers','mondaysdataForTeachers','tuesdaysdataForTeachers','wednesdaysdataForTeachers','thursdaysdataForTeachers','fridaysdataForTeachers'));
+
+        }elseif($currentLoginRoleInfo == "Headmaster"){
+            return view('home');
         }
-
-
-        // dd($dayOfWeekForToday);
-            
-        // // dd($dayOfWeekForToday);
-        // if ($dayOfWeekForToday == 'Saturday') {
-        //     // dd("true");
-        //     return "true";
-        // } else {
-        //     // dd("false");
-        //     return "false";
-        // }
-
-        // if($dayOfWeekForToday == "Thursday"){
-
-        // }
-
-
-
-            // $studentWiseClassSubject = !empty($studentWiseClassShow->subjects) ? $studentWiseClassShow->subjects : " ";
-
-            // dd($data = $studentWiseClassShow->toArray());
-
-            // $data = $studentWiseClassShow->toArray();
-
-            // foreach($data as $d){
-
-            //     $reArrangeSIAndAsiUsers[$d['id']] = $d['subjects'];
-
-            // }
-            // dd($reArrangeSIAndAsiUsers);
-
-            // return view('dashboard',compact('studentWiseClassShow'))->withSuccess('You have Successfully loggedin');
 
             return redirect()->intended('dashboard')
             ->withSuccess('You have Successfully loggedin');
 
-
-            // return redirect()->intended('dashboard')->with(compact('currentUserClass'))->withSuccess('You have Successfully logged in');
-
-
-            
-            
-            
-            
-            
             
             
         }

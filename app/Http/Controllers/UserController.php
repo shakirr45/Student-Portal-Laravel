@@ -30,23 +30,11 @@ class UserController extends Controller
 
     public function index(Request $request)
     {
-
-        // $currentDate = Carbon::now();
-        // $dayOfWeek = $currentDate->format('l'); // Get the current day of the week in full lowercase (e.g., "sunday")
-
-        // // dd($dayOfWeek);
-        // if ($dayOfWeek == 'Saturday') {
-        //     // dd("true");
-        //     return "true";
-        // } else {
-        //     // dd("false");
-        //     return "false";
-        // }
-
         $data = User::orderBy('id','DESC')
         ->with(['InstitutionClass'])
         ->with(['classSection'])
         ->paginate(5);
+
         return view('users.index',compact('data'))
             ->with('i', ($request->input('page', 1) - 1) * 5);
     }
@@ -61,6 +49,7 @@ class UserController extends Controller
         $institutionClass = InstitutionClass::dataList();
 
         $roles = Role::pluck('name','name')->all();
+
         return view('users.create',compact('roles','institutionClass'));
     }
     
@@ -74,16 +63,22 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+
             'email' => 'required|email|unique:users,email',
-            // 'assign_class' => 'required',
+
             'user_id' => 'required|unique:users,user_id',
+
             'mobile_no' => 'required|unique:users,mobile_no',
+
             'password' => 'required|same:confirm-password',
+
             'roles' => 'required'
+
         ]);
 
        
         $input = $request->all();
+        
         // $input['assign_class'] = json_encode($input['assign_class']);
 
         $input['password'] = Hash::make($input['password']);
@@ -146,12 +141,17 @@ class UserController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            // 'assign_class' => 'required',
+            
             'email' => 'required|email|unique:users,email,'.$id,
+            
             'user_id' => 'required|unique:users,user_id,'.$id,
+            
             'mobile_no' => 'required|unique:users,mobile_no,'.$id,
+            
             'password' => 'same:confirm-password',
+            
             'roles' => 'required'
+            
         ]);
     
         $input = $request->all();
