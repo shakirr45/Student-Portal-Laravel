@@ -59,7 +59,7 @@ class User extends Authenticatable
     //     return $this->hasOne('App\Models\ClassWiseSubjectAssign');
     // }
 
-    public function InstitutionClass()
+    public function institutionClass()
     {
         return $this->belongsTo('App\Models\InstitutionClass', 'assign_class');
     }

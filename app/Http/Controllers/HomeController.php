@@ -41,7 +41,4 @@ class HomeController extends Controller
         
     }
 
-    public function pagination(){
-        return view('pagination.index');
-    }
 }

@@ -11,6 +11,9 @@ use App\Http\Controllers\ClassAssignController;
 // use App\Http\Controllers\SubjectAssignController;
 use App\Http\Controllers\ManageStudentController;
 use App\Http\Controllers\ManageTeacherController;
+
+
+use App\Http\Controllers\Students\ClassOneWiseStudentController;
 // use App\Http\Controllers\ClassWiseSubjectAssignController;
 
   
@@ -57,8 +60,10 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage-students', ManageStudentController::class);
     Route::resource('manage-teachers', ManageTeacherController::class);
 
-    Route::get('pagination-search', [HomeController::class, 'pagination'])->name('pagination-search');
+    // Class Wise students Show =====>
+    Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);
 
+    
 });
 
 

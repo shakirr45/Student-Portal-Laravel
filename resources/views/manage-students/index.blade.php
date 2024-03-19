@@ -70,6 +70,19 @@
         </div>
 <!-- ================================================================= -->
 <!-- ================================================================= -->
+<br>
+<br>
+<a class="btn btn-info" href="{{ route('class-one-wise-students.index') }}">Class 1</a>
+<!-- <a class="btn btn-danger" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-success" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-primary" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-secondary" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-muted" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-warning" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-dark" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-info" href="{{ route('manage-students.create') }}">Class 1</a>
+<a class="btn btn-danger" href="{{ route('manage-students.create') }}">Class 1</a> -->
+
 <!-- ================================================================= -->
 
 

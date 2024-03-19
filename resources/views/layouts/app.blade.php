@@ -12,7 +12,15 @@
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=Nunito" rel="stylesheet">
-
+<!-- ===================== pagination section Start ================ -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/css/bootstrap-datepicker.css"rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.5.0/js/bootstrap-datepicker.js"></script>
+<!-- ===================== pagination section end ================ -->
     <!-- Scripts -->
     @vite(['resources/sass/app.scss', 'resources/js/app.js'])
 </head>
@@ -47,7 +55,6 @@
                             <li><a class="nav-link" href="{{ route('class-assign.index') }}">Class/Section Assign for School</a></li>
                             <li><a class="nav-link" href="{{ route('manage-students.index') }}">Manage Students</a></li>
                             {{-- <li><a class="nav-link" href="{{ route('class-wise-subject-assign.index') }}">Manage Class wise Subjects  </a></li> --}}
-                             <li><a class="nav-link btn btn-info" href="{{ route('pagination-search') }}">pagination with search</a></li> 
 
 
                             <li class="nav-item dropdown">
