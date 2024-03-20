@@ -13,9 +13,6 @@
 			<td >{{ $value->email }}</td>
 			<td >{{ $value->mobile_no }}</td>
 			<td >{{ $value->institutionClass->name }}</td>
-			<td >{{ $value->final_result }}</td>
-			<td >{{ $value->demote_class }}</td>
-
 			
 			<td style="text-align:right">
 
@@ -32,13 +29,6 @@
 			</div>
 
 			</form>
-
-			<form method="POST" action="{{ route('class-one-wise-students-demote-class', $value->id) }}">
-
-			@csrf
-			
-			<button class="btn btn-danger" type="submit">Demote</button>
-			</form> 
 
 
 

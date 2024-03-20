@@ -90,6 +90,8 @@ class ManageStudentController extends Controller
         // $input['assign_class'] = json_encode($input['assign_class']);
 
         $input['password'] = Hash::make($input['password']);
+
+        $input['promote_class'] = $input['assign_class'];
     
         $user = User::create($input);
         $user->assignRole('Student');
@@ -160,6 +162,8 @@ class ManageStudentController extends Controller
         }else{
             $input = Arr::except($input,array('password'));    
         }
+
+        $input['promote_class'] = $input['assign_class'];
     
         $user = User::find($id);
 

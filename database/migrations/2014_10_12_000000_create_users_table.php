@@ -14,18 +14,21 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('email')->unique();
             $table->string('mobile_no')->nullable()->unique();
             $table->string('user_id')->nullable()->unique();
             $table->integer('section_id')->default(0);
             $table->integer('assign_class')->default(0);
-            // $table->string('assign_class')->nullable();
-            $table->string('email')->unique();
+            $table->integer('promote_class')->default(0);
+            $table->integer('demote_class')->default(0)->comment('0 = promoted, 1 = demoted');
+            $table->string('final_result')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

@@ -26,6 +26,9 @@ class User extends Authenticatable
         'user_id',
         'section_id',
         'assign_class',
+        'promote_class',
+        'final_result',
+        'demote_class',
     ];
 
     /**

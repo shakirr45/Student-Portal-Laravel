@@ -60,10 +60,14 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('manage-students', ManageStudentController::class);
     Route::resource('manage-teachers', ManageTeacherController::class);
 
+
     // Class Wise students Show =====>
     Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);
+    Route::post('class-one-wise-students-promote-class/{id}', [ClassOneWiseStudentController::class, 'promoteClass'])->name('class-one-wise-students-promote-class');
+    Route::get('class-one-wise-students-promote-class-all-selected', [ClassOneWiseStudentController::class, 'SelectedPromoteClass'])->name('class-one-wise-students-promote-class-all-selected');
+    Route::post('class-one-wise-students-demote-class/{id}', [ClassOneWiseStudentController::class, 'deomoteClass'])->name('class-one-wise-students-demote-class');
 
-    
+
 });
 
 

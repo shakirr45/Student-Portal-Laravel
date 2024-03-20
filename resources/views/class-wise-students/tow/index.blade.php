@@ -70,19 +70,19 @@
 											</div>
 										</div>
 										
-										<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+										{{--<div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
 											<div class="form-group">
-												<label for="" class="form-label">Final Result</label>
-												{!! Form::text('final_result', null, array('placeholder' => 'enter final result', 'required', 'class' => 'form-control application_no', 'autocomplete' => 'off')) !!}
+												<label for="" class="form-label">Beneficiary Name </label>
+												{!! Form::text('name', null, array('placeholder' => 'enter beneficiary  name', 'required', 'class' => 'form-control application_no', 'autocomplete' => 'off')) !!}
 												
-												@error('final_result')
+												@error('name')
 													<span class="invalid-feedback">
 														<strong>{{ $message }}</strong>
 													</span>
 												@enderror
 												
 											</div>
-										</div>
+										</div>--}}
 										
 										{{-- <div class="col-xs-12 col-sm-12 col-md-4 col-lg-4">
 											<div class="form-group">
@@ -120,8 +120,6 @@
                                         <th scope="col" >Email</th>
                                         <th scope="col" >Mobile</th>
                                         <th scope="col" >Class</th>
-                                        <th scope="col" >Final Result</th>
-                                        <th scope="col" >Demote Class</th>
                                         <th scope="col" style="text-align:right">Promote Class</th>
                                     </tr>
                                 </thead>
