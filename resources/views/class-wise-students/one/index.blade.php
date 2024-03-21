@@ -30,8 +30,11 @@
 						</a>
 
 						<a href="{{ route('class-one-wise-students-promote-class-all-selected') }}" class="btn btn-success" type="submit">
-						 <strong> <i class="fa-solid fa-angle-double-right"></i> All Promote </strong>
+						 <strong> <i class="fa-solid fa-angle-double-right"></i> Promote All </strong>
 						</a>
+
+
+						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote All Selected Students</strong></a>
 
 
 					</div>
@@ -115,7 +118,8 @@
                                  <thead>
                                     <tr>
 									{{-- <th scope="col">SNO</th> --}}
-                                    <th scope="col" >Name</th>
+										<th scope="col" ><input type="checkbox" name="" id="select_all_ids"></th>
+										<th scope="col" >Name</th>
                                         <th scope="col" >User ID</th>
                                         <th scope="col" >Email</th>
                                         <th scope="col" >Mobile</th>
@@ -216,5 +220,42 @@
 		  
 			
 	</script>
+
+
+<<!-- For select all checkbox -->
+<script>
+    $(function() {
+
+        $("#select_all_ids").click(function() {
+            $('.checkbox_ids').prop('checked', $(this).prop('checked'));
+        });
+
+
+        // For Delete Selected checkbox 
+        $("#promoteAllSelectedRecord").click(function(e) {
+            e.preventDefault();
+            var all_ids = [];
+
+            $('input:checkbox[name=ids]:checked').each(function() {
+                all_ids.push($(this).val());
+            });
+
+            $.ajax({
+                url: "{{ route('selected-class-one-student-promote') }}", // Replace 'your_delete_route' with your actual route
+                type: "DELETE",
+                data: {
+                    ids: all_ids,
+                    _token: '{{ csrf_token() }}'
+                },
+                success: function(response) {
+                    $.each(all_ids, function(key, val) {
+                        $('#student_ids' + val).remove();
+                    });
+                }
+            });
+        });
+    });
+</script>
+
 
 @endsection

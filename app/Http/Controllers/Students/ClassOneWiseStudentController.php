@@ -23,12 +23,6 @@ class ClassOneWiseStudentController extends Controller
             $serchCondition['final_result'] = $request->final_result;
         }
 
-        // $data = User::where('assign_class', 1)
-        // ->where('promote_class', 1)
-        // ->where($serchCondition)
-        // ->with(['institutionClass'])
-        // ->paginate(10);
-
         $data = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
@@ -36,7 +30,7 @@ class ClassOneWiseStudentController extends Controller
         ->where('promote_class', 1)
         ->where($serchCondition)
         ->with(['institutionClass'])
-        ->paginate(10);
+        ->paginate(15);
 
         if($request->ajax()){
 			
@@ -44,7 +38,7 @@ class ClassOneWiseStudentController extends Controller
         }
 		
         return view('class-wise-students.one.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 10);
+            ->with('i', ($request->input('page', 1) - 1) * 15);
     }
 
     
@@ -85,7 +79,7 @@ class ClassOneWiseStudentController extends Controller
     }
 
 
-    public function SelectedPromoteClass(){
+    public function PromoteAllStudents(){
 
         $allClassOneStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
@@ -111,15 +105,28 @@ class ClassOneWiseStudentController extends Controller
     }
 
 
+    public function selectedPromote( Request $request ){
+        
+        $studentIds = $request->ids;
 
+        if(!empty($studentIds)){
 
+            $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+
+            foreach ($allClassOneStudents as $student) {
+                $student->assign_class = 2;
+                $student->promote_class = 2;
+                $student->section_id = 0;
     
-    // public function destroy( $id ){
-
-    //     User::find($id)->delete();
-
-    //     return redirect()->route('class-one-wise-students.index')
-    //     ->with('success','Class One Student Deleted successfully');
-    // }
+                $student->save(); // Save the changes to the database
+            }
     
+            return response()->json(["success" => "Students Promotes Successfully"]);
+        }
+
+
+        return response()->json(["success" => "No Student Selected"]);
+
+
+    }
 }

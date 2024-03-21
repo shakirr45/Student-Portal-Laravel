@@ -5,9 +5,10 @@
 
 	@foreach($data as $key => $value)
 		
-		<tr>
+		<tr id="student_ids{{ $value->id }}">
 
 			{{-- <td>{{ $sno++ }}</td> --}}
+			<td ><input type="checkbox" name="ids" id="ids" class="checkbox_ids" value="{{ $value->id }}"></td>
 			<td >{{ $value->name }}</td>
 			<td >{{ $value->user_id }}</td>
 			<td >{{ $value->email }}</td>
