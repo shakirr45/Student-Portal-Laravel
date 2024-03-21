@@ -69,7 +69,6 @@ Route::group(['middleware' => ['auth']], function() {
     Route::delete('selected-class-one-student-promote', [ClassOneWiseStudentController::class, 'selectedPromote'])->name('selected-class-one-student-promote');
 
 
-
 });
 
 

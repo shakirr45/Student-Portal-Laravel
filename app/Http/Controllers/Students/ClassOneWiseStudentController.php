@@ -117,7 +117,8 @@ class ClassOneWiseStudentController extends Controller
                 $student->assign_class = 2;
                 $student->promote_class = 2;
                 $student->section_id = 0;
-    
+                $student->demote_class = 0;
+                
                 $student->save(); // Save the changes to the database
             }
     
@@ -129,4 +130,6 @@ class ClassOneWiseStudentController extends Controller
 
 
     }
+
+
 }
