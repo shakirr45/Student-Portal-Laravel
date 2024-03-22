@@ -7,5 +7,8 @@ use Illuminate\Http\Request;
 
 class ClassSixWiseStudentController extends Controller
 {
-    //
+    function __construct()
+    {
+         $this->middleware('permission:manage-class-six-students', ['only' => ['index','singleStudentpromoteClass','studentWiseDemoteClass','promoteAllStudents','selectedWisePromoteStudents']]);
+    }
 }
