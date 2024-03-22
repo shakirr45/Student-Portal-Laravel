@@ -224,14 +224,17 @@ class AuthController extends Controller
             return view('home');
         }
 
-            return redirect()->intended('dashboard')
-            ->withSuccess('You have Successfully loggedin');
+            toastr()->success('You have Successfully loggedin');
 
-            
+            // return redirect()->route('dashboard');
+            return view('dashboard');
+
             
         }
   
-        return redirect("student-login")->withSuccess('Oppes! You have entered invalid credentials');
+        toastr()->success('Oppes! You have entered invalid credentials');
+
+        return redirect()->route('student-login');
     }
       
     /**
