@@ -15,26 +15,38 @@
 			<td >{{ $value->mobile_no }}</td>
 			<td >{{ $value->institutionClass->name }}</td>
 			<td >{{ $value->final_result }}</td>
-			<td >{{ $value->demote_class }}</td>
+			<td >
+				@if($value->demote_class == 1)
+				<span> Demoted </span>
+				@else
+				<span> Promoted </span>
+				@endif
 
 			
 			<td style="text-align:right">
 
 
 
-			<form method="POST" action="{{ route('class-one-wise-students-promote-class', $value->id) }}">
+			<form method="POST" action="{{ route('class-one-single-student-wise-promote-class', $value->id) }}">
 				@csrf
 			
 			<div class="">
-				<span>{{ $value->assign_class }} to</span>
-				<input type="text" name="promote_class" value="{{ (int)$value->assign_class + 1 }}" style="width: 50px;">
+				{{--<strong>{{ $value->institutionClass->name }} to</strong>--}}
+				<?php
+				// Increment the value of $value->promote_class by 1
+				$value->promote_class += 1;
+				?>
+
+				{!! Form::select('promote_class', ['' =>'Select One'] + $institutionClass, $value->promote_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
+
+
 
 			<button class="btn btn-primary" type="submit">Promote </button>
 			</div>
 
 			</form>
 
-			<form method="POST" action="{{ route('class-one-wise-students-demote-class', $value->id) }}">
+			<form method="POST" action="{{ route('class-one-wise-students-demote', $value->id) }}">
 
 			@csrf
 			

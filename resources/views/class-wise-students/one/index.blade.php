@@ -29,12 +29,12 @@
 						 <strong> <i class="fa-solid fa-angle-double-left"></i> Back </strong>
 						</a>
 
-						<a href="{{ route('class-one-wise-students-promote-class-all-selected') }}" class="btn btn-success" type="submit">
+						<a href="{{ route('class-one-wise-all-students-promote') }}" class="btn btn-success" type="submit">
 						 <strong> <i class="fa-solid fa-angle-double-right"></i> Promote All </strong>
 						</a>
 
 
-						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote All Selected Students</strong></a>
+						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
 
 
 					</div>
@@ -131,7 +131,8 @@
                                 </thead>
                                <tbody class="table-data" id="pagination_data">
 							   
-                               @include("class-wise-students.one.index-pagination",["data"=>$data]) 
+							   @include("class-wise-students.one.index-pagination", ["data" => $data, "institutionClass" => $institutionClass])
+
 
 										
 								</tbody>
@@ -231,7 +232,7 @@
         });
 
 
-        // For Delete Selected checkbox 
+        // For promote Selected checkbox students
         $("#promoteAllSelectedRecord").click(function(e) {
             e.preventDefault();
             var all_ids = [];
@@ -239,10 +240,13 @@
             $('input:checkbox[name=ids]:checked').each(function() {
                 all_ids.push($(this).val());
             });
-
+            if (all_ids.length === 0) {
+                alert("No Selected Students For Promote!");
+                return;
+            }
             $.ajax({
-                url: "{{ route('selected-class-one-student-promote') }}", // Replace 'your_delete_route' with your actual route
-                type: "DELETE",
+                url: "{{ route('selected-students-wise-class-promote') }}", // Replace 'your_delete_route' with your actual route
+                type: "GET",
                 data: {
                     ids: all_ids,
                     _token: '{{ csrf_token() }}'
@@ -251,10 +255,11 @@
                     $.each(all_ids, function(key, val) {
                         $('#student_ids' + val).remove();
                     });
+					alert("Selected Students Promoted Successfully");
                 }
             });
         });
-    });
+    }); 
 </script>
 
 

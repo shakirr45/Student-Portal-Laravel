@@ -186,7 +186,11 @@ class ManageStudentController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('manage-students.index')
-                        ->with('success','User deleted successfully');
+
+
+        toastr()->success('Student deleted successfully!');
+
+        return redirect()->route('manage-students.index');
+
     }
 }

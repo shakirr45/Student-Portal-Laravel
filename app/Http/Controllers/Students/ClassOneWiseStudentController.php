@@ -5,10 +5,16 @@ namespace App\Http\Controllers\Students;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\InstitutionClass;
 
 
 class ClassOneWiseStudentController extends Controller
 {
+    // function __construct()
+    // {
+    //      $this->middleware('permission:manage-class-one-students', ['only' => ['index','singleStudentpromoteClass','studentWiseDemoteClass','promoteAllStudents','selectedWisePromoteStudents']]);
+    // }
+    
     public function index(Request $request)
     {
 
@@ -32,17 +38,20 @@ class ClassOneWiseStudentController extends Controller
         ->with(['institutionClass'])
         ->paginate(15);
 
+        $institutionClass = InstitutionClass::dataList();
+
         if($request->ajax()){
 			
-			return view('class-wise-students.one.index-pagination',['data' => $data]); 
+			return view('class-wise-students.one.index-pagination',['data' => $data, 'institutionClass' => $institutionClass]); 
+            
         }
 		
-        return view('class-wise-students.one.index',compact('data'))
+        return view('class-wise-students.one.index',compact('data','institutionClass'))
             ->with('i', ($request->input('page', 1) - 1) * 15);
     }
 
     
-    public function promoteClass( Request $request, $id ){
+    public function singleStudentpromoteClass( Request $request, $id ){
 
         $this->validate($request, [
 
@@ -60,26 +69,28 @@ class ClassOneWiseStudentController extends Controller
         $input['assign_class'] = $input['promote_class'];
 		$updateData->update($input);
 
-        return redirect()->route('class-one-wise-students.index')
-        ->with('success','Class One Student Promoted successfully');
+        toastr()->success('Class One Student Promoted Class Tow successfully');
+
+        return redirect()->route('class-one-wise-students.index');
 
 
     }
 
-    public function deomoteClass( Request $request, $id ){
+    public function studentWiseDemoteClass( Request $request, $id ){
 
         $updateData = User::find($id);
 
         $input['demote_class'] = 1;
 
 		$updateData->update($input);
+        
+        toastr()->success('Class One Student Demoted successfully');
 
-        return redirect()->route('class-one-wise-students.index')
-        ->with('success','Class One Student Demoted successfully');
+        return redirect()->route('class-one-wise-students.index');
     }
 
 
-    public function PromoteAllStudents(){
+    public function promoteAllStudents(){
 
         $allClassOneStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
@@ -99,13 +110,14 @@ class ClassOneWiseStudentController extends Controller
 
         // dd($allClassOneStudents);
 
-        return redirect()->route('class-one-wise-students.index')
-        ->with('success','Class One Student Promoted successfully');
+        toastr()->success('Class One All Students Promoted Class Tow successfully');
+
+        return redirect()->route('class-one-wise-students.index');
 
     }
 
 
-    public function selectedPromote( Request $request ){
+    public function selectedWisePromoteStudents( Request $request ){
         
         $studentIds = $request->ids;
 
@@ -122,9 +134,11 @@ class ClassOneWiseStudentController extends Controller
                 $student->save(); // Save the changes to the database
             }
     
-            return response()->json(["success" => "Students Promotes Successfully"]);
-        }
+            // return response()->json(["success" => "Students Promotes Successfully"]);
 
+            $message = array('message' => 'Success!', 'title' => 'Updated');
+            return response()->json($message);
+        }
 
         return response()->json(["success" => "No Student Selected"]);
 

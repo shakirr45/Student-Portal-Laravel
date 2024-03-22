@@ -63,10 +63,10 @@ Route::group(['middleware' => ['auth']], function() {
 
     // Class Wise students Show =====>
     Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);
-    Route::post('class-one-wise-students-promote-class/{id}', [ClassOneWiseStudentController::class, 'promoteClass'])->name('class-one-wise-students-promote-class');
-    Route::get('class-one-wise-students-promote-class-all-selected', [ClassOneWiseStudentController::class, 'PromoteAllStudents'])->name('class-one-wise-students-promote-class-all-selected');
-    Route::post('class-one-wise-students-demote-class/{id}', [ClassOneWiseStudentController::class, 'deomoteClass'])->name('class-one-wise-students-demote-class');
-    Route::delete('selected-class-one-student-promote', [ClassOneWiseStudentController::class, 'selectedPromote'])->name('selected-class-one-student-promote');
+    Route::post('class-one-single-student-wise-promote-class/{id}', [ClassOneWiseStudentController::class, 'singleStudentpromoteClass'])->name('class-one-single-student-wise-promote-class');
+    Route::get('class-one-wise-all-students-promote', [ClassOneWiseStudentController::class, 'promoteAllStudents'])->name('class-one-wise-all-students-promote');
+    Route::post('class-one-wise-students-demote/{id}', [ClassOneWiseStudentController::class, 'studentWiseDemoteClass'])->name('class-one-wise-students-demote');
+    Route::get('selected-students-wise-class-promote', [ClassOneWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-students-wise-class-promote');
 
 
 });

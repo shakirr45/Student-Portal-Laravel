@@ -46,6 +46,19 @@ class PermissionTableSeeder extends Seeder
            'manage-teacher-create',
            'manage-teacher-edit',
            'manage-teacher-delete',
+
+           'manage-class-one-students',
+           'manage-class-tow-students',
+           'manage-class-three-students',
+           'manage-class-four-students',
+           'manage-class-five-students',
+           'manage-class-six-students',
+           'manage-class-seven-students',
+           'manage-class-eight-students',
+           'manage-class-nine-students',
+           'manage-class-ten-students',
+
+           
         ];
      
         foreach ($permissions as $permission) {
