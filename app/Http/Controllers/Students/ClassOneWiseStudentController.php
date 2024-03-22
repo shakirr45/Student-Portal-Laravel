@@ -10,10 +10,10 @@ use App\Models\InstitutionClass;
 
 class ClassOneWiseStudentController extends Controller
 {
-    // function __construct()
-    // {
-    //      $this->middleware('permission:manage-class-one-students', ['only' => ['index','singleStudentpromoteClass','studentWiseDemoteClass','promoteAllStudents','selectedWisePromoteStudents']]);
-    // }
+    function __construct()
+    {
+         $this->middleware('permission:manage-class-one-students', ['only' => ['index','singleStudentpromoteClass','studentWiseDemoteClass','promoteAllStudents','selectedWisePromoteStudents']]);
+    }
     
     public function index(Request $request)
     {
