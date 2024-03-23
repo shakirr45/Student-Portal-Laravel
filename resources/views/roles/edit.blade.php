@@ -2,6 +2,11 @@
 
 
 @section('content')
+
+<section class="enroll-main" style=" padding: 50px 0;">
+<div class="container">
+
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -52,5 +57,7 @@
 {!! Form::close() !!}
 
 
+
+</div>
+</div>
 @endsection
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>

@@ -155,8 +155,9 @@ class RoleController extends Controller
         // Sync the permissions with the role
         $role->syncPermissions($permissions);
     
-        return redirect()->route('roles.index')
-                        ->with('success','Role updated successfully');
+        toastr()->success('Role updated successfully');
+
+        return redirect()->route('roles.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -167,7 +168,9 @@ class RoleController extends Controller
     public function destroy($id)
     {
         DB::table("roles")->where('id',$id)->delete();
-        return redirect()->route('roles.index')
-                        ->with('success','Role deleted successfully');
+        
+        toastr()->success('Role deleted successfully');
+        return redirect()->route('roles.index');
+
     }
 }

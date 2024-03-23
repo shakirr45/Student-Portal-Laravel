@@ -2,6 +2,10 @@
 
 
 @section('content')
+<section class="enroll-main" style=" padding: 50px 0;">
+<div class="container">
+
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -25,6 +29,10 @@
     </div>
 @endif
 
+<div class="">
+    <strong>Select All</strong>
+<input type="checkbox" name="" id="select_all_ids">
+</div>
 
 {!! Form::open(array('route' => 'roles.store','method'=>'POST')) !!}
 <div class="row">
@@ -38,11 +46,19 @@
         <div class="form-group">
             <strong>Permission:</strong>
             <br/>
-            @foreach($permission as $value)
-                <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name')) }}
-                {{ $value->name }}</label>
-            <br/>
-            @endforeach
+
+<div class="row">
+@foreach($permission as $key => $value)
+    @if($key % 4 == 0 && $key != 0)
+        </div><div class="row">
+    @endif
+    <div class="col">
+        <label>{{ Form::checkbox('permission[]', $value->id, false, array('class' => 'name checkbox_ids')) }}
+        {{ $value->name }}</label>
+    </div>
+@endforeach
+</div><br>
+
         </div>
     </div>
     <div class="col-xs-12 col-sm-12 col-md-12 text-center">
@@ -52,5 +68,13 @@
 {!! Form::close() !!}
 
 
-<p class="text-center text-primary"><small>Tutorial by ItSolutionStuff.com</small></p>
+</div>
+</div>
+
+
+<script>
+$("#select_all_ids").click(function() {
+    $('.checkbox_ids').prop('checked', $(this).prop('checked'));
+});
+</script>
 @endsection
