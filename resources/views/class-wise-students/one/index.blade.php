@@ -8,33 +8,39 @@
             <p>{{ $message }}</p>
         </div>
     @endif
+	<div id="success-message-container"></div>
 
 
 <section class="enroll-main" style=" padding: 50px 0;">
         <div class="container">
             
 			<div class="row">
-				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-4">
 					<div class="page-header" style="margin-bottom:10px">
 						<div class="page-title">
-							<strong>Student</strong>
-							<h6 style="font-size:13px">Student</h6>
+							<a href="{{ route('manage-students.index') }}" style="text-decoration: none;"><strong>Manage Students </strong></a><strong style="font-size:13px"> / Class One Wise Students</strong>
 						</div>								
 					</div>
 				</div>
 				
-				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-10" align="right">
+				<div class="col-xs-10 col-sm-10 col-md-10 col-lg-8" align="right">
 					<div class="page-btn">
 						<a href="{{ route('manage-students.index') }}" class="btn btn-info" type="submit">
 						 <strong> <i class="fa-solid fa-angle-double-left"></i> Back </strong>
 						</a>
 
-						<a href="{{ route('class-one-wise-all-students-promote') }}" class="btn btn-success" type="submit">
-						 <strong> <i class="fa-solid fa-angle-double-right"></i> Promote All </strong>
-						</a>
-
-
 						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
+
+
+						<div style="margin-top: 30px;">
+						 {!! Form::open(array('route' => 'class-one-wise-all-students-promote','method'=>'POST')) !!}
+
+						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
+
+						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All (One to Tow)</strong></button>
+
+						{!! Form::close() !!}
+						</div>
 
 
 					</div>
@@ -255,7 +261,11 @@
                     $.each(all_ids, function(key, val) {
                         $('#student_ids' + val).remove();
                     });
-					alert("Selected Students Promoted Successfully");
+					if (response.message) {
+                    // If there's a success message, display it in the success message container
+                    $('#success-message-container').html('<div class="alert alert-success">' + response.message + '</div>');
+              	  	}
+					// alert("Selected Students Promoted Successfully");
                 }
             });
         });

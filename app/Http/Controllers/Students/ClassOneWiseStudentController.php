@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\InstitutionClass;
+use App\Models\ClassSection;
 
 
 class ClassOneWiseStudentController extends Controller
@@ -40,13 +41,15 @@ class ClassOneWiseStudentController extends Controller
 
         $institutionClass = InstitutionClass::dataList();
 
+        $classSection = ClassSection::dataList();
+
         if($request->ajax()){
 			
-			return view('class-wise-students.one.index-pagination',['data' => $data, 'institutionClass' => $institutionClass]); 
+			return view('class-wise-students.one.index-pagination',['data' => $data, 'institutionClass' => $institutionClass,'classSection' => $classSection]); 
             
         }
 		
-        return view('class-wise-students.one.index',compact('data','institutionClass'))
+        return view('class-wise-students.one.index',compact('data','institutionClass','classSection'))
             ->with('i', ($request->input('page', 1) - 1) * 15);
     }
 
@@ -65,7 +68,7 @@ class ClassOneWiseStudentController extends Controller
 
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
-        $input['section_id'] = 0;
+        $input['section_id'] = $input['section_id'];
         $input['assign_class'] = $input['promote_class'];
 		$updateData->update($input);
 
@@ -90,7 +93,13 @@ class ClassOneWiseStudentController extends Controller
     }
 
 
-    public function promoteAllStudents(){
+    public function promoteAllStudents( Request $request ){
+
+        $input = $request->all();
+
+        $promoteSection = $input['section_id'];
+
+        // dd($promoteSection);
 
         $allClassOneStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
@@ -103,8 +112,8 @@ class ClassOneWiseStudentController extends Controller
         foreach ($allClassOneStudents as $student) {
             $student->assign_class = 2;
             $student->promote_class = 2;
-            $student->section_id = 0;
-
+            $student->section_id = $promoteSection;
+            
             $student->save(); // Save the changes to the database
         }
 
@@ -128,7 +137,7 @@ class ClassOneWiseStudentController extends Controller
             foreach ($allClassOneStudents as $student) {
                 $student->assign_class = 2;
                 $student->promote_class = 2;
-                $student->section_id = 0;
+                $student->section_id = $student->section_id;
                 $student->demote_class = 0;
                 
                 $student->save(); // Save the changes to the database
@@ -136,7 +145,7 @@ class ClassOneWiseStudentController extends Controller
     
             // return response()->json(["success" => "Students Promotes Successfully"]);
 
-            $message = array('message' => 'Success!', 'title' => 'Updated');
+            $message = array('message' => 'Selected Students Promotes Successfully');
             return response()->json($message);
         }
 

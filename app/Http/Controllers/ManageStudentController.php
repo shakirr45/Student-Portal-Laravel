@@ -82,8 +82,6 @@ class ManageStudentController extends Controller
 
         ]);
 
-       
-        
 
         $input = $request->all();
 
@@ -96,9 +94,9 @@ class ManageStudentController extends Controller
         $user = User::create($input);
         $user->assignRole('Student');
 
-        return redirect()->route('manage-students.index')
-                        ->with('success','User created successfully');
+        toastr()->success('Student created successfully');
 
+        return redirect()->route('manage-students.index');
 
     }
 
@@ -174,10 +172,9 @@ class ManageStudentController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole('Student');
 
+        toastr()->success('Student updated successfully!');
 
-    
-        return redirect()->route('manage-students.index')
-                        ->with('success','User updated successfully');
+        return redirect()->route('manage-students.index');
     }
 
     // /**

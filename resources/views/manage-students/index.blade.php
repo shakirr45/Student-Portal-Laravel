@@ -111,15 +111,16 @@
 	        <td>{{ !empty($students->InstitutionClass->name) ? $students->InstitutionClass->name : " " }}</td>
 	        <td>{{ !empty($students->classSection->name) ? $students->classSection->name : " " }}</td> 
 	        <td>
-            <a class="btn btn-info" href="{{ route('manage-students.show',$students->id) }}">Show</a>
 
             <form action="{{ route('manage-students.destroy',$students->id) }}" method="POST">
+
+                   @can('manage-student-list')
+                   <a class="btn btn-info" href="{{ route('manage-students.show',$students->id) }}">Show</a>
+                   @endcan
 
                     @can('manage-student-edit')
                     <a class="btn btn-primary" href="{{ route('manage-students.edit',$students->id) }}">Edit</a>
                     @endcan
-
-                   
 
 
                     @csrf

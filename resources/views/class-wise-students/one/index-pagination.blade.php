@@ -37,8 +37,10 @@
 				$value->promote_class += 1;
 				?>
 
-				{!! Form::select('promote_class', ['' =>'Select One'] + $institutionClass, $value->promote_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
 
+				{!! Form::select('promote_class', ['' =>'Select One'] + $institutionClass, $value->promote_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
+				
+				{!! Form::select('section_id', ['' =>'Select One'] + $classSection, $value->section_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
 
 
 			<button class="btn btn-primary" type="submit">Promote </button>
