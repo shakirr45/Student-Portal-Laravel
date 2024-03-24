@@ -108,6 +108,16 @@ class ClassOneWiseStudentController extends Controller
         ->where('promote_class', 1)
         ->where('demote_class', 0)
         ->get();
+
+        // dd(count($allClassOneStudents));
+
+
+        if(count($allClassOneStudents) == 0){
+
+            toastr()->error('No one to promote class One to Tow');
+
+            return redirect()->route('class-one-wise-students.index');
+        }
         
         foreach ($allClassOneStudents as $student) {
             $student->assign_class = 2;
@@ -119,7 +129,7 @@ class ClassOneWiseStudentController extends Controller
 
         // dd($allClassOneStudents);
 
-        toastr()->success('Class One All Students Promoted Class Tow successfully');
+        toastr()->success('Class One all students promoted class One to Tow successfully');
 
         return redirect()->route('class-one-wise-students.index');
 
@@ -130,26 +140,62 @@ class ClassOneWiseStudentController extends Controller
         
         $studentIds = $request->ids;
 
-        if(!empty($studentIds)){
+        $sectionId = $request->section;
+
+        if(!empty($sectionId) && !empty($studentIds)) {
 
             $allClassOneStudents = User::whereIn('id', $studentIds)->get();
 
             foreach ($allClassOneStudents as $student) {
                 $student->assign_class = 2;
                 $student->promote_class = 2;
-                $student->section_id = $student->section_id;
+                $student->section_id = $sectionId;
                 $student->demote_class = 0;
                 
                 $student->save(); // Save the changes to the database
             }
     
-            // return response()->json(["success" => "Students Promotes Successfully"]);
-
             $message = array('message' => 'Selected Students Promotes Successfully');
             return response()->json($message);
         }
 
-        return response()->json(["success" => "No Student Selected"]);
+        $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+
+        foreach ($allClassOneStudents as $student) {
+            $student->assign_class = 2;
+            $student->promote_class = 2;
+            $student->section_id = $student->section_id;
+            $student->demote_class = 0;
+            
+            $student->save(); // Save the changes to the database
+        }
+
+        // return response()->json(["success" => "Students Promotes Successfully"]);
+
+        $message = array('message' => 'Selected Students Promotes Successfully');
+        return response()->json($message);
+
+        
+        // if(!empty($studentIds)){
+
+            // $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+
+            // foreach ($allClassOneStudents as $student) {
+            //     $student->assign_class = 2;
+            //     $student->promote_class = 2;
+            //     $student->section_id = $student->section_id;
+            //     $student->demote_class = 0;
+                
+            //     $student->save(); // Save the changes to the database
+            // }
+    
+            // // return response()->json(["success" => "Students Promotes Successfully"]);
+
+            // $message = array('message' => 'Selected Students Promotes Successfully');
+            // return response()->json($message);
+        // }
+
+        // return response()->json(["success" => "No Student Selected"]);
 
 
     }

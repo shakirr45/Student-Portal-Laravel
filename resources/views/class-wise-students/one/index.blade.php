@@ -29,18 +29,31 @@
 						 <strong> <i class="fa-solid fa-angle-double-left"></i> Back </strong>
 						</a>
 
+
+
+					<div class="col">
+						<div class="row">
+
+							<div class="col-6">
+						<div style="margin-top: 30px;">
+						{!! Form::select('promote_section_id', ['' => 'Select Section'] + $classSection, '', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width', 'style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
 						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
+						</div></div>
 
-
+						<div class="col-6">
 						<div style="margin-top: 30px;">
 						 {!! Form::open(array('route' => 'class-one-wise-all-students-promote','method'=>'POST')) !!}
-
 						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
-
-						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All (One to Tow)</strong></button>
-
+						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All (One to Tow)</strong></button><br>
+						<span>Except Demoted Students</span>
 						{!! Form::close() !!}
+						</div></div>
+
+					</div>
 						</div>
+
+
+
 
 
 					</div>
@@ -153,6 +166,7 @@
             </div>
 			
         </div>
+
     </section>
 
 
@@ -228,7 +242,6 @@
 			
 	</script>
 
-
 <<!-- For select all checkbox -->
 <script>
     $(function() {
@@ -243,11 +256,14 @@
             e.preventDefault();
             var all_ids = [];
 
+			var sectionValue = $("select[name='promote_section_id']").val(); // Get the value of the 'class' input field
+
+
             $('input:checkbox[name=ids]:checked').each(function() {
                 all_ids.push($(this).val());
             });
             if (all_ids.length === 0) {
-                alert("No Selected Students For Promote!");
+                alert("No selected students for promote!");
                 return;
             }
             $.ajax({
@@ -255,6 +271,7 @@
                 type: "GET",
                 data: {
                     ids: all_ids,
+					section: sectionValue, // Include the value of 'class'
                     _token: '{{ csrf_token() }}'
                 },
                 success: function(response) {
