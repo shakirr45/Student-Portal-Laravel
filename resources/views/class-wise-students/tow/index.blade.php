@@ -141,9 +141,9 @@
 									</div>
 									
 									<div class="text-center">
-										<a id="search_btn" href="{{ url('class-one-wise-students/') }}" class="btn submit-btn" type="submit">search</a>
+										<a id="search_btn" href="{{ url('class-tow-wise-students/') }}" class="btn submit-btn" type="submit">search</a>
 										
-										<a id="" href="{{ url('class-one-wise-students/') }}" class="btn  btn-danger" type="reset">Cancel</a>
+										<a id="" href="{{ url('class-tow-wise-students/') }}" class="btn  btn-danger" type="reset">Cancel</a>
 									</div>
 								{!! Form::close() !!}
 						
