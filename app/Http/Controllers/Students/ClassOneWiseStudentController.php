@@ -37,11 +37,27 @@ class ClassOneWiseStudentController extends Controller
         ->where('promote_class', 1)
         ->where($serchCondition)
         ->with(['institutionClass'])
-        ->paginate(15);
+        ->paginate(10);
 
         $institutionClass = InstitutionClass::dataList();
 
         $classSection = ClassSection::dataList();
+
+        // For count class wise ==============>
+        $totalStudentsCount = User::whereHas('roles', function($query){
+            $query->where('name', 'Student');
+        })->where('assign_class', 1)
+        ->where('promote_class', 1)
+        ->count();
+
+        $totalDemotedStudentsCount = User::whereHas('roles', function($query){
+            $query->where('name', 'Student');
+        })->where('assign_class', 1)
+        ->where('promote_class', 1)
+        ->where('demote_class', 1)
+        ->count();
+
+        // dd($totalDemotedStudentsCount);
 
         if($request->ajax()){
 			
@@ -49,8 +65,8 @@ class ClassOneWiseStudentController extends Controller
             
         }
 		
-        return view('class-wise-students.one.index',compact('data','institutionClass','classSection'))
-            ->with('i', ($request->input('page', 1) - 1) * 15);
+        return view('class-wise-students.one.index',compact('data','institutionClass','classSection','totalStudentsCount','totalDemotedStudentsCount'))
+            ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
     

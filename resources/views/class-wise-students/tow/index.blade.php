@@ -31,25 +31,30 @@
 
 
 
-					<div class="col">
+						<div class="col">
 						<div class="row">
 
-							<div class="col-6">
-						<div style="margin-top: 30px;">
+						<div class="form-group d-flex align-items-center">
+						<div style="margin-top: 10px; margin-left:10px;">
 						{!! Form::select('promote_section_id', ['' => 'Select Section'] + $classSection, '', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width', 'style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
-						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote Tow to Three for Selected Students</strong></a>
-						</div></div>
+						</div>
+						<div style="margin-top: 10px; margin-left:10px;">
+						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
+						</div>
+						</div>
 
-						<div class="col-6">
-						<div style="margin-top: 30px;">
+						<div class="form-group d-flex align-items-center">
+						<div style="margin-top: 10px; margin-left:10px;">
 						 {!! Form::open(array('route' => 'class-tow-wise-all-students-promote','method'=>'POST')) !!}
 						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
-						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All (Tow to Three)</strong></button><br>
-						<span>Except Demoted Students</span>
+						</div>
+						<div style="margin-top: 10px; margin-left:10px;">
+						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( Tow to Three ) . Except Demoted Students</strong></button><br>
 						{!! Form::close() !!}
-						</div></div>
+						</div>
+						</div>
 
-					</div>
+						</div>
 						</div>
 
 
@@ -59,6 +64,19 @@
 					</div>
 				</div>
 			</div>
+
+
+	<div class="row" style="margin-top:30px;">
+	<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+	<span class="" style="background-color: #006865; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Students : {{ $totalStudentsCount }} </span>
+
+	<span class="" style="background-color: #820025; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Demoted Students : {{ $totalDemotedStudentsCount }} </span>
+
+	{{-- <span class="" style="background-color: #000068; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Students : 10 </span> --}}
+
+	
+	</div>
+	</div><br>
 
 
 
@@ -143,9 +161,9 @@
                                         <th scope="col" >Email</th>
                                         <th scope="col" >Mobile</th>
                                         <th scope="col" >Class</th>
-                                        <th scope="col" >Final Result</th>
-                                        <th scope="col" >Demote Class</th>
-                                        <th scope="col" style="text-align:right">Promote Class</th>
+                                        <th scope="col" >Result</th>
+                                        <th scope="col" >Status</th>
+                                        <th scope="col" style="text-align:right; float:left;">Class ----------- Section ----------- Promote/Demote Class</th>
                                     </tr>
                                 </thead>
                                <tbody class="table-data" id="pagination_data">

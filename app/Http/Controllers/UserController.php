@@ -68,7 +68,7 @@ class UserController extends Controller
 
             'user_id' => 'required|unique:users,user_id',
 
-            'mobile_no' => 'required|unique:users,mobile_no',
+            'mobile_no' => 'required|max:11|unique:users,mobile_no',
 
             'password' => 'required|same:confirm-password',
 
@@ -146,7 +146,7 @@ class UserController extends Controller
             
             'user_id' => 'required|unique:users,user_id,'.$id,
             
-            'mobile_no' => 'required|unique:users,mobile_no,'.$id,
+            'mobile_no' => 'required|max:11|unique:users,mobile_no,'.$id,
             
             'password' => 'same:confirm-password',
             

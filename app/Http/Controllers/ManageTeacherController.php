@@ -78,7 +78,7 @@ class ManageTeacherController extends Controller
 
             'user_id' => 'required|unique:users,user_id',
 
-            'mobile_no' => 'required|unique:users,mobile_no',
+            'mobile_no' => 'required|max:11|unique:users,mobile_no',
 
             'password' => 'required|same:confirm-password',
 
@@ -95,9 +95,9 @@ class ManageTeacherController extends Controller
         $user = User::create($input);
         $user->assignRole('Teacher');
 
-        return redirect()->route('manage-teachers.index')
-                        ->with('success','teachers created successfully');
+        toastr()->success('Teachers created successfully');
 
+        return redirect()->route('manage-teachers.index');
 
     }
 
@@ -142,7 +142,7 @@ class ManageTeacherController extends Controller
 
             'user_id' => 'required|unique:users,user_id,'.$id,
 
-            'mobile_no' => 'required|unique:users,mobile_no,'.$id,
+            'mobile_no' => 'required|max:11|unique:users,mobile_no,'.$id,
 
             'password' => 'same:confirm-password',
 
@@ -164,10 +164,9 @@ class ManageTeacherController extends Controller
         DB::table('model_has_roles')->where('model_id',$id)->delete();
         $user->assignRole('Teacher');
 
+        toastr()->success('Teachers updated successfully');
 
-    
-        return redirect()->route('manage-teachers.index')
-                        ->with('success','teachers updated successfully');
+        return redirect()->route('manage-teachers.index');
     }
     /**
      * Remove the specified resource from storage.
@@ -175,7 +174,9 @@ class ManageTeacherController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('manage-teachers.index')
-                        ->with('success','teachers deleted successfully');
+
+        toastr()->success('Teachers deleted successfully');
+
+        return redirect()->route('manage-teachers.index');
     }
 }

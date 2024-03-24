@@ -5,11 +5,11 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Classes</h2>
+                <h2>All Student Lists</h2>
             </div>
             <div class="pull-right">
                 @can('class-create')
-                <a class="btn btn-success" href="{{ route('manage-students.create') }}"> Create New Class</a>
+                <a class="btn btn-success" href="{{ route('manage-students.create') }}"> Create New Students</a>
                 @endcan
             </div>
         </div>

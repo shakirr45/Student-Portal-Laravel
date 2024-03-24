@@ -26,39 +26,45 @@
 			<td style="text-align:right">
 
 
-
 			<form method="POST" action="{{ route('class-tow-single-student-wise-promote-class', $value->id) }}">
 				@csrf
 			
-			<div class="">
+			<div class="form-group d-flex align-items-center">
 				{{--<strong>{{ $value->institutionClass->name }} to</strong>--}}
 				<?php
 				// Increment the value of $value->promote_class by 1
 				$value->promote_class += 1;
 				?>
 
-
+				<div class="" style="margin-left:10px;">
 				{!! Form::select('promote_class', ['' =>'Select One'] + $institutionClass, $value->promote_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
+				</div>
 				
+				<div class="" style="margin-left:10px;">
 				{!! Form::select('section_id', ['' =>'Select One'] + $classSection, $value->section_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
+				</div>
 
 
-			<button class="btn btn-primary" type="submit">Promote </button>
-			</div>
+				<div class="" style="margin-left:10px;">
+				<button class="btn btn-primary" type="submit">Promote </button>
+				</div>
 
-			</form>
+				</form>
 
 			<form method="POST" action="{{ route('class-tow-wise-students-demote', $value->id) }}">
-
 			@csrf
-			
-			<button class="btn btn-danger" type="submit">Demote</button>
+
+				<div class="" style="margin-left:10px;">
+				<button class="btn btn-danger" type="submit">Demote</button>
+				</div>
+
 			</form> 
+
+			</div>
 
 
 
 			{{-- <form method="POST" action="{{ route('class-one-wise-students.destroy', $value->id) }}">
-
 				@csrf
 				@method('DELETE')
 				<button class="btn btn-danger" type="submit">Delete</button>

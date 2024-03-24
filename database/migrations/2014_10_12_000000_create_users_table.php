@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
-            $table->string('mobile_no')->nullable()->unique();
+            $table->string('mobile_no', 11)->nullable()->unique();
             $table->string('user_id')->nullable()->unique();
             $table->integer('section_id')->default(0);
             $table->integer('assign_class')->default(0);
