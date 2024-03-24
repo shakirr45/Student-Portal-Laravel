@@ -8,13 +8,12 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassAssignController;
-// use App\Http\Controllers\SubjectAssignController;
 use App\Http\Controllers\ManageStudentController;
 use App\Http\Controllers\ManageTeacherController;
 
 
 use App\Http\Controllers\Students\ClassOneWiseStudentController;
-// use App\Http\Controllers\ClassWiseSubjectAssignController;
+use App\Http\Controllers\Students\ClassTowWiseStudentController;
 
   
 /*
@@ -64,11 +63,17 @@ Route::group(['middleware' => ['auth']], function() {
     // Class Wise students Show =====>
     Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);
     Route::post('class-one-single-student-wise-promote-class/{id}', [ClassOneWiseStudentController::class, 'singleStudentpromoteClass'])->name('class-one-single-student-wise-promote-class');
-    Route::post('class-one-wise-all-students-promote', [ClassOneWiseStudentController::class, 'promoteAllStudents'])->name('class-one-wise-all-students-promote');
     Route::post('class-one-wise-students-demote/{id}', [ClassOneWiseStudentController::class, 'studentWiseDemoteClass'])->name('class-one-wise-students-demote');
-    Route::get('selected-students-wise-class-promote', [ClassOneWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-students-wise-class-promote');
+    Route::post('class-one-wise-all-students-promote', [ClassOneWiseStudentController::class, 'promoteAllStudents'])->name('class-one-wise-all-students-promote');
+    Route::get('selected-class-one-students-promote', [ClassOneWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-class-one-students-promote');
 
+    Route::resource('class-tow-wise-students', ClassTowWiseStudentController::class);
+    Route::post('class-tow-single-student-wise-promote-class/{id}', [ClassTowWiseStudentController::class, 'singleStudentpromoteClass'])->name('class-tow-single-student-wise-promote-class');
+    Route::post('class-tow-wise-students-demote/{id}', [ClassTowWiseStudentController::class, 'studentWiseDemoteClass'])->name('class-tow-wise-students-demote');
+    Route::post('class-tow-wise-all-students-promote', [ClassTowWiseStudentController::class, 'promoteAllStudents'])->name('class-tow-wise-all-students-promote');
+    Route::get('selected-class-tow-students-promote', [ClassTowWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-class-tow-students-promote');
 
+    
 });
 
 

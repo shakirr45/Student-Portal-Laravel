@@ -267,7 +267,7 @@
                 return;
             }
             $.ajax({
-                url: "{{ route('selected-students-wise-class-promote') }}", // Replace 'your_delete_route' with your actual route
+                url: "{{ route('selected-class-one-students-promote') }}", // Replace 'your_delete_route' with your actual route
                 type: "GET",
                 data: {
                     ids: all_ids,

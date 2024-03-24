@@ -72,7 +72,7 @@ class ClassOneWiseStudentController extends Controller
         $input['assign_class'] = $input['promote_class'];
 		$updateData->update($input);
 
-        toastr()->success('Class One Student Promoted Class Tow successfully');
+        toastr()->success('Class One Student promoted class Tow successfully');
 
         return redirect()->route('class-one-wise-students.index');
 
