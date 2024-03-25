@@ -45,7 +45,7 @@
 						<div class="form-group d-flex align-items-center">
 						<div style="margin-top: 10px; margin-left:10px;">
 						 {!! Form::open(array('route' => 'class-one-wise-all-students-promote','method'=>'POST')) !!}
-						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
+						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
 						</div>
 						<div style="margin-top: 10px; margin-left:10px;">
 						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( One to Tow ) . Except Demoted Students</strong></button><br>
@@ -163,7 +163,7 @@
                                         <th scope="col" >Class</th>
                                         <th scope="col" >Result</th>
                                         <th scope="col" >Status</th>
-                                        <th scope="col" style="text-align:right; float:left;">Class ----------- Section ----------- Promote/Demote Class</th>
+                                        <th scope="col" style="text-align:right; float:left;">Class ------------------- Section ------------------- Promote/Demote Class</th>
                                     </tr>
                                 </thead>
                                <tbody class="table-data" id="pagination_data">

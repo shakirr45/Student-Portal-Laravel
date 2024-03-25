@@ -4,8 +4,7 @@
     <div class="flex items-center justify-center h-screen">
         <div class="bg-white p-8 rounded-lg shadow-md w-96 flex flex-col items-center"> <!-- Added flex and flex-col classes -->
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQHJNtwBSFISEcJRgtMZ3IW2Tbi8nzqzK0wT0W-la4gJA&s" alt="Logo" class="mb-4 w-20 h-20 object-cover rounded-full"> <!-- Added image -->
-            <h1 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4">SAINT RITA'S HIGH SCHOOL</h1>
-            <p class="text-gray-600 mb-6">— Mothurapur, Chatmohar, Pabna.</p>
+            <h1 class="text-lg sm:text-xl md:text-2xl font-semibold mb-4">Collage or School name</p>
             <form  class="w-full" action="{{ route('login.post.student') }}" method="POST">
                 @csrf
                 <div class="mb-4">

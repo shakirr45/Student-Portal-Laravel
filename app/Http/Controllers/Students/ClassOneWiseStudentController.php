@@ -95,7 +95,7 @@ class ClassOneWiseStudentController extends Controller
 
     }
 
-    public function studentWiseDemoteClass( Request $request, $id ){
+    public function studentWiseDemoteStatus( Request $request, $id ){
 
         $updateData = User::find($id);
 
@@ -103,9 +103,23 @@ class ClassOneWiseStudentController extends Controller
 
 		$updateData->update($input);
         
-        toastr()->success('Class One Student Demoted successfully');
+        toastr()->success('Class One demoted status updated successfully');
 
         return redirect()->route('class-one-wise-students.index');
+    }
+
+    public function studentWisePromoteStatus( Request $request, $id ){
+
+        $updateData = User::find($id);
+
+        $input['demote_class'] = 0;
+
+		$updateData->update($input);
+        
+        toastr()->success('Class One student promoted status updated successfully');
+
+        return redirect()->route('class-one-wise-students.index');
+
     }
 
 
@@ -115,7 +129,40 @@ class ClassOneWiseStudentController extends Controller
 
         $promoteSection = $input['section_id'];
 
-        // dd($promoteSection);
+        if(!empty($promoteSection)){
+            
+            $allClassOneStudents = User::whereHas('roles', function ($query){
+                $query->where('name', 'Student');
+    
+            })->where('assign_class', 1)
+            ->where('promote_class', 1)
+            ->where('demote_class', 0)
+            ->get();
+    
+            // dd(count($allClassOneStudents));
+    
+            if(count($allClassOneStudents) == 0){
+    
+                toastr()->error('No one to promote class One to Tow');
+    
+                return redirect()->route('class-one-wise-students.index');
+            }
+            
+            foreach ($allClassOneStudents as $student) {
+                $student->assign_class = 2;
+                $student->promote_class = 2;
+                $student->section_id = $promoteSection;
+                
+                $student->save(); // Save the changes to the database
+            }
+    
+            // dd($allClassOneStudents);
+    
+            toastr()->success('Class One all students promoted class One to Tow successfully');
+    
+            return redirect()->route('class-one-wise-students.index');
+
+        }
 
         $allClassOneStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
@@ -138,7 +185,7 @@ class ClassOneWiseStudentController extends Controller
         foreach ($allClassOneStudents as $student) {
             $student->assign_class = 2;
             $student->promote_class = 2;
-            $student->section_id = $promoteSection;
+            $student->section_id = $student->section_id;
             
             $student->save(); // Save the changes to the database
         }

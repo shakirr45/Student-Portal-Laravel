@@ -16,11 +16,11 @@
 			<td >{{ $value->institutionClass->name }}</td>
 			<td >{{ $value->final_result }}</td>
 			<td >
-				@if($value->demote_class == 1)
-				<span> Demoted </span>
-				@else
-				<span> Promoted </span>
-				@endif
+			@if($value->demote_class == 1)
+			<span style="background-color: #E51D1A; font-size:12px; color: white; font-weight: bold; border-radius: 5px; padding: 5px;">Demoted</span>
+			@else
+			<span style="background-color: #029B02; font-size:12px; color: white; font-weight: bold; border-radius: 5px; padding: 5px;">Promoted</span>
+			@endif
 
 			
 			<td style="text-align:right">
@@ -51,14 +51,22 @@
 
 				</form>
 
-			<form method="POST" action="{{ route('class-tow-wise-students-demote', $value->id) }}">
+			@if($value->demote_class == 0)
+			<form method="POST" action="{{ route('class-tow-wise-students-demote-status', $value->id) }}">
 			@csrf
-
 				<div class="" style="margin-left:10px;">
-				<button class="btn btn-danger" type="submit">Demote</button>
+				<button class="btn btn-danger" type="submit">Demote Status</button>
 				</div>
-
 			</form> 
+			@else 
+			<form method="POST" action="{{ route('class-tow-wise-students-promote-status', $value->id) }}">
+			@csrf
+				<div class="" style="margin-left:10px;">
+				<button class="btn btn-success" type="submit">Promote Status</button>
+				</div>
+			</form> 
+			@endif
+
 
 			</div>
 
