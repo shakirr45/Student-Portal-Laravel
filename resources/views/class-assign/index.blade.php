@@ -40,7 +40,7 @@
 	        <td>{{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }}</td>
 	        <td>{{ !empty($class->classSection->name) ? $class->classSection->name : " " }}</td>
 	        <td>{{ !empty($class->userList->name) ? $class->userList->name : " " }}</td> 
-	         <td>{{ !empty($class->subjects) ? $class->subjects : " "}}</td>    
+	         <td>{{ !empty($class->subjects->name) ? $class->subjects->name : " "}}</td>    
 	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
 	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
 	        <td>

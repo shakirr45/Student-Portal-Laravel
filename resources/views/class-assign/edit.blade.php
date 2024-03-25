@@ -80,7 +80,7 @@
             <div class="form-group">
                 <label for="" class="form-label">Subject</label>
 
-                {!! Form::select('subjects', ['' =>'Select One']+$subjects,$classAssign->subjects, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                {!! Form::select('subject_id', ['' =>'Select One']+$subjects,$classAssign->subject_id, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
 
                 @error('subjects')
                     <span class="invalid-feedback" >

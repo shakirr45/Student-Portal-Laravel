@@ -15,8 +15,14 @@ class Subject extends Model
 
     protected function dataList( )
 	{
-		$data = Subject::orderBy('id', 'ASC')->pluck('name', 'name')->toArray();
+		$data = Subject::orderBy('id', 'ASC')->pluck('name', 'id')->toArray();
 		
 		return $data;
 	}
+
+    public function classAssign()
+    {
+        return $this->hasOne('App\Models\ClassAssign');
+    }
 }
+

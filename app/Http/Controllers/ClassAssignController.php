@@ -31,6 +31,7 @@ class ClassAssignController extends Controller
         ->with(['institutionClass'])
         ->with(['classSection'])
         ->with(['userList'])
+        ->with(['subjects'])
         ->paginate(5);
 
         // dd($classes);
@@ -51,6 +52,8 @@ class ClassAssignController extends Controller
         $days = DayOfWeek::dataList();
 
         $subjects = Subject::dataList();
+
+        // dd($subjects);
 
         $isTeacher = User::whereHas('roles', function($q) {
             $q->where(function ($query) {
@@ -75,7 +78,7 @@ class ClassAssignController extends Controller
         
         $this->validate($request, [
 
-            'user_id' => 'required',
+            'teacher_id' => 'required',
 
             'class_id' => 'required',
 
@@ -83,7 +86,7 @@ class ClassAssignController extends Controller
 
             'days' => 'required',
 
-            'subjects' => 'required',
+            'subject_id' => 'required',
 
             'time_start' => 'required',
 
@@ -103,8 +106,9 @@ class ClassAssignController extends Controller
 
         $user = ClassAssign::create($input);
 
-        return redirect()->route('class-assign.index')
-                        ->with('success','Class Assign successfully');
+        toastr()->success('Class assign successfully');
+
+        return redirect()->route('class-assign.index');
     }
 
     /**
@@ -147,7 +151,7 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
-            'user_id' => 'required',
+            'teacher_id' => 'required',
             
             'class_id' => 'required',
             
@@ -155,7 +159,7 @@ class ClassAssignController extends Controller
 
             'days' => 'required',
 
-            'subjects' => 'required',
+            'subject_id' => 'required',
 
             'class_schedule' => 'required',
 
@@ -166,9 +170,9 @@ class ClassAssignController extends Controller
 		$updateData = ClassAssign::find($classAssign->id);
 		$updateData->update($input);
 			
-    
-        return redirect()->route('class-assign.index')
-                        ->with('success','Assigned class updated successfully');
+        toastr()->success('Assigned class updated successfully');
+
+        return redirect()->route('class-assign.index');
     }
 
     /**
@@ -177,8 +181,9 @@ class ClassAssignController extends Controller
     public function destroy(ClassAssign $classAssign)
     {
         $classAssign->delete();
-    
-        return redirect()->route('class-assign.index')
-                        ->with('success','Assigned class deleted successfully');
+
+        toastr()->success('Assigned class deleted successfully');
+
+        return redirect()->route('class-assign.index');
     }
 }

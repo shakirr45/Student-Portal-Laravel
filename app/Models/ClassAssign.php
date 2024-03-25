@@ -9,28 +9,13 @@ class ClassAssign extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'user_id', 
+        'teacher_id', 
         'class_id', 
         'section_id', 
-        'subjects', 
+        'subject_id', 
         'days',
         'class_schedule', 
     ];
-
-    // public function userAsTeacher()
-    // {
-    //     return $this->belongsTo('App\Models\User', 'assign_teacher_id');
-    // }
-
-    // public function subjectAssign()
-    // {
-    //     return $this->hasOne('App\Models\SubjectAssign');
-    // }
-
-    // public function institutionClass()
-    // {
-    //     return $this->belongsTo('App\Models\InstitutionClass', 'class_id');
-    // }
 
 
     public function institutionClass()
@@ -46,7 +31,12 @@ class ClassAssign extends Model
 
     public function userList()
     {
-        return $this->belongsTo('App\Models\User', 'user_id');
+        return $this->belongsTo('App\Models\User', 'teacher_id');
+    }
+
+    public function subjects()
+    {
+        return $this->belongsTo('App\Models\Subject', 'subject_id');
     }
 
 }
