@@ -5,30 +5,27 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class InstitutionClass extends Model
+class Session extends Model
 {
+    
     use HasFactory;
     protected $fillable = [
-        'name',
-        'code',
+        'session',
+        'session_year',
     ];
 
     protected function dataList( )
 	{
-		$data = InstitutionClass::orderBy('id', 'ASC')->pluck('name', 'id')->toArray();
+		$data = Session::orderBy('id', 'ASC')->pluck('session', 'id')->toArray();
 		
 		return $data;
-	}
-    
 
-    public function userList()
+	}
+
+    public function session()
     {
         return $this->hasOne('App\Models\User');
     }
 
-    public function classAssign()
-    {
-        return $this->hasOne('App\Models\ClassAssign');
-    }
-
+    
 }

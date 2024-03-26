@@ -25,6 +25,7 @@ class User extends Authenticatable
         'mobile_no',
         'user_id',
         'section_id',
+        'session_id',
         'assign_class',
         'promote_class',
         'final_result',
@@ -72,11 +73,18 @@ class User extends Authenticatable
         return $this->belongsTo('App\Models\ClassSection', 'section_id');
     }
 
+    public function sessionList()
+    {
+        return $this->belongsTo('App\Models\Session', 'session_id');
+    }
+
 
     public function classAssign()
     {
         return $this->hasOne('App\Models\ClassAssign');
     }
+
+
 
 
 }

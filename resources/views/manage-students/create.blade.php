@@ -5,7 +5,7 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Assign Student Section</h2>
+                <h2>Create Student </h2>
             </div>
             <div class="pull-right">
                 <a class="btn btn-primary" href="{{ route('manage-students.index') }}"> Back</a>
@@ -103,7 +103,20 @@
                     
                     {!! Form::select('section_id', ['' => 'Select One']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
 
+                    @error('section_id')
+                        <span class="invalid-feedback">
+                            {{ $message }}
+                        </span>
+                    @enderror
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
+                <div class="form-group">
+                    <label for="" class="form-label">Sessions</label>
                     
+                    {!! Form::select('session_id', ['' => 'Select One']+$sessions,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!} 
+
                     @error('section_id')
                         <span class="invalid-feedback">
                             {{ $message }}

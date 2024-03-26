@@ -7,6 +7,7 @@ use App\Models\ManageStudent;
 use App\Http\Requests\StoreManageStudentRequest;
 use App\Http\Requests\UpdateManageStudentRequest;
 use App\Models\User;
+use App\Models\Session;
 use App\Models\ClassSection;
 use App\Models\InstitutionClass;
 use Hash;
@@ -60,10 +61,12 @@ class ManageStudentController extends Controller
         $institutionClass = InstitutionClass::dataList();
 
         $classSection = ClassSection::dataList();
+        
+        $sessions = Session::dataList();
 
-        // dd($institutionClass);
+        // dd($sessions);
 
-        return view('manage-students.create',compact('institutionClass','classSection'));
+        return view('manage-students.create',compact('institutionClass','classSection','sessions'));
     }
 
     /**
@@ -73,18 +76,27 @@ class ManageStudentController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
+
             'email' => 'required|email|unique:users,email',
+
             'user_id' => 'required|unique:users,user_id',
+
             'mobile_no' => 'required|max:11|unique:users,mobile_no',
+
             'password' => 'required|same:confirm-password',
+
             'assign_class' => 'required',
+
             'section_id' => 'required',
+
+            'session_id' => 'required',
+
 
         ]);
 
 
         $input = $request->all();
-
+        
         // $input['assign_class'] = json_encode($input['assign_class']);
 
         $input['password'] = Hash::make($input['password']);
@@ -126,10 +138,12 @@ class ManageStudentController extends Controller
 
         $classSections = ClassSection::dataList();
 
+        $sessions = Session::dataList();
+
 
         $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
 
-        return view('manage-students.edit',compact('user','institutionClass','institutionClassSelected','classSections'));
+        return view('manage-students.edit',compact('user','institutionClass','institutionClassSelected','classSections','sessions'));
     }
 
     // /**
@@ -151,6 +165,8 @@ class ManageStudentController extends Controller
             'assign_class' => 'required',
             
             'section_id' => 'required',
+
+            'session_id' => 'required',
             
         ]);
     

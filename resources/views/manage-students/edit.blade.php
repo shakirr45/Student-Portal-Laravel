@@ -66,6 +66,15 @@
         </div>
     </div>
 
+ <div class="col-xs-12 col-sm-12 col-md-12">
+        <div class="form-group">
+            <strong>Session</strong>
+            
+            {!! Form::select('session_id', ['' =>'Select One']+$sessions,$user->session_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+
+        </div>
+    </div>
+
    {{-- <div class="col-xs-12 col-sm-12 col-md-12">
         <div class="form-group">
             <strong>Assign class:</strong>

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->integer('section_id')->default(0);
             $table->integer('assign_class')->default(0);
             $table->integer('promote_class')->default(0);
+            $table->integer('session_id')->default(0);
             $table->integer('demote_class')->default(0)->comment('0 = promoted, 1 = demoted');
             $table->string('final_result')->nullable();
             $table->timestamp('email_verified_at')->nullable();

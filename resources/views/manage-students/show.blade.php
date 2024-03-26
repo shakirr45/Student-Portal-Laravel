@@ -72,6 +72,14 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="form-group">
+                <strong>Session:</strong>
+                {{ !empty($manageStudents->sessionList->session) ? $manageStudents->sessionList->session : '' }}
+
+            </div>
+        </div>
+
 
 
 @endsection

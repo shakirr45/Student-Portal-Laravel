@@ -11,13 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_one_student_records', function (Blueprint $table) {
+        Schema::create('sessions', function (Blueprint $table) {
             $table->id();
-            // $table->integer('student_id')->default(0);
-            // $table->integer('bangla_sub_id')->default(0);
-            // $table->integer('english_sub_id')->default(0);
-            // $table->integer('mathematics_sub_id')->default(0);
-
+            $table->string('session')->unique();
+            $table->string('session_year')->unique();
             $table->timestamps();
         });
     }
@@ -27,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_one_student_records');
+        Schema::dropIfExists('sessions');
     }
 };
