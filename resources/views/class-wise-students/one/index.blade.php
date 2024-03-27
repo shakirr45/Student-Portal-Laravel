@@ -67,9 +67,9 @@
 
 	<div class="row" style="margin-top:30px;">
    		<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-        <span class="" style="background-color: #006865; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Students : {{ $totalStudentsCount }} </span>
+        <span class="student-count" style="background-color: #006865; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Students : {{ $totalStudentsCount }} </span>
 
-        <span class="" style="background-color: #820025; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Demoted Students : {{ $totalDemotedStudentsCount }} </span>
+        <span class="demote-student-count" style="background-color: #820025; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Demoted Students : {{ $totalDemotedStudentsCount }} </span>
 
        {{-- <span class="" style="background-color: #000068; padding: 10px; border-radius: 5px; width:100px; font-size:14px; color: white; font-weight: bold; margin: 2px;">Total Students : 10 </span> --}}
 
@@ -301,6 +301,8 @@
                     $('#success-message-container').html('<div class="alert alert-success">' + response.message + '</div>');
               	  	}
 					// alert("Selected Students Promoted Successfully");
+					$('span.student-count').text('Total Students : ' + response.totalStudentsCount);
+					$('span.demote-student-count').text('Total Demoted Students : ' + response.totalDemotedStudentsCount);
                 }
             });
         });
@@ -309,3 +311,4 @@
 
 
 @endsection
+

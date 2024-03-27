@@ -218,8 +218,24 @@ class ClassOneWiseStudentController extends Controller
                 $student->save(); // Save the changes to the database
             }
     
-            $message = array('message' => 'Selected Students Promotes Successfully');
-            return response()->json($message);
+            // $message = array('message' => 'Selected Students Promotes Successfully');
+            // return response()->json($message);
+
+            $totalStudentsCount = User::whereHas('roles', function($query){
+                $query->where('name', 'Student');
+            })->where('assign_class', 1)
+            ->where('promote_class', 1)
+            ->count();
+    
+            $totalDemotedStudentsCount = User::whereHas('roles', function($query){
+                $query->where('name', 'Student');
+            })->where('assign_class', 1)
+            ->where('promote_class', 1)
+            ->where('demote_class', 1)
+            ->count();
+    
+            return response()->json(['message' => 'Selected Students Promoted Successfully', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
+    
         }
 
         $allClassOneStudents = User::whereIn('id', $studentIds)->get();
@@ -233,10 +249,29 @@ class ClassOneWiseStudentController extends Controller
             $student->save(); // Save the changes to the database
         }
 
-        // return response()->json(["success" => "Students Promotes Successfully"]);
 
-        $message = array('message' => 'Selected Students Promotes Successfully');
-        return response()->json($message);
+        // $message = array('message' => 'Selected Students Promotes Successfully');
+        // return response()->json($message);
+
+
+
+        // ==================
+        $totalStudentsCount = User::whereHas('roles', function($query){
+            $query->where('name', 'Student');
+        })->where('assign_class', 1)
+        ->where('promote_class', 1)
+        ->count();
+
+        $totalDemotedStudentsCount = User::whereHas('roles', function($query){
+            $query->where('name', 'Student');
+        })->where('assign_class', 1)
+        ->where('promote_class', 1)
+        ->where('demote_class', 1)
+        ->count();
+
+        return response()->json(['message' => 'Selected Students Promoted Successfully', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
+
+        // ======================
 
         
         // if(!empty($studentIds)){
