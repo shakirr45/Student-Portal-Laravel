@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Laravel 8 CRUD Application - ItSolutionStuff.com</title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet">
-</head>
-<body>
-    
+@extends('layouts.app')
+
+
+@section('content')
+{{--<link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha/css/bootstrap.css" rel="stylesheet"> --}}    
 <div class="container">
-    <h1>Laravel 8 Pagination Example - ItSolutionStuff.com</h1>
     <table class="table table-bordered">
         <thead>
             <tr>
-                <th>Name</th>
-                <th width="300px;">Action</th>
+                <th>Session</th>
+                <th>Session Current Year</th>
+                <th>Action</th>
             </tr>
         </thead>
         <tbody>
@@ -20,6 +17,7 @@
                 @foreach($sessions as $key => $value)
                     <tr>
                         <td>{{ $value->session }}</td>
+                        <td>{{ $value->session_year }}</td>
                         <td>
                             <button class="btn btn-danger">Delete</button>
                         </td>
@@ -35,6 +33,6 @@
          
     {!! $sessions->links() !!}
 </div>
-     
-</body>
-</html>
+
+@endsection
+
