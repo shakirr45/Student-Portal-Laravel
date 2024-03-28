@@ -10,6 +10,7 @@ use App\Models\User;
 use App\Models\Session;
 use App\Models\ClassSection;
 use App\Models\InstitutionClass;
+use App\Models\ClassOneStudentRecord;
 use Hash;
 use Illuminate\Support\Arr;
 use DB;
@@ -104,7 +105,26 @@ class ManageStudentController extends Controller
         $input['promote_class'] = $input['assign_class'];
     
         $user = User::create($input);
+        
         $user->assignRole('Student');
+
+        // For class record //
+
+        if( $user->promote_class == 1 ){
+
+            $data['student_id'] = $user->id;
+
+            $data['session_id'] = $user->session_id;
+
+            $data['promote_class_id'] = $user->promote_class;
+
+            ClassOneStudentRecord::create($data);
+
+        }
+
+
+
+
 
         toastr()->success('Student created successfully');
 

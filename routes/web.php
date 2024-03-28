@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassAssignController;
 use App\Http\Controllers\ManageStudentController;
+use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ManageTeacherController;
 
 
@@ -58,6 +59,11 @@ Route::group(['middleware' => ['auth']], function() {
 
     Route::resource('manage-students', ManageStudentController::class);
     Route::resource('manage-teachers', ManageTeacherController::class);
+    
+    
+    Route::resource('manage-sessions', SessionController::class);
+
+
 
 
     // Class Wise students Show =====>

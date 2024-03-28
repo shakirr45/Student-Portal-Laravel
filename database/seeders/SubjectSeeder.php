@@ -13,7 +13,16 @@ class SubjectSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        //for class one/tow ====>
+        $data["আমার বাংলা বই"] =  11;
+        $data["English For Today"] =  12;
+        $data["প্রাথমিক গণিত"] =  13;
+        $data["প্রাথমিক বিজ্ঞান"] =  14;
+        $data["বাংলাদেশ ও বিশ্বপরিচয়"] =  15;
+        $data["ইসলাম ও নৈতিক শিক্ষা"] =  16;
+
+
+        
         $data["Bangla 1st Paper"] =  101;
         $data["Bangla 2nd Paper"] =  102;
         $data["English 1st Paper"] =  107;

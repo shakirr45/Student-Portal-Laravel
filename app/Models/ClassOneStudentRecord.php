@@ -8,4 +8,30 @@ use Illuminate\Database\Eloquent\Model;
 class ClassOneStudentRecord extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        
+        'student_id',
+        'session_id',
+        'promote_class_id',
+        'amar_bangla_boi_1st_term',
+        'amar_bangla_boi_2nd_term',
+        'amar_bangla_boi_3rd_term',
+        'english_for_today_1st_term',
+        'english_for_today_2nd_term',
+        'english_for_today_3rd_term',
+        'prathomik_gonit_1st_term',
+        'prathomik_gonit_2nd_term',
+        'prathomik_gonit_3rd_term',
+    ];
 }
+
+
+
+
+
+
+
+
+
+
