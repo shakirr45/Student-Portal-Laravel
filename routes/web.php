@@ -62,9 +62,10 @@ Route::group(['middleware' => ['auth']], function() {
     
     
     Route::resource('manage-sessions', SessionController::class);
+    Route::delete('manage-sessions-destroy', [SessionController::class, 'destroy'])->name('manage-sessions-destroy');
 
 
-
+    
 
     // Class Wise students Show =====>
     Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);

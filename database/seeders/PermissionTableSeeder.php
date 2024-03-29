@@ -37,6 +37,9 @@ class PermissionTableSeeder extends Seeder
            'class-wise-subject-edit',
            'class-wise-subject-delete',
 
+           'session-list',
+           'session-delete',
+
            'manage-student-list',
            'manage-student-create',
            'manage-student-edit',

@@ -97,14 +97,13 @@
 	        {{--<td>{{ !empty($teachers->InstitutionClass->name) ? $teachers->InstitutionClass->name : " " }}</td>--}}
 	        {{--<td>{{ !empty($teachers->classSection->name) ? $teachers->classSection->name : " " }}</td> --}}
 	        <td>
-            <a class="btn btn-info" href="{{ route('manage-teachers.show',$teachers->id) }}">Show</a>
 
             <form action="{{ route('manage-teachers.destroy',$teachers->id) }}" method="POST">
+            <a class="btn btn-info" href="{{ route('manage-teachers.show',$teachers->id) }}">Show</a>
 
                     @can('manage-student-edit')
                     <a class="btn btn-primary" href="{{ route('manage-teachers.edit',$teachers->id) }}">Edit</a>
                     @endcan
-
                    
 
 

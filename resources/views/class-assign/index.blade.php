@@ -15,7 +15,7 @@
         </div>
     </div>
 
-    <a href="{{ route('manage-sessions.index') }}" class="btn btn-info">Add Session +</a><br>
+    <a href="{{ route('manage-sessions.index') }}" class="btn btn-info">Show Session & add + </a><br>
 
 
     @if ($message = Session::get('success'))
