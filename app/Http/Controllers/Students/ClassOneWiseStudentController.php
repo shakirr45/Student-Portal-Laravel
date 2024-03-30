@@ -190,6 +190,8 @@ class ClassOneWiseStudentController extends Controller
 
         $input = $request->all();
 
+        // dd($input);
+
         $promoteSection = $input['section_id'];
 
         if(!empty($promoteSection)){
@@ -236,6 +238,34 @@ class ClassOneWiseStudentController extends Controller
         ->get();
 
         // dd(count($allClassOneStudents));
+// =====================
+        // $items = [];
+        // foreach ($allClassOneStudents as $student) {
+        //     // $items[] = ['student_id' => $student];
+
+        //     $items[$student['id']] = $student['student_id'];
+        // }
+
+        // foreach($allClassOneStudents as $key => $stu){
+        //     $input['student_id'] = 
+        // }
+
+        foreach($allClassOneStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class];
+
+            ClassTowStudentRecord::create($input);
+
+        }
+
+
+// =====================
+
+
+
+
+
+
 
 
         if(count($allClassOneStudents) == 0){
