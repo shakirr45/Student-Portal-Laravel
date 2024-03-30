@@ -5,12 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ClassOneStudentRecord extends Model
+class ClassTowStudentRecord extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        
         'student_id',
         'session_id',
         'promote_class_id',
@@ -26,13 +25,3 @@ class ClassOneStudentRecord extends Model
         'prathomik_gonit_3rd_term',
     ];
 }
-
-
-
-
-
-
-
-
-
-

@@ -33,10 +33,10 @@ class UserController extends Controller
         $data = User::orderBy('id','DESC')
         ->with(['InstitutionClass'])
         ->with(['classSection'])
-        ->paginate(5);
+        ->paginate(10);
 
         return view('users.index',compact('data'))
-            ->with('i', ($request->input('page', 1) - 1) * 5);
+            ->with('i', ($request->input('page', 1) - 1) * 10);
     }
     
     /**
@@ -86,8 +86,9 @@ class UserController extends Controller
         $user = User::create($input);
         $user->assignRole($request->input('roles'));
     
-        return redirect()->route('users.index')
-                        ->with('success','User created successfully');
+        toastr()->success('User created successfully');
+
+        return redirect()->route('users.index');
     }
     
     /**
@@ -171,8 +172,9 @@ class UserController extends Controller
     
         $user->assignRole($request->input('roles'));
     
-        return redirect()->route('users.index')
-                        ->with('success','User updated successfully');
+        toastr()->success('User updated successfully');
+
+        return redirect()->route('users.index');
     }
     
     /**
@@ -184,7 +186,9 @@ class UserController extends Controller
     public function destroy($id)
     {
         User::find($id)->delete();
-        return redirect()->route('users.index')
-                        ->with('success','User deleted successfully');
+
+        toastr()->success('User deleted successfully');
+
+        return redirect()->route('users.index');
     }
 }

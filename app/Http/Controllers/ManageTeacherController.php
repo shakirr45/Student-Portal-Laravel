@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateManageTeachersRequest;
 
 use App\Models\User;
 use App\Models\ClassSection;
+use App\Models\Session;
 use App\Models\InstitutionClass;
 use Hash;
 use Illuminate\Support\Arr;
@@ -61,9 +62,12 @@ class ManageTeacherController extends Controller
 
         $classSection = ClassSection::dataList();
 
+        $sessions = Session::dataList();
+
+
         // dd($institutionClass);
 
-        return view('manage-teachers.create',compact('institutionClass','classSection'));
+        return view('manage-teachers.create',compact('institutionClass','classSection','sessions'));
     }
 
     /**
@@ -72,6 +76,7 @@ class ManageTeacherController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
+
             'name' => 'required',
 
             'email' => 'required|email|unique:users,email',
@@ -81,6 +86,8 @@ class ManageTeacherController extends Controller
             'mobile_no' => 'required|max:11|unique:users,mobile_no',
 
             'password' => 'required|same:confirm-password',
+
+            'session_id' => 'required',
 
         ]);
 
@@ -121,13 +128,16 @@ class ManageTeacherController extends Controller
 
         $user = User::find($id);
 
-        $institutionClass = InstitutionClass::dataList();
+        // $institutionClass = InstitutionClass::dataList();
 
-        $classSections = ClassSection::dataList();
+        // $classSections = ClassSection::dataList();
 
-        $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
+        $sessions = Session::dataList();
 
-        return view('manage-teachers.edit',compact('user','institutionClass','institutionClassSelected','classSections'));
+
+        // $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
+
+        return view('manage-teachers.edit',compact('user','sessions'));
     }
     /**
      * Update the specified resource in storage.

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\InstitutionClass;
 use App\Models\ClassSection;
+use App\Models\ClassTowStudentRecord;
 
 
 class ClassOneWiseStudentController extends Controller
@@ -87,6 +88,68 @@ class ClassOneWiseStudentController extends Controller
         $input['section_id'] = $input['section_id'];
         $input['assign_class'] = $input['promote_class'];
 		$updateData->update($input);
+
+        // =============
+        $stuId = $updateData->id;
+        $stuSessionId = $updateData->session_id;
+        $stuClassId = $updateData->promote_class;
+
+        if($stuClassId == 2){
+
+            $checkStudentAtClasstow = ClassTowStudentRecord::where('student_id', $stuId)->get();
+
+            $countCheckStudentAtClassTwo = $checkStudentAtClasstow->count();
+
+            // dd($countCheckStudentAtClassTwo);
+
+            if($countCheckStudentAtClassTwo <= 0){
+                
+                $data['student_id'] = $stuId;
+
+                $data['session_id'] = $stuSessionId;
+    
+                $data['promote_class_id'] = $stuClassId;
+
+                $data['promote_status'] = 1;
+    
+                ClassTowStudentRecord::create($data);
+
+                toastr()->success('Created with new record into class One');
+
+                }else{
+
+                    $lastClassRecordStatus = ClassTowStudentRecord::where('student_id', $stuId)
+                    ->latest('promote_status')
+                    ->first();
+
+                    $lastClassRecordStatus = $lastClassRecordStatus['promote_status'] + 1 ;
+
+                    $data['student_id'] = $stuId;
+
+                    $data['session_id'] = $stuSessionId;
+        
+                    $data['promote_class_id'] = $stuClassId;
+    
+                    $data['promote_status'] = $lastClassRecordStatus;
+        
+                    ClassTowStudentRecord::create($data);
+
+                    // dd($lastClassRecordStatus);
+
+                    toastr()->error('Already have preview record into class One');
+
+                }
+
+
+        }
+
+
+
+
+
+        // =============
+
+
 
         toastr()->success('Class One Student promoted class Tow successfully');
 

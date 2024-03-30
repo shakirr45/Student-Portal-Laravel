@@ -2,6 +2,10 @@
 
 
 @section('content')
+<section class="enroll-main" style=" padding: 50px 0;">
+<div class="container">
+
+
 <div class="row">
     <div class="col-lg-12 margin-tb">
         <div class="pull-left">
@@ -26,8 +30,8 @@
    <th>No</th>
    <th>Name</th>
    <th>Email</th>
-   <th>Class</th>
-   <th>Section</th>
+   {{--<th>Class</th>--}}
+   {{--<th>Section</th>--}}
    <th>Roles</th>
    <th width="280px">Action</th>
  </tr>
@@ -36,8 +40,8 @@
     <td>{{ ++$i }}</td>
     <td>{{ !empty($user->name) ? $user->name : " " }}</td>
     <td>{{ !empty($user->email) ? $user->email : " " }}</td>
-    <td>{{!empty($user->InstitutionClass->name) ?  $user->InstitutionClass->name : " " }}</td>
-    <td>{{!empty($user->classSection->name) ?  $user->classSection->name : " " }}</td>
+    {{--<td>{{!empty($user->InstitutionClass->name) ?  $user->InstitutionClass->name : " " }}</td>--}}
+    {{--<td>{{!empty($user->classSection->name) ?  $user->classSection->name : " " }}</td>--}}
     <td>
       @if(!empty($user->getRoleNames()))
         @foreach($user->getRoleNames() as $v)
@@ -60,5 +64,6 @@
 {!! $data->render() !!}
 
 
-
+</div>
+</section>
 @endsection
