@@ -30,15 +30,15 @@
 				@csrf
 			
 			<div class="form-group d-flex align-items-center">
-				{{--<strong>{{ $value->institutionClass->name }} to</strong>--}}
+				{{--<strong>{{ $value->institutionClass->name }} to</strong>
 				<?php
 				// Increment the value of $value->promote_class by 1
 				$value->promote_class += 1;
-				?>
+				?>--}}
 
-				<div class="" style="margin-left:10px;">
+				{{--<div class="" style="margin-left:10px;">
 				{!! Form::select('promote_class', ['' =>'Select One'] + $institutionClass, $value->promote_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}
-				</div>
+				</div>--}}
 				
 				<div class="" style="margin-left:10px;">
 				{!! Form::select('section_id', ['' =>'Select One'] + $classSection, $value->section_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!}

@@ -10,6 +10,17 @@
     @endif
 	<div id="success-message-container"></div>
 
+<!-- for laravel validation 	 -->
+@if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
+
 
 <section class="enroll-main" style=" padding: 50px 0;">
         <div class="container">
@@ -163,12 +174,12 @@
                                         <th scope="col" >Class</th>
                                         <th scope="col" >Result</th>
                                         <th scope="col" >Status</th>
-                                        <th scope="col" style="text-align:right; float:left;">Class ------------------- Section ------------------- Promote/Demote Class</th>
+                                        <th scope="col" style="text-align:right; float:left;">Section ------------------- Promote/Demote Class</th>
                                     </tr>
                                 </thead>
                                <tbody class="table-data" id="pagination_data">
 							   
-							   @include("class-wise-students.one.index-pagination", ["data" => $data, "institutionClass" => $institutionClass])
+							   @include("class-wise-students.one.index-pagination", ["data" => $data])
 
 
 										

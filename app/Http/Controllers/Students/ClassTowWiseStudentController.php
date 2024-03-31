@@ -39,7 +39,7 @@ class ClassTowWiseStudentController extends Controller
         ->with(['institutionClass'])
         ->paginate(10);
 
-        $institutionClass = InstitutionClass::dataList();
+        // $institutionClass = InstitutionClass::dataList();
 
         $classSection = ClassSection::dataList();
 
@@ -61,11 +61,11 @@ class ClassTowWiseStudentController extends Controller
 
         if($request->ajax()){
 			
-			return view('class-wise-students.tow.index-pagination',['data' => $data, 'institutionClass' => $institutionClass,'classSection' => $classSection]); 
+			return view('class-wise-students.tow.index-pagination',['data' => $data,'classSection' => $classSection]); 
             
         }
 		
-        return view('class-wise-students.tow.index',compact('data','institutionClass','classSection','totalStudentsCount','totalDemotedStudentsCount'))
+        return view('class-wise-students.tow.index',compact('data','classSection','totalStudentsCount','totalDemotedStudentsCount'))
             ->with('i', ($request->input('page', 1) - 1) * 10);
     }
 
@@ -73,7 +73,7 @@ class ClassTowWiseStudentController extends Controller
 
         $this->validate($request, [
 
-            'promote_class' => 'required',
+            'section_id' => 'required',
 
         ]);
 
@@ -84,7 +84,8 @@ class ClassTowWiseStudentController extends Controller
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
         $input['section_id'] = $input['section_id'];
-        $input['assign_class'] = $input['promote_class'];
+        $input['assign_class'] = 3;
+        $input['promote_class'] = 3;
 		$updateData->update($input);
 
         toastr()->success('Class Tow student promoted class Three successfully');
