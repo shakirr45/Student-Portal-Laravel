@@ -12,6 +12,9 @@ use App\Models\ClassSection;
 use App\Models\InstitutionClass;
 use App\Models\ClassOneStudentRecord;
 use App\Models\ClassTwoStudentRecord;
+use App\Models\ClassThreeStudentRecord;
+use App\Models\ClassFourStudentRecord;
+use App\Models\ClassFiveStudentRecord;
 use Hash;
 use Illuminate\Support\Arr;
 use DB;
@@ -135,11 +138,47 @@ class ManageStudentController extends Controller
 
             ClassTwoStudentRecord::create($data);
 
+        }else if( $user->promote_class == 3 ){
+
+            $data['student_id'] = $user->id;
+
+            $data['session_id'] = $user->session_id;
+            
+            $data['section_id'] = $user->section_id;
+
+            $data['promote_class_id'] = $user->promote_class;
+
+            ClassThreeStudentRecord::create($data);
+
+        }else if( $user->promote_class == 4 ){
+
+            $data['student_id'] = $user->id;
+
+            $data['session_id'] = $user->session_id;
+            
+            $data['section_id'] = $user->section_id;
+
+            $data['promote_class_id'] = $user->promote_class;
+
+            ClassFourStudentRecord::create($data);
+            
+        }else if( $user->promote_class == 5 ){
+
+            $data['student_id'] = $user->id;
+
+            $data['session_id'] = $user->session_id;
+            
+            $data['section_id'] = $user->section_id;
+
+            $data['promote_class_id'] = $user->promote_class;
+
+            ClassFiveStudentRecord::create($data);
         }
 
 
 
-
+        
+        
 
         toastr()->success('Student created successfully');
 
