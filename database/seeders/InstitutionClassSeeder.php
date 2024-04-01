@@ -15,7 +15,7 @@ class InstitutionClassSeeder extends Seeder
     {
         //
          $data["one"] =  1;
-         $data["tow"] =  2;
+         $data["two"] =  2;
          $data["three"] =  3;
          $data["four"] =  4;
          $data["five"] =  5;

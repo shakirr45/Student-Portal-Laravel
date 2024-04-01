@@ -28,7 +28,7 @@
 				<div class="col-xs-2 col-sm-2 col-md-2 col-lg-4">
 					<div class="page-header" style="margin-bottom:10px">
 						<div class="page-title">
-							<a href="{{ route('manage-students.index') }}" style="text-decoration: none;"><strong>Manage Students </strong></a><strong style="font-size:13px"> / Class Tow Wise Students</strong>
+							<a href="{{ route('manage-students.index') }}" style="text-decoration: none;"><strong>Manage Students </strong></a><strong style="font-size:13px"> / Class Two Wise Students</strong>
 						</div>								
 					</div>
 				</div>
@@ -49,17 +49,17 @@
 						{!! Form::select('promote_section_id', ['' => 'Select Section'] + $classSection, '', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width', 'style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
 						</div>
 						<div style="margin-top: 10px; margin-left:10px;">
-						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
+						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Two for Selected Students</strong></a>
 						</div>
 						</div>
 
 						<div class="form-group d-flex align-items-center">
 						<div style="margin-top: 10px; margin-left:10px;">
-						 {!! Form::open(array('route' => 'class-tow-wise-all-students-promote','method'=>'POST')) !!}
+						 {!! Form::open(array('route' => 'class-two-wise-all-students-promote','method'=>'POST')) !!}
 						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
 						</div>
 						<div style="margin-top: 10px; margin-left:10px;">
-						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( Tow to Three ) . Except Demoted Students</strong></button><br>
+						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( Two to Three ) . Except Demoted Students</strong></button><br>
 						{!! Form::close() !!}
 						</div>
 						</div>
@@ -151,9 +151,9 @@
 									</div>
 									
 									<div class="text-center">
-										<a id="search_btn" href="{{ url('class-tow-wise-students/') }}" class="btn submit-btn" type="submit">search</a>
+										<a id="search_btn" href="{{ url('class-two-wise-students/') }}" class="btn submit-btn" type="submit">search</a>
 										
-										<a id="" href="{{ url('class-tow-wise-students/') }}" class="btn  btn-danger" type="reset">Cancel</a>
+										<a id="" href="{{ url('class-two-wise-students/') }}" class="btn  btn-danger" type="reset">Cancel</a>
 									</div>
 								{!! Form::close() !!}
 						
@@ -178,7 +178,7 @@
                                 </thead>
                                <tbody class="table-data" id="pagination_data">
 							   
-							   @include("class-wise-students.tow.index-pagination", ["data" => $data])
+							   @include("class-wise-students.two.index-pagination", ["data" => $data])
 
 
 										
@@ -295,7 +295,7 @@
                 return;
             }
             $.ajax({
-                url: "{{ route('selected-class-tow-students-promote') }}", // Replace 'your_delete_route' with your actual route
+                url: "{{ route('selected-class-two-students-promote') }}", // Replace 'your_delete_route' with your actual route
                 type: "GET",
                 data: {
                     ids: all_ids,

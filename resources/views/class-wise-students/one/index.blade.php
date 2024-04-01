@@ -49,7 +49,7 @@
 						{!! Form::select('promote_section_id', ['' => 'Select Section'] + $classSection, '', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width', 'style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false', 'required' => 'required')) !!}
 						</div>
 						<div style="margin-top: 10px; margin-left:10px;">
-						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Tow for Selected Students</strong></a>
+						<a href="#" class="btn btn-warning" id="promoteAllSelectedRecord"> <i class="fa-solid fa-angle-double-right"> <strong></i> Promote One to Two for Selected Students</strong></a>
 						</div>
 						</div>
 
@@ -59,7 +59,7 @@
 						{!! Form::select('section_id', ['' => 'Select Section']+$classSection,'', array('id' => 'section_id', 'class' => 'form-select form-small select select2-hidden-accessible custom-width','style' => 'width: 210px;', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
 						</div>
 						<div style="margin-top: 10px; margin-left:10px;">
-						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( One to Tow ) . Except Demoted Students</strong></button><br>
+						<button type="submit" class="btn btn-success" ><strong> <i class="fa-solid fa-angle-double-right"></i> Promote All ( One to Two ) . Except Demoted Students</strong></button><br>
 						{!! Form::close() !!}
 						</div>
 						</div>

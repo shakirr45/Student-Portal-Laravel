@@ -51,7 +51,7 @@ class PermissionTableSeeder extends Seeder
            'manage-teacher-delete',
 
            'manage-class-one-students',
-           'manage-class-tow-students',
+           'manage-class-two-students',
            'manage-class-three-students',
            'manage-class-four-students',
            'manage-class-five-students',

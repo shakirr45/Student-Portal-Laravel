@@ -26,7 +26,7 @@
 			<td style="text-align:right">
 
 
-			<form method="POST" action="{{ route('class-tow-single-student-wise-promote-class', $value->id) }}">
+			<form method="POST" action="{{ route('class-two-single-student-wise-promote-class', $value->id) }}">
 				@csrf
 			
 			<div class="form-group d-flex align-items-center">
@@ -52,14 +52,14 @@
 				</form>
 
 			@if($value->demote_class == 0)
-			<form method="POST" action="{{ route('class-tow-wise-students-demote-status', $value->id) }}">
+			<form method="POST" action="{{ route('class-two-wise-students-demote-status', $value->id) }}">
 			@csrf
 				<div class="" style="margin-left:10px;">
 				<button class="btn btn-danger" type="submit">Demote Status</button>
 				</div>
 			</form> 
 			@else 
-			<form method="POST" action="{{ route('class-tow-wise-students-promote-status', $value->id) }}">
+			<form method="POST" action="{{ route('class-two-wise-students-promote-status', $value->id) }}">
 			@csrf
 				<div class="" style="margin-left:10px;">
 				<button class="btn btn-success" type="submit">Promote Status</button>

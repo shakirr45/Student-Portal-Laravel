@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\InstitutionClass;
 use App\Models\ClassSection;
-use App\Models\ClassTowStudentRecord;
+use App\Models\ClassTwoStudentRecord;
 
 
 class ClassOneWiseStudentController extends Controller
@@ -94,14 +94,15 @@ class ClassOneWiseStudentController extends Controller
         $stuId = $updateData->id;
         $stuSessionId = $updateData->session_id;
         $stuClassId = $updateData->promote_class;
+        $stuSectionId = $updateData->section_id;
 
-        // dd($stuClassId);
+        // dd($stuSectionId);
 
         // if($stuClassId == 2){
 
-            // $checkStudentAtClasstow = ClassTowStudentRecord::where('student_id', $stuId)->get();
+            // $checkStudentAtClassTwo = ClassTwoStudentRecord::where('student_id', $stuId)->get();
 
-            // $countCheckStudentAtClassTwo = $checkStudentAtClasstow->count();
+            // $countCheckStudentAtClassTwo = $checkStudentAtClassTwo->count();
 
             // dd($countCheckStudentAtClassTwo);
 
@@ -113,15 +114,17 @@ class ClassOneWiseStudentController extends Controller
     
                 $data['promote_class_id'] = $stuClassId;
 
-                $data['promote_status'] = 1;
-    
-                ClassTowStudentRecord::create($data);
+                $data['section_id'] = $stuSectionId;
 
-                toastr()->success('Created with new record into class Tow');
+                // $data['promote_status'] = 1;
+    
+                ClassTwoStudentRecord::create($data);
+
+                toastr()->success('Created with new record into class Two');
 
                 // }else{
 
-                //     $lastClassRecordStatus = ClassTowStudentRecord::where('student_id', $stuId)
+                //     $lastClassRecordStatus = ClassTwoStudentRecord::where('student_id', $stuId)
                 //     ->latest('promote_status')
                 //     ->first();
 
@@ -135,7 +138,7 @@ class ClassOneWiseStudentController extends Controller
     
                 //     $data['promote_status'] = $lastClassRecordStatus;
         
-                //     ClassTowStudentRecord::create($data);
+                //     ClassTwoStudentRecord::create($data);
 
                 //     // dd($lastClassRecordStatus);
 
@@ -151,7 +154,7 @@ class ClassOneWiseStudentController extends Controller
 
 
 
-        toastr()->success('Class One Student promoted class Tow successfully');
+        toastr()->success('Class One Student promoted class Two successfully');
 
         return redirect()->route('class-one-wise-students.index');
 
@@ -208,7 +211,7 @@ class ClassOneWiseStudentController extends Controller
     
             if(count($allClassOneStudents) == 0){
     
-                toastr()->error('No one to promote class One to Tow');
+                toastr()->error('No one to promote class One to Two');
     
                 return redirect()->route('class-one-wise-students.index');
             }
@@ -223,16 +226,16 @@ class ClassOneWiseStudentController extends Controller
         // =====================
             foreach($allClassOneStudents as $stu){
 
-                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class];
+                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
 
-                ClassTowStudentRecord::create($input);
+                ClassTwoStudentRecord::create($input);
             }
-            toastr()->success('Created with new record into class Tow');
+            toastr()->success('Created with new record into class Two');
         // =====================
     
             // dd($allClassOneStudents);
     
-            toastr()->success('Class One all students promoted class One to Tow successfully');
+            toastr()->success('Class One all students promoted class One to Two successfully');
     
             return redirect()->route('class-one-wise-students.index');
 
@@ -250,7 +253,7 @@ class ClassOneWiseStudentController extends Controller
 
         if(count($allClassOneStudents) == 0){
 
-            toastr()->error('No one to promote class One to Tow');
+            toastr()->error('No one to promote class One to Two');
 
             return redirect()->route('class-one-wise-students.index');
         }
@@ -267,16 +270,16 @@ class ClassOneWiseStudentController extends Controller
 
         foreach($allClassOneStudents as $stu){
 
-            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class];
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
 
-            ClassTowStudentRecord::create($input);
+            ClassTwoStudentRecord::create($input);
         }
-        toastr()->success('Created with new record into class Tow');
+        toastr()->success('Created with new record into class Two');
 
         // =====================
         // dd($allClassOneStudents);
 
-        toastr()->success('Class One all students promoted class One to Tow successfully');
+        toastr()->success('Class One all students promoted class One to Two successfully');
 
         return redirect()->route('class-one-wise-students.index');
 
@@ -305,9 +308,9 @@ class ClassOneWiseStudentController extends Controller
             // =====================
             foreach($allClassOneStudents as $stu){
 
-                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class];
+                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
     
-                ClassTowStudentRecord::create($input);
+                ClassTwoStudentRecord::create($input);
             }
             // =====================
 
@@ -329,7 +332,7 @@ class ClassOneWiseStudentController extends Controller
             ->where('demote_class', 1)
             ->count();
     
-            return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Tow', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
+            return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Two', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
     
         }
 
@@ -347,9 +350,9 @@ class ClassOneWiseStudentController extends Controller
         // =====================
         foreach($allClassOneStudents as $stu){
 
-            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class];
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
 
-            ClassTowStudentRecord::create($input);
+            ClassTwoStudentRecord::create($input);
         }
         // =====================
 
@@ -373,7 +376,7 @@ class ClassOneWiseStudentController extends Controller
         ->where('demote_class', 1)
         ->count();
 
-        return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Tow', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
+        return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Two', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
 
         // ======================
 
