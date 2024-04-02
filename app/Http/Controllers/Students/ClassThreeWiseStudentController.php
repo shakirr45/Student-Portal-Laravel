@@ -209,7 +209,7 @@ class ClassThreeWiseStudentController extends Controller
 
         if(count($allClassThreeStudents) == 0){
 
-            toastr()->error('No Three student to promote class Three to Four');
+            toastr()->error('No one student to promote class Three to Four');
 
             return redirect()->route('class-three-wise-students.index');
         }
@@ -289,8 +289,8 @@ class ClassThreeWiseStudentController extends Controller
         $allClassThreeStudents = User::whereIn('id', $studentIds)->get();
 
         foreach ($allClassThreeStudents as $student) {
-            $student->assign_class = 2;
-            $student->promote_class = 2;
+            $student->assign_class = 4;
+            $student->promote_class = 4;
             $student->section_id = $student->section_id;
             $student->demote_class = 0;
             
