@@ -34,7 +34,11 @@ class ClassFiveStudentRecord extends Model
         'islam_o_noytik_shikkha_2nd_term',
         'islam_o_noytik_shikkha_3rd_term',
 
+        'entry_user_id',
+        'modified_user_id',
+
         // 'promote_status',
 
     ];
 }
+

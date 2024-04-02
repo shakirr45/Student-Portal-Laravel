@@ -29,6 +29,9 @@ return new class extends Migration
             $table->string('prathomik_gonit_1st_term')->nullable();
             $table->string('prathomik_gonit_2nd_term')->nullable();
             $table->string('prathomik_gonit_3rd_term')->nullable();
+
+            $table->integer('entry_user_id')->default(0);
+            $table->integer('modified_user_id')->default(0);
             $table->timestamps();
         });
     }

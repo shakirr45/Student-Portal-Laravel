@@ -24,6 +24,9 @@ class ClassTwoStudentRecord extends Model
         'prathomik_gonit_2nd_term',
         'prathomik_gonit_3rd_term',
 
+        'entry_user_id',
+        'modified_user_id',
+
         // 'promote_status',
 
     ];

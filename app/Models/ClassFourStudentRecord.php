@@ -36,5 +36,8 @@ class ClassFourStudentRecord extends Model
 
         // 'promote_status',
 
+        'entry_user_id',
+        'modified_user_id',
+
     ];
 }

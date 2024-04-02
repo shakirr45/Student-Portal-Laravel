@@ -74,8 +74,9 @@
 <br>
 <a class="btn btn-info" href="{{ route('class-one-wise-students.index') }}">Class 1</a>
 <a class="btn btn-danger" href="{{ route('class-two-wise-students.index') }}">Class 2</a>
+<a class="btn btn-success" href="{{ route('class-three-wise-students.index') }}">Class 3</a>
+
 <!-- 
-<a class="btn btn-success" href="{{ route('manage-students.create') }}">Class 1</a>
 <a class="btn btn-primary" href="{{ route('manage-students.create') }}">Class 1</a>
 <a class="btn btn-secondary" href="{{ route('manage-students.create') }}">Class 1</a>
 <a class="btn btn-muted" href="{{ route('manage-students.create') }}">Class 1</a>

@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\InstitutionClass;
 use App\Models\ClassSection;
+use App\Models\ClassThreeStudentRecord;
+
 
 class ClassTwoWiseStudentController extends Controller
 {
@@ -87,6 +89,28 @@ class ClassTwoWiseStudentController extends Controller
         $input['promote_class'] = 3;
 		$updateData->update($input);
 
+        // =============
+        $stuId = $updateData->id;
+        $stuSessionId = $updateData->session_id;
+        $stuClassId = $updateData->promote_class;
+        $stuSectionId = $updateData->section_id;
+
+        $data['student_id'] = $stuId;
+
+        $data['session_id'] = $stuSessionId;
+
+        $data['promote_class_id'] = $stuClassId;
+
+        $data['section_id'] = $stuSectionId;
+
+        // $data['promote_status'] = 1;
+
+        ClassThreeStudentRecord::create($data);
+
+        toastr()->success('Created with new record into class Three');
+        // =============
+
+
         toastr()->success('Class Two student promoted class Three successfully');
 
         return redirect()->route('class-two-wise-students.index');
@@ -101,7 +125,7 @@ class ClassTwoWiseStudentController extends Controller
 
 		$updateData->update($input);
         
-        toastr()->success('Class Two student demoted status updated successfully');
+        toastr()->success('Class Two student student demoted status updated successfully');
 
         return redirect()->route('class-two-wise-students.index');
     }
@@ -129,7 +153,7 @@ class ClassTwoWiseStudentController extends Controller
             
               // dd($promoteSection);
 
-        $allClassOneStudents = User::whereHas('roles', function ($query){
+        $allClassTwoStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
         })->where('assign_class', 2)
@@ -137,17 +161,17 @@ class ClassTwoWiseStudentController extends Controller
         ->where('demote_class', 0)
         ->get();
 
-        // dd(count($allClassOneStudents));
+        // dd(count($allClassTwoStudents));
 
 
-        if(count($allClassOneStudents) == 0){
+        if(count($allClassTwoStudents) == 0){
 
             toastr()->error('No one to promote class Two to Three');
 
             return redirect()->route('class-two-wise-students.index');
         }
         
-        foreach ($allClassOneStudents as $student) {
+        foreach ($allClassTwoStudents as $student) {
             $student->assign_class = 3;
             $student->promote_class = 3;
             $student->section_id = $promoteSection;
@@ -155,7 +179,17 @@ class ClassTwoWiseStudentController extends Controller
             $student->save(); // Save the changes to the database
         }
 
-        // dd($allClassOneStudents);
+        // ==================
+        foreach($allClassTwoStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
+
+            ClassThreeStudentRecord::create($input);
+        }
+        toastr()->success('Created with new record into class Three');
+        // ==================
+
+        // dd($allClassTwoStudents);
 
         toastr()->success('Class Two all students promoted class Two to Three successfully');
 
@@ -165,7 +199,7 @@ class ClassTwoWiseStudentController extends Controller
 
         // dd($promoteSection);
 
-        $allClassOneStudents = User::whereHas('roles', function ($query){
+        $allClassTwoStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
         })->where('assign_class', 2)
@@ -173,17 +207,17 @@ class ClassTwoWiseStudentController extends Controller
         ->where('demote_class', 0)
         ->get();
 
-        // dd(count($allClassOneStudents));
+        // dd(count($allClassTwoStudents));
 
 
-        if(count($allClassOneStudents) == 0){
+        if(count($allClassTwoStudents) == 0){
 
             toastr()->error('No one to promote class Two to Three');
 
             return redirect()->route('class-two-wise-students.index');
         }
         
-        foreach ($allClassOneStudents as $student) {
+        foreach ($allClassTwoStudents as $student) {
             $student->assign_class = 3;
             $student->promote_class = 3;
             $student->section_id = $student->section_id;
@@ -191,7 +225,17 @@ class ClassTwoWiseStudentController extends Controller
             $student->save(); // Save the changes to the database
         }
 
-        // dd($allClassOneStudents);
+        // ==================
+        foreach($allClassTwoStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
+
+            ClassThreeStudentRecord::create($input);
+        }
+        toastr()->success('Created with new record into class Three');
+        // ==================
+
+        // dd($allClassTwoStudents);
 
         toastr()->success('Class Two all students promoted class Two to Three successfully');
 
@@ -207,9 +251,9 @@ class ClassTwoWiseStudentController extends Controller
 
         if(!empty($sectionId) && !empty($studentIds)) {
 
-            $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+            $allClassTwoStudents = User::whereIn('id', $studentIds)->get();
 
-            foreach ($allClassOneStudents as $student) {
+            foreach ($allClassTwoStudents as $student) {
                 $student->assign_class = 3;
                 $student->promote_class = 3;
                 $student->section_id = $sectionId;
@@ -217,6 +261,16 @@ class ClassTwoWiseStudentController extends Controller
                 
                 $student->save(); // Save the changes to the database
             }
+
+        // ==================
+        foreach($allClassTwoStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
+
+            ClassThreeStudentRecord::create($input);
+        }
+        toastr()->success('Created with new record into class Three');
+        // ==================
     
             // $message = array('message' => 'Selected Students Promotes Successfully');
             // return response()->json($message);
@@ -238,9 +292,9 @@ class ClassTwoWiseStudentController extends Controller
     
         }
 
-        $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+        $allClassTwoStudents = User::whereIn('id', $studentIds)->get();
 
-        foreach ($allClassOneStudents as $student) {
+        foreach ($allClassTwoStudents as $student) {
             $student->assign_class = 3;
             $student->promote_class = 3;
             $student->section_id = $student->section_id;
@@ -248,6 +302,16 @@ class ClassTwoWiseStudentController extends Controller
             
             $student->save(); // Save the changes to the database
         }
+
+        // ==================
+        foreach($allClassTwoStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
+
+            ClassThreeStudentRecord::create($input);
+        }
+        toastr()->success('Created with new record into class Three');
+        // ==================
 
 
         // $message = array('message' => 'Selected Students Promotes Successfully');

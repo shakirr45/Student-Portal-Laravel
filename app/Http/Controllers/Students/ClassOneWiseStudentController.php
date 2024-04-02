@@ -169,7 +169,7 @@ class ClassOneWiseStudentController extends Controller
 
 		$updateData->update($input);
         
-        toastr()->success('Class One demoted status updated successfully');
+        toastr()->success('Class One student demoted status updated successfully');
 
         return redirect()->route('class-one-wise-students.index');
     }

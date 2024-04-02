@@ -37,6 +37,9 @@ return new class extends Migration
             $table->string('islam_o_noytik_shikkha_1st_term')->nullable();
             $table->string('islam_o_noytik_shikkha_2nd_term')->nullable();
             $table->string('islam_o_noytik_shikkha_3rd_term')->nullable();
+
+            $table->integer('entry_user_id')->default(0);
+            $table->integer('modified_user_id')->default(0);
             $table->timestamps();
         });
     }

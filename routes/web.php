@@ -15,6 +15,7 @@ use App\Http\Controllers\ManageTeacherController;
 
 use App\Http\Controllers\Students\ClassOneWiseStudentController;
 use App\Http\Controllers\Students\ClassTwoWiseStudentController;
+use App\Http\Controllers\Students\ClassThreeWiseStudentController;
 
   
 /*
@@ -81,6 +82,13 @@ Route::group(['middleware' => ['auth']], function() {
     Route::post('class-two-wise-students-promote-status/{id}', [ClassTwoWiseStudentController::class, 'studentWisePromoteStatus'])->name('class-two-wise-students-promote-status');
     Route::post('class-two-wise-all-students-promote', [ClassTwoWiseStudentController::class, 'promoteAllStudents'])->name('class-two-wise-all-students-promote');
     Route::get('selected-class-two-students-promote', [ClassTwoWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-class-two-students-promote');
+
+    Route::resource('class-three-wise-students', ClassThreeWiseStudentController::class);
+    Route::post('class-three-single-student-wise-promote-class/{id}', [ClassThreeWiseStudentController::class, 'singleStudentpromoteClass'])->name('class-three-single-student-wise-promote-class');
+    Route::post('class-three-wise-students-demote-status/{id}', [ClassThreeWiseStudentController::class, 'studentWiseDemoteStatus'])->name('class-three-wise-students-demote-status');
+    Route::post('class-three-wise-students-promote-status/{id}', [ClassThreeWiseStudentController::class, 'studentWisePromoteStatus'])->name('class-three-wise-students-promote-status');
+    Route::post('class-three-wise-all-students-promote', [ClassThreeWiseStudentController::class, 'promoteAllStudents'])->name('class-three-wise-all-students-promote');
+    Route::get('selected-class-three-students-promote', [ClassThreeWiseStudentController::class, 'selectedWisePromoteStudents'])->name('selected-class-three-students-promote');
 
     
 });
