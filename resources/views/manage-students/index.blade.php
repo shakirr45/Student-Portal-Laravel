@@ -76,7 +76,7 @@
 <a class="btn btn-danger" href="{{ route('class-two-wise-students.index') }}">Class 2</a>
 <a class="btn btn-success" href="{{ route('class-three-wise-students.index') }}">Class 3</a>
 <a class="btn btn-secondary" href="{{ route('class-four-wise-students.index') }}">Class 4</a>
-<a class="btn btn-warning" href="#">Class 5</a>
+<a class="btn btn-warning" href="{{ route('class-five-wise-students.index') }}">Class 5</a>
 
 
 <!-- ================================================================= -->

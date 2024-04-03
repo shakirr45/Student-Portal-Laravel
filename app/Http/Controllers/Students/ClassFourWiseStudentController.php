@@ -247,9 +247,9 @@ class ClassFourWiseStudentController extends Controller
 
         if(!empty($sectionId) && !empty($studentIds)) {
 
-            $allClassThreeStudents = User::whereIn('id', $studentIds)->get();
+            $allClassFourStudents = User::whereIn('id', $studentIds)->get();
 
-            foreach ($allClassThreeStudents as $student) {
+            foreach ($allClassFourStudents as $student) {
                 $student->assign_class = 5;
                 $student->promote_class = 5;
                 $student->section_id = $sectionId;
@@ -259,7 +259,7 @@ class ClassFourWiseStudentController extends Controller
             }
 
             // =====================
-            foreach($allClassThreeStudents as $stu){
+            foreach($allClassFourStudents as $stu){
 
                 $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
     
@@ -284,9 +284,9 @@ class ClassFourWiseStudentController extends Controller
     
         }
 
-        $allClassThreeStudents = User::whereIn('id', $studentIds)->get();
+        $allClassFourStudents = User::whereIn('id', $studentIds)->get();
 
-        foreach ($allClassThreeStudents as $student) {
+        foreach ($allClassFourStudents as $student) {
             $student->assign_class = 5;
             $student->promote_class = 5;
             $student->section_id = $student->section_id;
@@ -296,7 +296,7 @@ class ClassFourWiseStudentController extends Controller
         }
 
         // =====================
-        foreach($allClassThreeStudents as $stu){
+        foreach($allClassFourStudents as $stu){
 
             $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
 
