@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateManageStudentRequest;
 use App\Models\User;
 use App\Models\Session;
 use App\Models\ClassSection;
+use App\Models\ClassAssign;
 use App\Models\InstitutionClass;
 use App\Models\ClassOneStudentRecord;
 use App\Models\ClassTwoStudentRecord;
@@ -117,19 +118,44 @@ class ManageStudentController extends Controller
         
         $user->assignRole('Student');
 
+
+
         // For class record //
 
         if( $user->promote_class == 1 ){
 
-            $data['student_id'] = $user->id;
+            // $data['student_id'] = $user->id;
 
-            $data['session_id'] = $user->session_id;
+            // $data['session_id'] = $user->session_id;
             
-            $data['section_id'] = $user->section_id;
+            // $data['section_id'] = $user->section_id;
 
-            $data['promote_class_id'] = $user->promote_class;
+            // $data['promote_class_id'] = $user->promote_class;
 
-            ClassOneStudentRecord::create($data);
+            // ClassOneStudentRecord::create($data);
+
+            // =======================
+
+        // ============= 
+            $getStuClassId = $user->promote_class;
+
+            $getAllClass = ClassAssign::where('class_id', $getStuClassId)->get();
+
+            foreach($getAllClass as $class){
+
+                $input = ['student_id' => $user->id , 'session_id' => $class->subject_id ];
+
+                ClassOneStudentRecord::create($input);
+            }
+
+            dd("Ok");
+
+            // =======================
+
+
+
+
+
 
         }else if( $user->promote_class == 2 ){
 
