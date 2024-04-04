@@ -223,6 +223,7 @@ class ClassOneWiseStudentController extends Controller
                 
                 $student->save(); // Save the changes to the database
             }
+            
         // =====================
             foreach($allClassOneStudents as $stu){
 
