@@ -95,7 +95,7 @@ class ManageTeacherController extends Controller
         
 
         $input = $request->all();
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $input['password'] = Hash::make($input['password']);
     
@@ -135,7 +135,7 @@ class ManageTeacherController extends Controller
         $sessions = Session::dataList();
 
 
-        // $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
+        // $institutionClassSelected =  !empty( $user->assign_class_id ) ? ( $user->assign_class_id ) : [];
 
         return view('manage-teachers.edit',compact('user','sessions'));
     }
@@ -167,7 +167,7 @@ class ManageTeacherController extends Controller
     
         $user = User::find($id);
 
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $user->update($input);
         

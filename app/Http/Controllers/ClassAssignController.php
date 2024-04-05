@@ -101,8 +101,17 @@ class ClassAssignController extends Controller
         // dd($input = $request->all());
         $input = $request->all();
 
+        $classId = $input['class_id'];
+
+        // dd($classId);
+
+        $getClass = InstitutionClass::where('id',$classId)->pluck('code')->first();
+        
+        // dd($getClass);
         
         $input['class_schedule'] = $input['time_start'] . "   " . $input['pm_or_am_first']. " - " . $input['time_end'] . "   " . $input['pm_or_am_second'];
+       
+        $input['class'] = $getClass;
 
         $user = ClassAssign::create($input);
 

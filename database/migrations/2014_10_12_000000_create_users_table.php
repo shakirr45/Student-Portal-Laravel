@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('mobile_no', 11)->nullable()->unique();
             $table->string('user_id')->nullable()->unique();
             $table->integer('section_id')->default(0);
-            $table->integer('assign_class')->default(0);
+            $table->integer('assign_class_id')->default(0);
             $table->integer('promote_class')->default(0);
             $table->integer('session_id')->default(0);
             $table->integer('demote_class')->default(0)->comment('0 = promoted, 1 = demoted');

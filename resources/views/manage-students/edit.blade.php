@@ -50,7 +50,7 @@
             <strong>Class</strong>
 
             
-            {!! Form::select('assign_class', ['' =>'Select One']+$institutionClass,$user->assign_class, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+            {!! Form::select('assign_class_id', ['' =>'Select One']+$institutionClass,$user->assign_class_id, array('id' => 'section', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
 
         </div>
     </div>
@@ -79,7 +79,7 @@
         <div class="form-group">
             <strong>Assign class:</strong>
 
-            {!! Form::select('assign_class', ['0' => 'Select One']+$institutionClass,$institutionClassSelected, array('id' => 'police_station', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
+            {!! Form::select('assign_class_id', ['0' => 'Select One']+$institutionClass,$institutionClassSelected, array('id' => 'police_station', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false')) !!}
             
         </div>
     </div> --}}

@@ -26,7 +26,7 @@ class User extends Authenticatable
         'user_id',
         'section_id',
         'session_id',
-        'assign_class',
+        'assign_class_id',
         'promote_class',
         'final_result',
         'demote_class',
@@ -65,7 +65,7 @@ class User extends Authenticatable
 
     public function institutionClass()
     {
-        return $this->belongsTo('App\Models\InstitutionClass', 'assign_class');
+        return $this->belongsTo('App\Models\InstitutionClass', 'assign_class_id');
     }
 
     public function classSection()

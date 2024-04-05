@@ -33,7 +33,7 @@ class ClassThreeWiseStudentController extends Controller
         $data = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->where($serchCondition)
         ->with(['institutionClass'])
@@ -46,13 +46,13 @@ class ClassThreeWiseStudentController extends Controller
         // For count class wise ==============>
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->where('demote_class', 1)
         ->count();
@@ -84,7 +84,7 @@ class ClassThreeWiseStudentController extends Controller
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
         $input['section_id'] = $input['section_id'];
-        $input['assign_class'] = 4;
+        $input['assign_class_id'] = 4;
         $input['promote_class'] = 4;
 		$updateData->update($input);
 
@@ -158,7 +158,7 @@ class ClassThreeWiseStudentController extends Controller
             $allClassThreeStudents = User::whereHas('roles', function ($query){
                 $query->where('name', 'Student');
     
-            })->where('assign_class', 3)
+            })->where('assign_class_id', 3)
             ->where('promote_class', 3)
             ->where('demote_class', 0)
             ->get();
@@ -173,7 +173,7 @@ class ClassThreeWiseStudentController extends Controller
             }
             
             foreach ($allClassThreeStudents as $student) {
-                $student->assign_class = 4;
+                $student->assign_class_id = 4;
                 $student->promote_class = 4;
                 $student->section_id = $promoteSection;
                 
@@ -200,7 +200,7 @@ class ClassThreeWiseStudentController extends Controller
         $allClassThreeStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->where('demote_class', 0)
         ->get();
@@ -215,7 +215,7 @@ class ClassThreeWiseStudentController extends Controller
         }
         
         foreach ($allClassThreeStudents as $student) {
-            $student->assign_class = 4;
+            $student->assign_class_id = 4;
             $student->promote_class = 4;
             $student->section_id = $student->section_id;
             
@@ -252,7 +252,7 @@ class ClassThreeWiseStudentController extends Controller
             $allClassThreeStudents = User::whereIn('id', $studentIds)->get();
 
             foreach ($allClassThreeStudents as $student) {
-                $student->assign_class = 4;
+                $student->assign_class_id = 4;
                 $student->promote_class = 4;
                 $student->section_id = $sectionId;
                 $student->demote_class = 0;
@@ -271,13 +271,13 @@ class ClassThreeWiseStudentController extends Controller
 
             $totalStudentsCount = User::whereHas('roles', function($query){
                 $query->where('name', 'Student');
-            })->where('assign_class', 3)
+            })->where('assign_class_id', 3)
             ->where('promote_class', 3)
             ->count();
     
             $totalDemotedStudentsCount = User::whereHas('roles', function($query){
                 $query->where('name', 'Student');
-            })->where('assign_class', 3)
+            })->where('assign_class_id', 3)
             ->where('promote_class', 3)
             ->where('demote_class', 1)
             ->count();
@@ -289,7 +289,7 @@ class ClassThreeWiseStudentController extends Controller
         $allClassThreeStudents = User::whereIn('id', $studentIds)->get();
 
         foreach ($allClassThreeStudents as $student) {
-            $student->assign_class = 4;
+            $student->assign_class_id = 4;
             $student->promote_class = 4;
             $student->section_id = $student->section_id;
             $student->demote_class = 0;
@@ -309,13 +309,13 @@ class ClassThreeWiseStudentController extends Controller
 
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class', 3)
+        })->where('assign_class_id', 3)
         ->where('promote_class', 3)
         ->where('demote_class', 1)
         ->count();

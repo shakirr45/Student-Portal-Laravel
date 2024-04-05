@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->integer('teacher_id')->default(0);
             $table->integer('class_id')->default(0);
+            $table->string('class')->nullable();
             $table->integer('section_id')->default(0);
             $table->integer('subject_id')->default(0);
             $table->string('days')->nullable();

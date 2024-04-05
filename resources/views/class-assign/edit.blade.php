@@ -65,9 +65,9 @@
             <div class="form-group">
                 <label for="" class="form-label">Assign Teacher</label>
 
-                {!! Form::select('user_id', ['' =>'Select One']+$isTeacher,$classAssign->user_id, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
+                {!! Form::select('teacher_id', ['' =>'Select One']+$isTeacher,$classAssign->teacher_id, array('id' => 'roles', 'class' => 'form-select', 'single' => 'single', 'required')) !!} 
 
-                @error('user_id')
+                @error('teacher_id')
                     <span class="invalid-feedback" >
                         <b>{{ $message }}</b>
                     </span>

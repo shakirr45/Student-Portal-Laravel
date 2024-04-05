@@ -79,7 +79,7 @@ class UserController extends Controller
        
         $input = $request->all();
         
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $input['password'] = Hash::make($input['password']);
     
@@ -121,8 +121,8 @@ class UserController extends Controller
 
         $institutionClass = InstitutionClass::dataList();
 
-        // $institutionClassSelected =  !empty( $user->assign_class ) ? json_decode( $user->assign_class ) : [];
-        $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
+        // $institutionClassSelected =  !empty( $user->assign_class_id ) ? json_decode( $user->assign_class_id ) : [];
+        $institutionClassSelected =  !empty( $user->assign_class_id ) ? ( $user->assign_class_id ) : [];
 
         $roles = Role::pluck('name','name')->all();
 
@@ -164,7 +164,7 @@ class UserController extends Controller
     
         $user = User::find($id);
 
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $user->update($input);
         

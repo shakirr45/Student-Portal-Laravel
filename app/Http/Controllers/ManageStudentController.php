@@ -96,7 +96,7 @@ class ManageStudentController extends Controller
 
             'password' => 'required|same:confirm-password',
 
-            'assign_class' => 'required',
+            'assign_class_id' => 'required',
 
             'section_id' => 'required',
 
@@ -108,11 +108,11 @@ class ManageStudentController extends Controller
 
         $input = $request->all();
         
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $input['password'] = Hash::make($input['password']);
 
-        $input['promote_class'] = $input['assign_class'];
+        $input['promote_class'] = $input['assign_class_id'];
     
         $user = User::create($input);
         
@@ -141,9 +141,20 @@ class ManageStudentController extends Controller
 
             $getAllClass = ClassAssign::where('class_id', $getStuClassId)->get();
 
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+
+
             foreach($getAllClass as $class){
 
-                $input = ['student_id' => $user->id , 'session_id' => $class->subject_id ];
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'assign_class_id_id' => $user->assign_class_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                ];
 
                 ClassOneStudentRecord::create($input);
             }
@@ -151,9 +162,6 @@ class ManageStudentController extends Controller
             dd("Ok");
 
             // =======================
-
-
-
 
 
 
@@ -258,7 +266,7 @@ class ManageStudentController extends Controller
         $sessions = Session::dataList();
 
 
-        $institutionClassSelected =  !empty( $user->assign_class ) ? ( $user->assign_class ) : [];
+        $institutionClassSelected =  !empty( $user->assign_class_id ) ? ( $user->assign_class_id ) : [];
 
         return view('manage-students.edit',compact('user','institutionClass','institutionClassSelected','classSections','sessions'));
     }
@@ -279,7 +287,7 @@ class ManageStudentController extends Controller
 
             'password' => 'same:confirm-password',
             
-            'assign_class' => 'required',
+            'assign_class_id' => 'required',
             
             'section_id' => 'required',
 
@@ -294,11 +302,11 @@ class ManageStudentController extends Controller
             $input = Arr::except($input,array('password'));    
         }
 
-        $input['promote_class'] = $input['assign_class'];
+        $input['promote_class'] = $input['assign_class_id'];
     
         $user = User::find($id);
 
-        // $input['assign_class'] = json_encode($input['assign_class']);
+        // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $user->update($input);
         

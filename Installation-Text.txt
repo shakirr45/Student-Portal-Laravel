@@ -14,3 +14,42 @@ php artisan db:seed --class=ClassSectionSeeder
 
 php artisan db:seed --class=SessionSeeder
 
+
+
+
+$allClassOneStudents = User::whereHas('roles', function ($query) {
+    $query->where('name', 'Student');
+})->where('assign_class_id', 1)
+    ->where('promote_class', 1)
+    ->where('demote_class', 0)
+    ->get();
+
+foreach ($allClassOneStudents as $student) {
+    // Update student attributes
+    $student->assign_class_id = 2;
+    $student->promote_class = 2;
+    $student->section_id = $promoteSection;
+
+    // Save the changes to the database
+    $student->save();
+
+    // Retrieve the promoted class ID for the student
+    $promotedClassId = $student->promote_class;
+
+    // Get all classes assigned to the promoted class
+    $assignedClasses = ClassAssign::where('class_id', $promotedClassId)->get();
+
+    // Create records in ClassTwoStudentRecord for each assigned class
+    foreach ($assignedClasses as $class) {
+        $input = [
+            'student_id' => $student->id,
+            'subject_id' => $class->subject_id
+        ];
+
+        // Create the record
+        ClassTwoStudentRecord::create($input);
+    }
+}
+
+// Output message for debugging
+dd("Process completed successfully");

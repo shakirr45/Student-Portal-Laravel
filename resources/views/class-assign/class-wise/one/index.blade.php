@@ -2,27 +2,19 @@
 
 
 @section('content')
+<section class="enroll-main" style=" padding: 50px 0;">
+        <div class="container">
+
+
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Classes</h2>
+                <h2>Class One Wise Classes</h2>
             </div>
-            <div class="pull-right">
-                @can('class-create')
-                <a class="btn btn-success" href="{{ route('class-assign.create') }}"> Create New Class</a>
-                @endcan
-            </div>
-        </div>
-    </div>
-<a class="btn btn-info" href="{{ route('class-assign-for-class-one.index') }}">Class 1</a>
-<a class="btn btn-danger" href="{{ route('class-two-wise-students.index') }}">Class 2</a>
-<a class="btn btn-success" href="{{ route('class-three-wise-students.index') }}">Class 3</a>
-<a class="btn btn-secondary" href="{{ route('class-four-wise-students.index') }}">Class 4</a>
-<a class="btn btn-warning" href="{{ route('class-five-wise-students.index') }}">Class 5</a>
 
-    <br>
-
-    <a href="{{ route('manage-sessions.index') }}" class="btn btn-warning">Show Session & add + </a><br>
+            <a href="{{ route('class-assign.index') }}" class="btn btn-info" type="submit">
+                <strong> <i class="fa-solid fa-angle-double-left"></i> Back </strong>
+            </a>
 
 
     @if ($message = Session::get('success'))
@@ -41,7 +33,7 @@
              <th>Subjects</th>  
              <th>Day</th>   
              <th>Class Schedule</th>   
-            <th width="280px">Action</th>
+             {{--<th width="280px">Action</th>--}}
         </tr>
 	    @foreach ($classes as $class)
 	    <tr>
@@ -52,7 +44,7 @@
 	         <td>{{ !empty($class->subjects->name) ? $class->subjects->name : " "}}</td>    
 	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
 	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
-	        <td>
+	        {{--<td>
                 <form action="{{ route('class-assign.destroy',$class->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('class-assign.show',$class->id) }}">Show</a>
                     @can('class-edit')
@@ -66,7 +58,7 @@
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
-	        </td>
+	        </td>--}}
 	    </tr>
 	    @endforeach
     </table>
@@ -74,5 +66,8 @@
 
     {!! $classes->links() !!}
 
+
+    </div>
+    </div>
 
 @endsection
