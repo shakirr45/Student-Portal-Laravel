@@ -32,11 +32,18 @@ class ClassFourWiseStudentController extends Controller
         $data = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('assign_class_id', 4)
-        ->where('promote_class', 4)
+        })->where('promote_class', 4)
         ->where($serchCondition)
         ->with(['institutionClass'])
         ->paginate(10);
+
+        // =================== sudhu index ei kaj kora hoice
+
+        $data2 = InstitutionClass::where('code', 4)->first()->toArray();
+
+        dd($data2);
+
+// =======================
 
         // $institutionClass = InstitutionClass::dataList();
 
@@ -45,14 +52,12 @@ class ClassFourWiseStudentController extends Controller
         // For count class wise ==============>
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 4)
-        ->where('promote_class', 4)
+        })->where('promote_class', 4)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 4)
-        ->where('promote_class', 4)
+        })->where('promote_class', 4)
         ->where('demote_class', 1)
         ->count();
 

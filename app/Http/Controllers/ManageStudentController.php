@@ -107,12 +107,17 @@ class ManageStudentController extends Controller
 
 
         $input = $request->all();
+
+        $classId = $input['assign_class_id'];
         
+        $checkClass = InstitutionClass::find($classId);
+
+        // dd($checkClass->code);
         // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $input['password'] = Hash::make($input['password']);
 
-        $input['promote_class'] = $input['assign_class_id'];
+        $input['promote_class'] = $checkClass->code;
     
         $user = User::create($input);
         
@@ -296,13 +301,19 @@ class ManageStudentController extends Controller
         ]);
     
         $input = $request->all();
+
+        $classId = $input['assign_class_id'];
+        
+        $checkClass = InstitutionClass::find($classId);
+
         if(!empty($input['password'])){ 
             $input['password'] = Hash::make($input['password']);
         }else{
             $input = Arr::except($input,array('password'));    
         }
 
-        $input['promote_class'] = $input['assign_class_id'];
+        $input['promote_class'] = $checkClass->code;
+
     
         $user = User::find($id);
 
