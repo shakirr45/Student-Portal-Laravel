@@ -14,13 +14,15 @@ class ClassOneStudentRecord extends Model
         'student_id',
         'session_id',
         'subject_id',
-        'assign_class_id_id',
         'section_id',
-
+        'promote_class',
+        
         '1st_term_exam_result',
         '2nd_term_exam_result',
         '3rd_term_exam_result',
         
+        
+        // 'assign_class_id',
         // 'amar_bangla_boi_1st_term',
         // 'amar_bangla_boi_2nd_term',
         // 'amar_bangla_boi_3rd_term',

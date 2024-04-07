@@ -32,7 +32,9 @@ class ClassFourWiseStudentController extends Controller
         $data = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('promote_class', 4)
+        })
+        // ->where('assign_class_id', 4)
+        ->where('promote_class', 4)
         ->where($serchCondition)
         ->with(['institutionClass'])
         ->paginate(10);
@@ -54,12 +56,16 @@ class ClassFourWiseStudentController extends Controller
         // For count class wise ==============>
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('promote_class', 4)
+        })
+        // ->where('assign_class_id', 4)
+        ->where('promote_class', 4)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('promote_class', 4)
+        })
+        // ->where('assign_class_id', 4)
+        ->where('promote_class', 4)
         ->where('demote_class', 1)
         ->count();
 
@@ -87,21 +93,21 @@ class ClassFourWiseStudentController extends Controller
 
         // dd($input);
 
-        $classFiveId = InstitutionClass::where('code', 5)->first()->toArray();
+        // $classFiveId = InstitutionClass::where('code', 5)->first()->toArray();
 
-        $classFiveId = $classFiveId['id'];
+        // $classFiveId = $classFiveId['id'];
 
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
         $input['section_id'] = $input['section_id'];
-        $input['assign_class_id'] = $classFiveId;
+        // $input['assign_class_id'] = $classFiveId;
         $input['promote_class'] = 5;
 		$updateData->update($input);
 
         // =============
         $stuId = $updateData->id;
         $stuSessionId = $updateData->session_id;
-        $stuClassId = $updateData->promote_class;
+        $stuPromotedClass = $updateData->promote_class;
         $stuSectionId = $updateData->section_id;
 
         // dd($stuSectionId);
@@ -110,7 +116,7 @@ class ClassFourWiseStudentController extends Controller
 
         $data['session_id'] = $stuSessionId;
 
-        $data['promote_class_id'] = $stuClassId;
+        $data['promote_class'] = $stuPromotedClass;
 
         $data['section_id'] = $stuSectionId;
 

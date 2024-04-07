@@ -34,10 +34,11 @@ class ClassOneWiseStudentController extends Controller
         $data = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->where($serchCondition)
-        ->with(['institutionClass'])
+        // ->with(['institutionClass'])
         ->paginate(10);
 
         // $institutionClass = InstitutionClass::dataList();
@@ -47,13 +48,15 @@ class ClassOneWiseStudentController extends Controller
         // For count class wise ==============>
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->where('demote_class', 1)
         ->count();
@@ -86,17 +89,17 @@ class ClassOneWiseStudentController extends Controller
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
         $input['section_id'] = $input['section_id'];
-        $input['assign_class_id'] = 2;
+        // $input['assign_class_id'] = 2;
         $input['promote_class'] = 2;
 		$updateData->update($input);
 
         // =============
         $stuId = $updateData->id;
         $stuSessionId = $updateData->session_id;
-        $stuClassId = $updateData->promote_class;
+        $stuPromotedClass = $updateData->promote_class;
         $stuSectionId = $updateData->section_id;
 
-        // dd($stuSectionId);
+        // dd($stuPromotedClass);
 
         // if($stuClassId == 2){
 
@@ -112,7 +115,7 @@ class ClassOneWiseStudentController extends Controller
 
                 $data['session_id'] = $stuSessionId;
     
-                $data['promote_class_id'] = $stuClassId;
+                $data['promote_class'] = $stuPromotedClass;
 
                 $data['section_id'] = $stuSectionId;
 
@@ -121,6 +124,10 @@ class ClassOneWiseStudentController extends Controller
                 ClassTwoStudentRecord::create($data);
 
                 toastr()->success('Created with new record into class Two');
+
+                // subject_id
+
+                // student_id	session_id		section_id	promote_class
 
                 // }else{
 
@@ -202,7 +209,8 @@ class ClassOneWiseStudentController extends Controller
             $allClassOneStudents = User::whereHas('roles', function ($query){
                 $query->where('name', 'Student');
     
-            })->where('assign_class_id', 1)
+            })
+            // ->where('assign_class_id', 1)
             ->where('promote_class', 1)
             ->where('demote_class', 0)
             ->get();
@@ -217,7 +225,7 @@ class ClassOneWiseStudentController extends Controller
             }
             
             foreach ($allClassOneStudents as $student) {
-                $student->assign_class_id = 2;
+                // $student->assign_class_id = 2;
                 $student->promote_class = 2;
                 $student->section_id = $promoteSection;
                 
@@ -246,7 +254,8 @@ class ClassOneWiseStudentController extends Controller
         $allClassOneStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
 
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->where('demote_class', 0)
         ->get();
@@ -261,7 +270,7 @@ class ClassOneWiseStudentController extends Controller
         }
         
         foreach ($allClassOneStudents as $student) {
-            $student->assign_class_id = 2;
+            // $student->assign_class_id = 2;
             $student->promote_class = 2;
             $student->section_id = $student->section_id;
             
@@ -299,7 +308,7 @@ class ClassOneWiseStudentController extends Controller
             $allClassOneStudents = User::whereIn('id', $studentIds)->get();
 
             foreach ($allClassOneStudents as $student) {
-                $student->assign_class_id = 2;
+                // $student->assign_class_id = 2;
                 $student->promote_class = 2;
                 $student->section_id = $sectionId;
                 $student->demote_class = 0;
@@ -323,13 +332,15 @@ class ClassOneWiseStudentController extends Controller
 
             $totalStudentsCount = User::whereHas('roles', function($query){
                 $query->where('name', 'Student');
-            })->where('assign_class_id', 1)
+            })
+            // ->where('assign_class_id', 1)
             ->where('promote_class', 1)
             ->count();
     
             $totalDemotedStudentsCount = User::whereHas('roles', function($query){
                 $query->where('name', 'Student');
-            })->where('assign_class_id', 1)
+            })
+            // ->where('assign_class_id', 1)
             ->where('promote_class', 1)
             ->where('demote_class', 1)
             ->count();
@@ -341,7 +352,7 @@ class ClassOneWiseStudentController extends Controller
         $allClassOneStudents = User::whereIn('id', $studentIds)->get();
 
         foreach ($allClassOneStudents as $student) {
-            $student->assign_class_id = 2;
+            // $student->assign_class_id = 2;
             $student->promote_class = 2;
             $student->section_id = $student->section_id;
             $student->demote_class = 0;
@@ -367,13 +378,15 @@ class ClassOneWiseStudentController extends Controller
         // ==================
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->count();
 
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
-        })->where('assign_class_id', 1)
+        })
+        // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->where('demote_class', 1)
         ->count();

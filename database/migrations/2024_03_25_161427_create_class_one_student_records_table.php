@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->integer('student_id')->default(0);
             $table->integer('session_id')->default(0);
-            $table->integer('assign_class_id_id')->default(0);
-            $table->integer('section_id')->default(0);
+            // $table->integer('assign_class_id')->default(0);
             $table->integer('subject_id')->default(0);
+            $table->integer('section_id')->default(0);
+            $table->string('promote_class')->nullable();
 
             $table->string('1st_term_exam_result')->nullable();
             $table->string('2nd_term_exam_result')->nullable();

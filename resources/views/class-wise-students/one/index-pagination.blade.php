@@ -13,7 +13,7 @@
 			<td >{{ $value->user_id }}</td>
 			<td >{{ $value->email }}</td>
 			<td >{{ $value->mobile_no }}</td>
-			<td >{{ $value->institutionClass->name }}</td>
+			<td >{{ $value->promote_class }}</td>
 			<td >{{ $value->final_result }}</td>
 			<td >
 
