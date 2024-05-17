@@ -270,7 +270,7 @@
 			
 	</script>
 
-<<!-- For select all checkbox -->
+<!-- For select all checkbox -->
 <script>
     $(function() {
 

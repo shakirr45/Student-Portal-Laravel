@@ -57,7 +57,7 @@ class AuthController extends Controller
 
 
 
-            $currentUserClass = !empty(Auth::user()->assign_class_id) ? Auth::user()->assign_class_id : "";
+            $currentUserClass = !empty(Auth::user()->promote_class) ? Auth::user()->promote_class : "";
 
             $currentUserId = !empty(Auth::user()->id) ? Auth::user()->id : "";
 
