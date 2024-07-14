@@ -59,16 +59,18 @@ class AuthController extends Controller
 
             $currentUserClass = !empty(Auth::user()->promote_class) ? Auth::user()->promote_class : "";
 
+            // dd($currentUserClass);
+
             $currentUserId = !empty(Auth::user()->id) ? Auth::user()->id : "";
 
             $currentUserSectionId = !empty(Auth::user()->section_id) ? Auth::user()->section_id : "" ;
 
-            $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
+            // $currentUserClass = !empty($currentUserClass) ? json_decode($currentUserClass) : " ";
             
 
-        // $currentDate = Carbon::now();
-        $currentDate = Carbon::now()->setTimezone('Asia/Dhaka');
-        $dayOfWeekForToday = $currentDate->format('l'); // Get the current day of the week in full lowercase (e.g., "sunday")
+            // $currentDate = Carbon::now();
+            $currentDate = Carbon::now()->setTimezone('Asia/Dhaka');
+            $dayOfWeekForToday = $currentDate->format('l'); // Get the current day of the week in full lowercase (e.g., "sunday")
 
             // dd($dayOfWeekForToday);
 

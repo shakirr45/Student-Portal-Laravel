@@ -24,6 +24,16 @@ class HomeController extends Controller
      */
     public function index()
     {
+
+
+        // ----------------------------- check code start ---------------------??
+        // $roleCheck = Auth::user()->roles()->get()->toArray();
+        // $roleCheckName = !empty($roleCheck[0]['name']) ? $roleCheck[0]['name'] : ' ';
+        // $roleCheckId = !empty($roleCheck[0]['id']) ? $roleCheck[0]['id'] : ' ';
+        // dd($roleCheckName);
+        // ----------------------------- check code end ---------------------??
+
+        
         $currentLoginRoleInfo = Auth::user()->roles()->get()->toArray();
         $currentLoginRoleInfo = !empty($currentLoginRoleInfo[0]['name']) ? $currentLoginRoleInfo[0]['name'] : '' ;
 

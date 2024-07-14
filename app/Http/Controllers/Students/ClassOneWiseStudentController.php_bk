@@ -8,8 +8,7 @@ use App\Models\User;
 use App\Models\InstitutionClass;
 use App\Models\ClassSection;
 use App\Models\ClassTwoStudentRecord;
-use App\Models\ClassAssign;
-use Auth;
+
 
 class ClassOneWiseStudentController extends Controller
 {
@@ -84,9 +83,8 @@ class ClassOneWiseStudentController extends Controller
         ]);
 
         $input = $request->all();
-        $getAllClass = ClassAssign::where('class', 2)->get();
 
-        // dd($getAllClass);
+        // dd($input);
 
 		$updateData = User::find($id);
         $input['demote_class'] = 0;
@@ -95,28 +93,78 @@ class ClassOneWiseStudentController extends Controller
         $input['promote_class'] = 2;
 		$updateData->update($input);
 
+        // =============
+        $stuId = $updateData->id;
+        $stuSessionId = $updateData->session_id;
+        $stuPromotedClass = $updateData->promote_class;
+        $stuSectionId = $updateData->section_id;
 
-        foreach($getAllClass as $class){
+        // dd($stuPromotedClass);
 
-            $input = [
-            'student_id' => $updateData->id ,
-            'subject_id' => $class->subject_id,
-            // 'assign_class_id_id' => $user->assign_class_id,
-            'session_id' => $updateData->session_id,
-            'section_id' => $updateData->section_id,
-            'promote_class' => 2,
-            'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
-            ];
+        // if($stuClassId == 2){
 
-            ClassTwoStudentRecord::create($input);
-            
-        }
+            // $checkStudentAtClassTwo = ClassTwoStudentRecord::where('student_id', $stuId)->get();
 
-        toastr()->success('Created with new record into class Two');
+            // $countCheckStudentAtClassTwo = $checkStudentAtClassTwo->count();
+
+            // dd($countCheckStudentAtClassTwo);
+
+            // if($countCheckStudentAtClassTwo <= 0){
+                
+                $data['student_id'] = $stuId;
+
+                $data['session_id'] = $stuSessionId;
+    
+                $data['promote_class'] = $stuPromotedClass;
+
+                $data['section_id'] = $stuSectionId;
+
+                // $data['promote_status'] = 1;
+    
+                ClassTwoStudentRecord::create($data);
+
+                toastr()->success('Created with new record into class Two');
+
+                // subject_id
+
+                // student_id	session_id		section_id	promote_class
+
+                // }else{
+
+                //     $lastClassRecordStatus = ClassTwoStudentRecord::where('student_id', $stuId)
+                //     ->latest('promote_status')
+                //     ->first();
+
+                //     $lastClassRecordStatus = $lastClassRecordStatus['promote_status'] + 1 ;
+
+                //     $data['student_id'] = $stuId;
+
+                //     $data['session_id'] = $stuSessionId;
+        
+                //     $data['promote_class_id'] = $stuClassId;
+    
+                //     $data['promote_status'] = $lastClassRecordStatus;
+        
+                //     ClassTwoStudentRecord::create($data);
+
+                //     // dd($lastClassRecordStatus);
+
+                //     toastr()->error('Already have preview record into class One');
+
+                // }
+
+
+        // }
+
+
+        // =============
+
+
 
         toastr()->success('Class One Student promoted class Two successfully');
 
         return redirect()->route('class-one-wise-students.index');
+
 
     }
 
@@ -152,20 +200,20 @@ class ClassOneWiseStudentController extends Controller
 
         $input = $request->all();
 
-        $allClassOneStudents = User::whereHas('roles', function ($query){
-            $query->where('name', 'Student');
-
-        })
-        // ->where('assign_class_id', 1)
-        ->where('promote_class', 1)
-        ->where('demote_class', 0)
-        ->get();
-
-        // dd($input);
+        dd($input);
 
         $promoteSection = $input['section_id'];
 
         if(!empty($promoteSection)){
+            
+            $allClassOneStudents = User::whereHas('roles', function ($query){
+                $query->where('name', 'Student');
+    
+            })
+            // ->where('assign_class_id', 1)
+            ->where('promote_class', 1)
+            ->where('demote_class', 0)
+            ->get();
     
             // dd(count($allClassOneStudents));
     
@@ -175,9 +223,6 @@ class ClassOneWiseStudentController extends Controller
     
                 return redirect()->route('class-one-wise-students.index');
             }
-
-            $getAllClass = ClassAssign::where('class', 2)->get();
-
             
             foreach ($allClassOneStudents as $student) {
                 // $student->assign_class_id = 2;
@@ -186,26 +231,36 @@ class ClassOneWiseStudentController extends Controller
                 
                 $student->save(); // Save the changes to the database
 
-                foreach($getAllClass as $class){
-
-                    $input = [
-                    'student_id' => $student->id ,
-                    'subject_id' => $class->subject_id,
-                    'session_id' => $student->session_id,
-                    'section_id' => $student->section_id,
-                    'promote_class' => 2,
-                    'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
-                    ];
-    
-                    ClassTwoStudentRecord::create($input);
-                }
-
             }
+
+        // =====================
+            foreach($allClassOneStudents as $stu){
+
+                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class, 'section_id' => $stu->section_id];
+
+                ClassTwoStudentRecord::create($input);
+            }
+            toastr()->success('Created with new record into class Two');
+        // =====================
+    
+            // dd($allClassOneStudents);
     
             toastr()->success('Class One all students promoted class One to Two successfully');
+    
             return redirect()->route('class-one-wise-students.index');
 
         }
+
+        $allClassOneStudents = User::whereHas('roles', function ($query){
+            $query->where('name', 'Student');
+
+        })
+        // ->where('assign_class_id', 1)
+        ->where('promote_class', 1)
+        ->where('demote_class', 0)
+        ->get();
+
+        // dd(count($allClassOneStudents));
 
         if(count($allClassOneStudents) == 0){
 
@@ -213,32 +268,27 @@ class ClassOneWiseStudentController extends Controller
 
             return redirect()->route('class-one-wise-students.index');
         }
-
-        $getAllClass = ClassAssign::where('class', 2)->get();
-
-            
+        
         foreach ($allClassOneStudents as $student) {
             // $student->assign_class_id = 2;
             $student->promote_class = 2;
             $student->section_id = $student->section_id;
             
             $student->save(); // Save the changes to the database
-
-            foreach($getAllClass as $class){
-
-                $input = [
-                'student_id' => $student->id ,
-                'subject_id' => $class->subject_id,
-                'session_id' => $student->session_id,
-                'section_id' => $student->section_id,
-                'promote_class' => 2,
-                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
-                ];
-
-                ClassTwoStudentRecord::create($input);
-            }
-
         }
+
+        // =====================
+
+        foreach($allClassOneStudents as $stu){
+
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
+
+            ClassTwoStudentRecord::create($input);
+        }
+        toastr()->success('Created with new record into class Two');
+
+        // =====================
+        // dd($allClassOneStudents);
 
         toastr()->success('Class One all students promoted class One to Two successfully');
 
@@ -251,38 +301,34 @@ class ClassOneWiseStudentController extends Controller
         
         $studentIds = $request->ids;
 
-        // dd($studentIds);
-        $getAllClass = ClassAssign::where('class', 2)->get();
         $sectionId = $request->section;
 
         if(!empty($sectionId) && !empty($studentIds)) {
 
             $allClassOneStudents = User::whereIn('id', $studentIds)->get();
 
-            //  dd($allClassOneStudents->toArray());
-            
             foreach ($allClassOneStudents as $student) {
                 // $student->assign_class_id = 2;
                 $student->promote_class = 2;
                 $student->section_id = $sectionId;
+                $student->demote_class = 0;
                 
                 $student->save(); // Save the changes to the database
-    
-                foreach($getAllClass as $class){
-    
-                    $input = [
-                    'student_id' => $student->id ,
-                    'subject_id' => $class->subject_id,
-                    'session_id' => $student->session_id,
-                    'section_id' => $sectionId,
-                    'promote_class' => 2,
-                    'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
-                    ];
-    
-                    ClassTwoStudentRecord::create($input);
-                }
-    
             }
+
+            // =====================
+            foreach($allClassOneStudents as $stu){
+
+                $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
+    
+                ClassTwoStudentRecord::create($input);
+            }
+            // =====================
+
+            // toastr()->success('Created with new record into class One');
+    
+            // $message = array('message' => 'Selected Students Promotes Successfully');
+            // return response()->json($message);
 
             $totalStudentsCount = User::whereHas('roles', function($query){
                 $query->where('name', 'Student');
@@ -302,38 +348,41 @@ class ClassOneWiseStudentController extends Controller
             return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Two', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
     
         }
+
         $allClassOneStudents = User::whereIn('id', $studentIds)->get();
 
         foreach ($allClassOneStudents as $student) {
             // $student->assign_class_id = 2;
             $student->promote_class = 2;
             $student->section_id = $student->section_id;
+            $student->demote_class = 0;
             
             $student->save(); // Save the changes to the database
-
-            foreach($getAllClass as $class){
-
-                $input = [
-                'student_id' => $student->id ,
-                'subject_id' => $class->subject_id,
-                'session_id' => $student->session_id,
-                'section_id' => $student->section_id,
-                'promote_class' => 2,
-                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
-                ];
-
-                ClassTwoStudentRecord::create($input);
-            }
-
         }
 
+        // =====================
+        foreach($allClassOneStudents as $stu){
 
+            $input = ['student_id' => $stu->id , 'session_id' => $stu->session_id , 'promote_class_id' => $stu->promote_class,'section_id' => $stu->section_id];
+
+            ClassTwoStudentRecord::create($input);
+        }
+        // =====================
+
+
+        // $message = array('message' => 'Selected Students Promotes Successfully');
+        // return response()->json($message);
+
+
+
+        // ==================
         $totalStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
         })
         // ->where('assign_class_id', 1)
         ->where('promote_class', 1)
         ->count();
+
         $totalDemotedStudentsCount = User::whereHas('roles', function($query){
             $query->where('name', 'Student');
         })
@@ -343,6 +392,30 @@ class ClassOneWiseStudentController extends Controller
         ->count();
 
         return response()->json(['message' => 'Selected Students Promoted Successfully and also Created with new record into class Two', 'totalStudentsCount' => $totalStudentsCount, 'totalDemotedStudentsCount' => $totalDemotedStudentsCount]);
+
+        // ======================
+
+        
+        // if(!empty($studentIds)){
+
+            // $allClassOneStudents = User::whereIn('id', $studentIds)->get();
+
+            // foreach ($allClassOneStudents as $student) {
+            //     $student->assign_class_id = 2;
+            //     $student->promote_class = 2;
+            //     $student->section_id = $student->section_id;
+            //     $student->demote_class = 0;
+                
+            //     $student->save(); // Save the changes to the database
+            // }
+    
+            // // return response()->json(["success" => "Students Promotes Successfully"]);
+
+            // $message = array('message' => 'Selected Students Promotes Successfully');
+            // return response()->json($message);
+        // }
+
+        // return response()->json(["success" => "No Student Selected"]);
 
 
     }

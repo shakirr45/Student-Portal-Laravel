@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\ClassAssignController;
 use App\Http\Controllers\Classes\ClassAssignForClassOneController;
+use App\Http\Controllers\Classes\ClassAssignForClassTwoController;
 use App\Http\Controllers\ManageStudentController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ManageTeacherController;
@@ -19,6 +20,11 @@ use App\Http\Controllers\Students\ClassTwoWiseStudentController;
 use App\Http\Controllers\Students\ClassThreeWiseStudentController;
 use App\Http\Controllers\Students\ClassFourWiseStudentController;
 use App\Http\Controllers\Students\ClassFiveWiseStudentController;
+
+
+// -------------------------test ----------------------? start
+use App\Http\Controllers\testController;
+// -------------------------test ----------------------? end
 
   
 /*
@@ -61,6 +67,7 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('class-assign', ClassAssignController::class);
     // Route::resource('class-wise-subject-assign', SubjectAssignController::class);
     Route::resource('class-assign-for-class-one', ClassAssignForClassOneController::class);
+    Route::resource('class-assign-for-class-two', ClassAssignForClassTwoController::class);
 
    
    
@@ -115,3 +122,12 @@ Route::group(['middleware' => ['auth']], function() {
 });
 
 
+
+
+
+// ----------------------------- test ----------------------- ?? start 
+Route::get('test', [testController::class, 'index'])->name('test.index');
+Route::post('test-data.store', [testController::class, 'testDatSore'])->name('test-data.store');
+Route::get('destroy/{$id}', [testController::class, 'destroy'])->name('test.destroy');
+
+// ----------------------------- test ----------------------- ?? end 

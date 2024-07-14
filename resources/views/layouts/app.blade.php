@@ -55,6 +55,7 @@
                             <li><a class="nav-link" href="{{ route('class-assign.index') }}">Class/Section Assign for School</a></li>
                             <li><a class="nav-link" href="{{ route('manage-students.index') }}">Manage Students</a></li>
                             {{-- <li><a class="nav-link" href="{{ route('class-wise-subject-assign.index') }}">Manage Class wise Subjects  </a></li> --}}
+                            <li><a class="nav-link" href="{{ route('test.index') }}">Test</a></li>
 
 
                             <li class="nav-item dropdown">
