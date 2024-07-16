@@ -20,6 +20,7 @@ class ClassOneStudentRecord extends Model
         '1st_term_exam_result',
         '2nd_term_exam_result',
         '3rd_term_exam_result',
+        'final_result',
         
         
         // 'assign_class_id',

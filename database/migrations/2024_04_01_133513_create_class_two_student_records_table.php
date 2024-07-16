@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('1st_term_exam_result')->nullable();
             $table->string('2nd_term_exam_result')->nullable();
             $table->string('3rd_term_exam_result')->nullable();
+            $table->string('final_result')->nullable();
 
             // // $table->integer('promote_status')->default(1);
             // $table->string('amar_bangla_boi_1st_term')->nullable();
