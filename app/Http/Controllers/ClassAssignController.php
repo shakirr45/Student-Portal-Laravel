@@ -47,24 +47,25 @@ class ClassAssignController extends Controller
     {
         $institutionClass = InstitutionClass::dataList();
 
-        $classSection = ClassSection::dataList();
+        // $classSection = ClassSection::dataList();
 
-        $days = DayOfWeek::dataList();
+        // $days = DayOfWeek::dataList();
 
         $subjects = Subject::dataList();
 
         // dd($subjects);
 
-        $isTeacher = User::whereHas('roles', function($q) {
-            $q->where(function ($query) {
-                $query->where('name', 'Teacher')
-                ->orWhere('name', 'Headmaster');
-            });
-        })->pluck('name', 'id')->toArray();
+        // $isTeacher = User::whereHas('roles', function($q) {
+        //     $q->where(function ($query) {
+        //         $query->where('name', 'Teacher')
+        //         ->orWhere('name', 'Headmaster');
+        //     });
+        // })->pluck('name', 'id')->toArray();
 
         // dd($isTeacher);
         
-        return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
+        // return view('class-assign.create',compact('institutionClass','classSection','isTeacher','subjects','days'));
+        return view('class-assign.create',compact('institutionClass','subjects'));
     }
 
     /**
@@ -78,23 +79,23 @@ class ClassAssignController extends Controller
         
         $this->validate($request, [
 
-            'teacher_id' => 'required',
+            // 'teacher_id' => 'required',
 
             'class_id' => 'required',
 
-            'section_id' => 'required',
+            // 'section_id' => 'required',
 
-            'days' => 'required',
+            // 'days' => 'required',
 
             'subject_id' => 'required',
 
-            'time_start' => 'required',
+            // 'time_start' => 'required',
 
-            'time_end' => 'required',
+            // 'time_end' => 'required',
 
-            'pm_or_am_first' => 'required',
+            // 'pm_or_am_first' => 'required',
 
-            'pm_or_am_second' => 'required',
+            // 'pm_or_am_second' => 'required',
 			
         ]);
 
@@ -109,7 +110,7 @@ class ClassAssignController extends Controller
         
         // dd($getClass);
         
-        $input['class_schedule'] = $input['time_start'] . "   " . $input['pm_or_am_first']. " - " . $input['time_end'] . "   " . $input['pm_or_am_second'];
+        // $input['class_schedule'] = $input['time_start'] . "   " . $input['pm_or_am_first']. " - " . $input['time_end'] . "   " . $input['pm_or_am_second'];
        
         $input['class'] = $getClass;
 
@@ -135,20 +136,21 @@ class ClassAssignController extends Controller
     {
         $institutionClass = InstitutionClass::dataList();
 
-        $classSection = ClassSection::dataList();
+        // $classSection = ClassSection::dataList();
 
-        $days = DayOfWeek::dataList();
+        // $days = DayOfWeek::dataList();
 
         $subjects = Subject::dataList();
 
-        $isTeacher = User::whereHas('roles', function($q) {
-            $q->where(function ($query) {
-                $query->where('name', 'Teacher')
-                ->orWhere('name', 'Headmaster');
-            });
-        })->pluck('name', 'id')->toArray();
+        // $isTeacher = User::whereHas('roles', function($q) {
+        //     $q->where(function ($query) {
+        //         $query->where('name', 'Teacher')
+        //         ->orWhere('name', 'Headmaster');
+        //     });
+        // })->pluck('name', 'id')->toArray();
 
-        return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection','isTeacher','subjects','days'));
+        // return view('class-assign.edit',compact('classAssign'),compact('institutionClass','classSection','isTeacher','subjects','days'));
+        return view('class-assign.edit',compact('institutionClass','classAssign','subjects'));
 
     }
 
@@ -160,21 +162,33 @@ class ClassAssignController extends Controller
 
         $this->validate($request, [
 
-            'teacher_id' => 'required',
+            // 'teacher_id' => 'required',
             
             'class_id' => 'required',
             
-            'section_id' => 'required',
+            // 'section_id' => 'required',
 
-            'days' => 'required',
+            // 'days' => 'required',
 
             'subject_id' => 'required',
 
-            'class_schedule' => 'required',
+            // 'class_schedule' => 'required',
 
         ]);
     
 		$input = $request->all();
+
+        $classId = $input['class_id'];
+
+        // dd($classId);
+
+        $getClass = InstitutionClass::where('id',$classId)->pluck('code')->first();
+        
+        // dd($getClass);
+        
+        // $input['class_schedule'] = $input['time_start'] . "   " . $input['pm_or_am_first']. " - " . $input['time_end'] . "   " . $input['pm_or_am_second'];
+       
+        $input['class'] = $getClass;
 
 		$updateData = ClassAssign::find($classAssign->id);
 		$updateData->update($input);

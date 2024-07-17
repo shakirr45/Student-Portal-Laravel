@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2>Assign New Class</h2>
+                <h2> Manage Class One </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('class-assign.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-class-one.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('class-assign.store') }}" method="POST">
+    <form action="{{ route('manage-class-one.store') }}" method="POST">
     	@csrf
 
 
@@ -37,7 +37,13 @@
                 <div class="form-group">
                     <label for="" class="form-label">Institution Class</label>
                     
-                    {!! Form::select('class_id', ['' => 'Select One']+$institutionClass,'', array('id' => 'class_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} 
+                    {{-- {!! Form::select('suject_id', ['' => 'Select One']+$classAssign,'', array('id' => 'suject_id', 'class' => 'form-select form-small select select2-hidden-accessible ', 'tabindex' => '-1', 'aria-hidden' => 'false',  'required' => 'required')) !!} --}}
+
+                    <select name="class_assign_id" id="">
+                        @foreach($classAssign as $class)
+                        <option value="{{ $class['id']}}">{{$class['subjects']['name']}}</option>
+                        @endforeach
+                    </select>
                     
                     @error('roles')
                         <span class="invalid-feedback">

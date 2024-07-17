@@ -15,6 +15,10 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ManageTeacherController;
 
 
+use App\Http\Controllers\ManageClassController;
+use App\Http\Controllers\ManageClassOneController;
+
+
 use App\Http\Controllers\Students\ClassOneWiseStudentController;
 use App\Http\Controllers\Students\ClassTwoWiseStudentController;
 use App\Http\Controllers\Students\ClassThreeWiseStudentController;
@@ -69,7 +73,11 @@ Route::group(['middleware' => ['auth']], function() {
     Route::resource('class-assign-for-class-one', ClassAssignForClassOneController::class);
     Route::resource('class-assign-for-class-two', ClassAssignForClassTwoController::class);
 
-   
+
+    Route::resource('manage-class', ManageClassController::class);
+    Route::resource('manage-class-one', ManageClassOneController::class);
+
+    
    
    
     Route::resource('manage-students', ManageStudentController::class);

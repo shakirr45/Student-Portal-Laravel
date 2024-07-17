@@ -9,14 +9,21 @@ class ClassAssign extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'teacher_id', 
+        // 'teacher_id', 
         'class_id', 
         'class', 
-        'section_id', 
+        // 'section_id', 
         'subject_id', 
-        'days',
-        'class_schedule', 
+        // 'days',
+        // 'class_schedule', 
     ];
+
+    // protected function classOneDataList( )
+	// {
+	// 	$data = ClassAssign::orderBy('id', 'ASC')->where('class', 1)->pluck('subject_id', 'id')->toArray();
+		
+	// 	return $data;
+	// }
 
 
     public function institutionClass()
