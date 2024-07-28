@@ -8,11 +8,11 @@
             <a href="{{ route('manage-class.index') }}" class="btn btn-info" type="submit">
                 <strong> <i class="fa-solid fa-angle-double-left"></i> Back </strong>
             </a>
-                <h2>Manage Class One</h2>
+                <h2>Manage Class Two</h2>
             </div>
             <div class="pull-right">
             @can('class-create')
-                <a class="btn btn-success" href="{{ route('manage-class-one.create') }}">Create (Class one)</a>
+                <a class="btn btn-success" href="{{ route('manage-class-two.create') }}">Create (Class Two)</a>
                 @endcan
             </div>
         </div>
@@ -45,9 +45,9 @@
              <th>Class Schedule</th>   
              {{--<th width="280px">Action</th>--}}
         </tr>
-	    @foreach ($manageClassOneData as $data)
+	    @foreach ($manageClassTwoData as $data)
 	    <tr>
-             <td>{{ ++$i }}</td>
+              <td>{{ ++$i }}</td>
 	        <td>{{ !empty($data->class) ? $data->class : " " }}</td>
 	        <td>{{ !empty($data->classSection->name) ? $data->classSection->name : " " }}</td>
 	        <td>{{ !empty($data->userList->name) ? $data->userList->name : " " }}</td> 
@@ -74,7 +74,7 @@
     </table>
 
 
-    {!! $manageClassOneData->links() !!}
+   {!! $manageClassTwoData->links() !!}
 
 
 @endsection

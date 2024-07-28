@@ -13,14 +13,9 @@
                             {{ session('success') }}
                         </div>
                     @endif
-  
 
                     <div class="container">
                         <div class="row">
-
-
-
-
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
                             <h3>Welcome {{ !empty(Auth::user()->name) ? Auth::user()->name : " " }}</h3><br>
@@ -29,8 +24,8 @@
 
                         <div class="col-xs-12 col-sm-12 col-md-6 col-lg-6">
                         <div class="form-group">
-                            <h3>Section {{ !empty(Auth::user()->section_id) ? Auth::user()->section_id : " " }}</h3><br>
-                        </div>
+                         <h3>Section: ( {{ !empty( $getSection->name ) ? $getSection->name : " " }} )</h3><br>
+                          </div>
                         </div>
 
 
@@ -43,15 +38,21 @@
                                     <th>Subject</th>
                                     <th>Days</th>
                                     <th>Class Schedule</th>
+                                    {{-- <th>Action</th>--}}
                                 </tr>
                                @foreach($studentWiseClassShow as $class)
                                 <tr>
-                                    <td>{{ !empty( $class->institutionClass->name ) ? $class->institutionClass->name : " " }}</td>
+                                  <td>{{ !empty( $class->class ) ? $class->class : " " }}</td>
                                     <td>{{ !empty( $class->userList->name ) ? $class->userList->name : " " }}</td>
-                                    <td>{{ !empty( $class->subjects->name ) ? $class->subjects->name : " " }}</td>
-                                    <td>{{ !empty( $class->days ) ? $class->days : " " }}</td>
+                                   <td>{{ !empty( $class->subjects->name ) ? $class->subjects->name : " " }}</td>
+                                      <td>{{ !empty( $class->days ) ? $class->days : " " }}</td>
                                     <td>{{ !empty( $class->class_schedule ) ? $class->class_schedule : " " }}</td>
-                                </tr>
+                                    {{--<td>
+                                    <a class="btn btn-primary" href="#"></a>
+                                    </td>--}}
+                                       
+                               
+                                  </tr>
                                 @endforeach 
 
                             </table>

@@ -51,7 +51,7 @@ class ManageStudentController extends Controller
         $manageStudents = User::whereHas('roles', function ($query){
             $query->where('name', 'Student');
         })->where($serchCondition)
-        ->with(['InstitutionClass'])
+        // ->with(['InstitutionClass'])
         ->with(['classSection'])
         ->latest()->paginate(5);
 
@@ -120,9 +120,9 @@ class ManageStudentController extends Controller
         
         $user->assignRole('Student');
 
-        if( $user->promote_class == 1 ){
+        $getStuClass = $user->promote_class;
 
-            $getStuClass = $user->promote_class;
+        if( $getStuClass == 1 ){
 
             $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
 
@@ -134,7 +134,6 @@ class ManageStudentController extends Controller
                 $input = [
                 'student_id' => $user->id ,
                 'subject_id' => $class->subject_id,
-                // 'assign_class_id_id' => $user->assign_class_id,
                 'session_id' => $user->session_id,
                 'section_id' => $user->section_id,
                 'promote_class' => 1,
@@ -145,75 +144,226 @@ class ManageStudentController extends Controller
                 
             }
 
-            dd("Ok");
+            dd("Ok for one");
 
-            // =======================
+        }else if( $getStuClass == 2 ){
 
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
 
+            // dd($getAllClass->toArray());
 
-        }else if( $user->promote_class == 2 ){
+            foreach($getAllClass as $class){
 
-            $data['student_id'] = $user->id;
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 2,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
 
-            $data['session_id'] = $user->session_id;
+                ClassTwoStudentRecord::create($input);
+            }
+
+            dd("Ok for 2");
+
+        }else if( $getStuClass == 3 ){
+
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
+
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+            foreach($getAllClass as $class){
+
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 3,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
+
+                ClassThreeStudentRecord::create($input);
+                
+            }
+
+            dd("Ok for 3");
+
+        }else if( $getAllClass == 4 ){
+
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
+
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+            foreach($getAllClass as $class){
+
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 4,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
+
+                ClassFourStudentRecord::create($input);
+                
+            }
+
+            dd("Ok for four");
             
-            $data['section_id'] = $user->section_id;
+        }else if( $getAllClass == 5 ){
 
-            $data['promote_class_id'] = $user->promote_class;
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
 
-            ClassTwoStudentRecord::create($data);
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
 
-        }else if( $user->promote_class == 3 ){
+            foreach($getAllClass as $class){
 
-            $data['student_id'] = $user->id;
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 5,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
 
-            $data['session_id'] = $user->session_id;
-            
-            $data['section_id'] = $user->section_id;
+                ClassFiveStudentRecord::create($input);
+                
+            }
 
-            $data['promote_class_id'] = $user->promote_class;
+            dd("Ok for Five");
 
-            ClassThreeStudentRecord::create($data);
+        }else if( $getAllClass == 6 ){
 
-        }else if( $user->promote_class == 4 ){
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
 
-            $data['student_id'] = $user->id;
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
 
-            $data['session_id'] = $user->session_id;
-            
-            $data['section_id'] = $user->section_id;
+            foreach($getAllClass as $class){
 
-            $data['promote_class_id'] = $user->promote_class;
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 6,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
 
-            ClassFourStudentRecord::create($data);
-            
-        }else if( $user->promote_class == 5 ){
+                ClassSixStudentRecord::create($input);
+                
+            }
 
-            $data['student_id'] = $user->id;
+            dd("Ok for Six");
+        }
+        else if( $getAllClass == 7 ){
 
-            $data['session_id'] = $user->session_id;
-            
-            $data['section_id'] = $user->section_id;
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
 
-            $data['promote_class_id'] = $user->promote_class;
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
 
-            ClassFiveStudentRecord::create($data);
+            foreach($getAllClass as $class){
 
-        }else if( $user->promote_class == 6 ){
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 7,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
 
-            $data['student_id'] = $user->id;
+                ClassSevenStudentRecord::create($input);
+                
+            }
 
-            $data['session_id'] = $user->session_id;
-            
-            $data['section_id'] = $user->section_id;
+            dd("Ok for Seven");
 
-            $data['promote_class_id'] = $user->promote_class;
+        }else if( $getAllClass == 8 ){
 
-            ClassSixStudentRecord::create($data);
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
+
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+            foreach($getAllClass as $class){
+
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 8,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
+
+                ClassEightStudentRecord::create($input);
+                
+            }
+
+            dd("Ok for Eight");
+
+        }
+        else if( $getAllClass == 9 ){
+
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
+
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+            foreach($getAllClass as $class){
+
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 9,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
+
+                ClassNineStudentRecord::create($input);
+                
+            }
+
+            dd("Ok for Nine");
+
+        }else if( $getAllClass == 10 ){
+
+            $getAllClass = ClassAssign::where('class_id', $getStuClass)->get();
+
+            // dd($getAllClass->toArray());
+            // dd($user->toArray());
+
+            foreach($getAllClass as $class){
+
+                $input = [
+                'student_id' => $user->id ,
+                'subject_id' => $class->subject_id,
+                'session_id' => $user->session_id,
+                'section_id' => $user->section_id,
+                'promote_class' => 10,
+                'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                ];
+
+                ClassTenStudentRecord::create($input);
+                
+            }
+
+            dd("Ok for Ten");
         }
 
 
-
+dd("ok");
         
         
 

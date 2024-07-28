@@ -7,9 +7,12 @@ use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\Auth\AuthController;
+
 use App\Http\Controllers\ClassAssignController;
 use App\Http\Controllers\Classes\ClassAssignForClassOneController;
 use App\Http\Controllers\Classes\ClassAssignForClassTwoController;
+use App\Http\Controllers\Classes\ClassAssignForClassThreeController;
+
 use App\Http\Controllers\ManageStudentController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ManageTeacherController;
@@ -17,6 +20,10 @@ use App\Http\Controllers\ManageTeacherController;
 
 use App\Http\Controllers\ManageClassController;
 use App\Http\Controllers\ManageClassOneController;
+use App\Http\Controllers\ManageClassTwoController;
+use App\Http\Controllers\ManageClassThreeController;
+
+use App\Http\Controllers\StudentDataController;
 
 
 use App\Http\Controllers\Students\ClassOneWiseStudentController;
@@ -72,23 +79,23 @@ Route::group(['middleware' => ['auth']], function() {
     // Route::resource('class-wise-subject-assign', SubjectAssignController::class);
     Route::resource('class-assign-for-class-one', ClassAssignForClassOneController::class);
     Route::resource('class-assign-for-class-two', ClassAssignForClassTwoController::class);
+    Route::resource('class-assign-for-class-three', ClassAssignForClassThreeController::class);
 
 
     Route::resource('manage-class', ManageClassController::class);
     Route::resource('manage-class-one', ManageClassOneController::class);
+    Route::resource('manage-class-two', ManageClassTwoController::class);
+    Route::resource('manage-class-three', ManageClassThreeController::class);
 
-    
-   
    
     Route::resource('manage-students', ManageStudentController::class);
     Route::resource('manage-teachers', ManageTeacherController::class);
-    
+    // Route::resource('student-data', StudentDataController::class);
+    Route::get('student-data/{class}/{subject_id}', [StudentDataController::class, 'index'])->name('student-data');
     
     Route::resource('manage-sessions', SessionController::class);
     Route::delete('manage-sessions-destroy', [SessionController::class, 'destroy'])->name('manage-sessions-destroy');
 
-
-    
 
     // Class Wise students Show =====>
     Route::resource('class-one-wise-students', ClassOneWiseStudentController::class);

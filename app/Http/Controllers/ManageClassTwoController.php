@@ -1,11 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Http\Request;
 
-// use App\Models\ManageClassOne;
-use App\Http\Requests\StoreManageClassOneRequest;
-use App\Http\Requests\UpdateManageClassOneRequest;
+// use App\Models\ManageClassTwo;
 use App\Models\ClassAssign;
 use App\Models\ClassSection;
 use App\Models\User;
@@ -13,42 +12,37 @@ use App\Models\Subject;
 use App\Models\DayOfWeek;
 use App\Models\ManageClass;
 
-class ManageClassOneController extends Controller
+class ManageClassTwoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-        $manageClassOneData = ManageClass::where('class', 1)
+    //
+    public function index(){
+
+        $manageClassTwoData = ManageClass::where('class', 2)
         ->with(['classSection'])
         ->with(['userList'])
         ->with(['subjects'])
         ->paginate(10);
-        // dd($manageClassOneData);
-        // return view('manage-class.class-one.index',compact('manageClassOneData'));
 
-        return view('manage-class.class-one.index',compact('manageClassOneData'))
+        // dd($manageClassTwoData);
+        // return view('manage-class.class-two.index',compact('manageClassTwoData'));
+
+        return view('manage-class.class-two.index',compact('manageClassTwoData'))
         ->with('i', (request()->input('page', 1) - 1) * 5);
 
+
     }
-    
-    
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
         //
+        // dd("two");
 
         $classAssign = ClassAssign::orderBy('id', 'ASC')
-        ->where('class', 1)
+        ->where('class', 2)
         ->with(['subjects'])
         ->get()->toArray();
 
         // dd($classAssign);
-            
 
         $classSection = ClassSection::dataList();
 
@@ -67,18 +61,15 @@ class ManageClassOneController extends Controller
 
         // dd($isTeacher);
         
-        return view('manage-class.class-one.create',compact('classAssign','classSection','isTeacher','days'));
+        return view('manage-class.class-two.create',compact('classAssign','classSection','isTeacher','days'));
 
 
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+
     public function store(Request $request)
     {
         // dd($request->all());
-        
         
         $this->validate($request, [
 
@@ -125,44 +116,12 @@ class ManageClassOneController extends Controller
        
         $input['subject_id'] = $getSubjectId;
         
-        $input['class'] = 1;
+        $input['class'] = 2;
 
         $user = ManageClass::create($input);
 
-        toastr()->success('Manage Class one created successfully');
+        toastr()->success('Manage Class Two created successfully');
 
         return redirect()->back();
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(ManageClassOne $manageClassOne)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(ManageClassOne $manageClassOne)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateManageClassOneRequest $request, ManageClassOne $manageClassOne)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(ManageClassOne $manageClassOne)
-    {
-        //
     }
 }

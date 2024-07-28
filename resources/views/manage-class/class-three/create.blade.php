@@ -5,10 +5,10 @@
     <div class="row">
         <div class="col-lg-12 margin-tb">
             <div class="pull-left">
-                <h2> Manage Class One </h2>
+                <h2> Manage Class Three </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('manage-class-one.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-class-three.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('manage-class-one.store') }}" method="POST">
+    <form action="{{ route('manage-class-three.store') }}" method="POST">
     	@csrf
 
 

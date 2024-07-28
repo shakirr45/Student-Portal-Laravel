@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\testModel;
+use App\Models\ClassAssign;
+use App\Models\Subject;
+use DB;
 
 class testController extends Controller
 {
@@ -11,9 +14,70 @@ class testController extends Controller
 
     public function index(){
 
-        $data = testModel::all();
 
+        $date = Date('Y-m-d');
+
+        $classAssign = Subject::with(['classAssign'])
+        ->get()
+        ->toArray();
+
+        // $classAssign = Subject::whereHas('classAssign', function($q) as $date{
+        //         $q->whereDate('created_at',  $date);
+        //     }
+        // )->get();
+
+        dd($classAssign);
+
+
+
+
+
+
+        $arrayData = [0,1,2];
+
+        // dd($arrayData);
+
+        // foreach ($arrayData as $s => $d) {
+        //     echo 
+        //     //    $d->cat_id . $d->child_cat . "<br>"
+        //     $d . "<br>"
+        //     ;
+
+        // }
+
+        $childData = DB::table('category')
+        ->whereIn('cat_id',$arrayData)
+        // ->orWhere('cat_id',2)
+        ->distinct()
+        ->pluck('child_cat')->toArray();
+
+        foreach ($arrayData as $s => $d) {
+            $array = [
+                $d => $childData,
+            ];
+            
+            echo '<pre>' . print_r($array, true) . '</pre>';
+
+        }
+
+
+
+
+        // foreach ($data as $s => $d) {
+        //     echo 
+        //        $d->cat_id . $d->child_cat . "<br>"
+        //     ;
+
+        // }
         
+
+
+
+
+
+
+
+        $data = testModel::all();
 
 
         // dd($data);

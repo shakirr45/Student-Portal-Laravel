@@ -22,10 +22,6 @@
         </div>
     @endif
 
-
-
-
-
 <!-- ================================================================= -->
 <!-- ================================================================= -->
 <!-- ================================================================= -->
@@ -104,7 +100,7 @@
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ !empty($students->user_id ) ? $students->user_id  : " " }}</td>
-	        <td>{{ !empty($students->InstitutionClass->name) ? $students->InstitutionClass->name : " " }}</td>
+	        <td>{{ !empty($students->promote_class) ? $students->promote_class : " " }}</td>
 	        <td>{{ !empty($students->classSection->name) ? $students->classSection->name : " " }}</td> 
 	        <td>
 

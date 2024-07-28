@@ -75,26 +75,28 @@ class ManageTeacherController extends Controller
      */
     public function store(Request $request)
     {
-        $this->validate($request, [
+        // $this->validate($request, [
 
-            'name' => 'required',
+        //     'name' => 'required',
 
-            'email' => 'required|email|unique:users,email',
+        //     'email' => 'required|email|unique:users,email',
 
-            'user_id' => 'required|unique:users,user_id',
+        //     'user_id' => 'required|unique:users,user_id',
 
-            'mobile_no' => 'required|max:11|unique:users,mobile_no',
+        //     'mobile_no' => 'required|max:11|unique:users,mobile_no',
 
-            'password' => 'required|same:confirm-password',
+        //     'password' => 'required|same:confirm-password',
 
-            'session_id' => 'required',
+        //     'session_id' => 'required',
 
-        ]);
+        // ]);
 
        
         
 
         $input = $request->all();
+
+        // dd($input);
         // $input['assign_class_id'] = json_encode($input['assign_class_id']);
 
         $input['password'] = Hash::make($input['password']);

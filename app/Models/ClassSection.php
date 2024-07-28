@@ -28,4 +28,8 @@ class ClassSection extends Model
     {
         return $this->hasOne('App\Models\ClassAssign');
     }
+    public function manageClass()
+    {
+        return $this->hasOne('App\Models\ManageClass');
+    }
 }

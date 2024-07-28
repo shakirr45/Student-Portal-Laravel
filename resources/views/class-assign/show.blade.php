@@ -24,13 +24,13 @@
             </div>
         </div>
         
-        <div class="col-xs-12 col-sm-12 col-md-12">
+        {{--  <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Section:</strong>
                 {{ !empty($classAssign->classSection->name) ? $classAssign->classSection->name : '' }}
 
             </div>
-        </div>
+        </div>--}}
 
 
 
@@ -43,26 +43,26 @@
             </div>
         </div>
 
-       <div class="col-xs-12 col-sm-12 col-md-12">
+{{--      <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Assign Teacher:</strong>
                 {{ !empty($classAssign->userList->name) ? $classAssign->userList->name : '' }}
 
             </div>
         </div>
-    </div>
+    </div>--}}
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+{{--   <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Days:</strong>
                 {{ !empty($classAssign->days) ? $classAssign->days : '' }}
             </div>
-        </div>
+        </div>--}}
 
-    <div class="col-xs-12 col-sm-12 col-md-12">
+{{--   <div class="col-xs-12 col-sm-12 col-md-12">
             <div class="form-group">
                 <strong>Class Schedule:</strong>
                 {{ !empty($classAssign->class_schedule) ? $classAssign->class_schedule : '' }}
             </div>
-        </div>
+        </div>--}}
 @endsection

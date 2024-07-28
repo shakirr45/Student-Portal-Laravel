@@ -8,7 +8,7 @@
                 <h2> Manage Class One </h2>
             </div>
             <div class="pull-right">
-                <a class="btn btn-primary" href="{{ route('manage-class-one.index') }}"> Back</a>
+                <a class="btn btn-primary" href="{{ route('manage-class-two.index') }}"> Back</a>
             </div>
         </div>
     </div>
@@ -26,7 +26,7 @@
     @endif
 
 
-    <form action="{{ route('manage-class-one.store') }}" method="POST">
+    <form action="{{ route('manage-class-two.store') }}" method="POST">
     	@csrf
 
 

@@ -7,10 +7,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Session;
 use App\Models\User;
-use App\Models\ClassSection;
 use Hash;
 use App\Models\ClassAssign;
-use App\Models\ManageClass;
 use App\Models\ClassWiseSubjectAssign;
 use Carbon\Carbon;
 
@@ -82,46 +80,43 @@ class AuthController extends Controller
             // dd($currentLoginRoleInfo);
 
             // For students ===========>
-            $saturdaysdata = ManageClass::where('class', $currentUserClass)
+            $saturdaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Saturday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-
-            // dd($saturdaysdata);
-
-            $sundaysdata = ManageClass::where('class', $currentUserClass)
+            $sundaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Sunday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-            $mondaysdata = ManageClass::where('class', $currentUserClass)
+            $mondaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Monday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-            $tuesdaysdata = ManageClass::where('class', $currentUserClass)
+            $tuesdaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Tuesday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-            $wednesdaysdata = ManageClass::where('class', $currentUserClass)
+            $wednesdaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Wednesday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-            $thursdaysdata = ManageClass::where('class', $currentUserClass)
+            $thursdaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Thursday')
             ->with(['subjects'])
             ->with(['userList'])
             ->get();
-            $fridaysdata = ManageClass::where('class', $currentUserClass)
+            $fridaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Friday')
             ->with(['subjects'])
@@ -131,31 +126,31 @@ class AuthController extends Controller
 
             // For Teachers ===========>
 
-            $saturdaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $saturdaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Saturday')
             ->with(['subjects'])
             ->get();
-            $sundaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $sundaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Sunday')
             ->with(['subjects'])
             ->get();
-            $mondaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $mondaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Monday')
             ->with(['subjects'])
             ->get();
-            $tuesdaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $tuesdaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Tuesday')
             ->with(['subjects'])
             ->get();
-            $wednesdaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $wednesdaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Wednesday')
             ->with(['subjects'])
             ->get();
-            $thursdaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $thursdaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Thursday')
             ->with(['subjects'])
             ->get();
-            $fridaysdataForTeachers = ManageClass::where('assign_teacher_id', $currentUserId)
+            $fridaysdataForTeachers = ClassAssign::where('teacher_id', $currentUserId)
             ->where('days', 'Friday')
             ->with(['subjects'])
             ->get();
@@ -166,24 +161,17 @@ class AuthController extends Controller
         if($currentLoginRoleInfo == "Student"){
 
 
-            $studentWiseClassShow = ManageClass::where('class', $currentUserClass)
+            $studentWiseClassShow = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
-            // ->with(['institutionClass'])
-            ->with(['classAssign'])
+            ->with(['institutionClass'])
             ->with(['userList'])
             ->with(['subjects'])
             ->get();
 
-            $getSection = ClassSection::find($currentUserSectionId);
-            // dd($getSection);
-
-
-            // dd($studentWiseClassShow);
-
                 
         if($dayOfWeekForToday == "Saturday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Saturday')
             ->with(['subjects'])
@@ -193,7 +181,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Sunday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Sunday')
             ->with(['subjects'])
@@ -202,7 +190,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Monday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Monday')
             ->with(['subjects'])
@@ -211,7 +199,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Tuesday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Tuesday')
             ->with(['subjects'])
@@ -220,7 +208,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Wednesday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Wednesday')
             ->with(['subjects'])
@@ -229,7 +217,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Thursday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Thursday')
             ->with(['subjects'])
@@ -240,7 +228,7 @@ class AuthController extends Controller
 
         }elseif($dayOfWeekForToday == "Friday"){
 
-            $currentDateDaysdata = ManageClass::where('class', $currentUserClass)
+            $currentDateDaysdata = ClassAssign::where('class_id', $currentUserClass)
             ->where('section_id', $currentUserSectionId)
             ->where('days', 'Friday')
             ->with(['subjects'])
@@ -250,19 +238,19 @@ class AuthController extends Controller
         }else{
             return "No Data";
         }
-        return view('students.index', compact('getSection','studentWiseClassShow','currentDateDaysdata','dayOfWeekForToday','saturdaysdata','sundaysdata','mondaysdata','tuesdaysdata','wednesdaysdata','thursdaysdata','fridaysdata'));
+        return view('students.index', compact('studentWiseClassShow','currentDateDaysdata','dayOfWeekForToday','saturdaysdata','sundaysdata','mondaysdata','tuesdaysdata','wednesdaysdata','thursdaysdata','fridaysdata'));
 
 
         }elseif($currentLoginRoleInfo == "Teacher"){
 
-            $teachertWiseClassShow = ManageClass::where('assign_teacher_id', $currentUserId)
-            // ->with(['institutionClass'])
+            $teachertWiseClassShow = ClassAssign::where('teacher_id', $currentUserId)
+            ->with(['institutionClass'])
             ->with(['classSection'])
             ->with(['subjects'])
             ->get();
 
-            $currentDateDaysClass = ManageClass::where('assign_teacher_id', $currentUserId)
-            // ->with(['institutionClass'])
+            $currentDateDaysClass = ClassAssign::where('teacher_id', $currentUserId)
+            ->with(['institutionClass'])
             ->with(['classSection'])
             ->with(['subjects'])
             ->where('days', $dayOfWeekForToday)

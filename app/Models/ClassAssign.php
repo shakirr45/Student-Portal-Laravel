@@ -47,6 +47,11 @@ class ClassAssign extends Model
         return $this->belongsTo('App\Models\Subject', 'subject_id');
     }
 
+    public function manageClass()
+    {
+        return $this->hasOne('App\Models\ManageClass');
+    }
+
 }
 
 

@@ -152,7 +152,8 @@
 									</div>
 									
 									<div class="text-center">
-										<a id="search_btn" href="{{ url('class-one-wise-students/') }}" class="btn submit-btn" type="submit">search</a>
+										{{--<a id="search_btn" href="{{ url('class-one-wise-students/') }}" class="btn submit-btn" type="submit">search</a>--}}
+										<button type="submit" class="btn submit-btn" >Search</button>
 										
 										<a id="" href="{{ url('class-one-wise-students/') }}" class="btn  btn-danger" type="reset">Cancel</a>
 									</div>

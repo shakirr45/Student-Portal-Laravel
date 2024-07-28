@@ -28,22 +28,22 @@
         <tr>
             <th>No</th>
             <th>Class</th>
-            <th>Section</th>
-            <th>Assign Teacher</th> 
+           {{-- <th>Section</th>--}}
+           {{-- <th>Assign Teacher</th> --}}
              <th>Subjects</th>  
-             <th>Day</th>   
-             <th>Class Schedule</th>   
+            {{--  <th>Day</th> --}}  
+             {{-- <th>Class Schedule</th> --}}  
              {{--<th width="280px">Action</th>--}}
         </tr>
 	    @foreach ($classes as $class)
 	    <tr>
 	        <td>{{ ++$i }}</td>
 	        <td>{{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }}</td>
-	        <td>{{ !empty($class->classSection->name) ? $class->classSection->name : " " }}</td>
-	        <td>{{ !empty($class->userList->name) ? $class->userList->name : " " }}</td> 
+	        {{-- <td>{{ !empty($class->classSection->name) ? $class->classSection->name : " " }}</td>--}}
+	        {{-- <td>{{ !empty($class->userList->name) ? $class->userList->name : " " }}</td>--}} 
 	         <td>{{ !empty($class->subjects->name) ? $class->subjects->name : " "}}</td>    
-	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
-	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
+	         {{-- <td>{{ !empty($class->days) ? $class->days : " " }}</td>--}}   
+	         {{-- <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>--}}   
 	        {{--<td>
                 <form action="{{ route('class-assign.destroy',$class->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('class-assign.show',$class->id) }}">Show</a>

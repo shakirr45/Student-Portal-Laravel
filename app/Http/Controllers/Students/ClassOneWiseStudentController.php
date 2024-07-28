@@ -276,7 +276,7 @@ class ClassOneWiseStudentController extends Controller
                     'session_id' => $student->session_id,
                     'section_id' => $sectionId,
                     'promote_class' => 2,
-                    'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null ,
+                    'entry_user_id' => !empty( Auth::user()->id) ? Auth::user()->id : null,
                     ];
     
                     ClassTwoStudentRecord::create($input);

@@ -85,6 +85,12 @@ class User extends Authenticatable
     }
 
 
+    public function manageClass()
+    {
+        return $this->hasOne('App\Models\ManageClass');
+    }
+
+
 
 
 }

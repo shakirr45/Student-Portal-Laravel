@@ -15,6 +15,8 @@
         </div>
     </div>
         <a class="btn btn-info" href="{{ route('manage-class-one.index') }}">Class 1</a>
+        <a class="btn btn-danger" href="{{ route('manage-class-two.index') }}">Class 2</a>
+        <a class="btn btn-success" href="{{ route('manage-class-three.index') }}">Class 3</a>
         {{--  <a class="btn btn-danger" href="{{ route('manage-class-two.index') }}">Class 2</a>--}}
 
 
@@ -32,25 +34,28 @@
 
     <table class="table table-bordered">
         <tr>
-            <th>No</th>
+        <th>No</th>
             <th>Class</th>
             <th>Section</th>
+            <th>Subjects</th> 
+            <th>Class Schedule</th>   
             <th>Assign Teacher</th> 
-             <th>Subjects</th>  
-             <th>Day</th>   
-             <th>Class Schedule</th>   
-            <th width="280px">Action</th>
+            <th>Days</th>   
+             {{-- <th>Subjects</th>  
+            <th width="280px">Action</th>--}}
         </tr>
-	   {{--  @foreach ($classes as $class)
+	    @foreach ($manageClassData as $data)
 	    <tr>
-	        <td>{{ ++$i }}</td>
-	        <td>{{ !empty($class->institutionClass->name) ? $class->institutionClass->name : " " }}</td>
-	        <td>{{ !empty($class->classSection->name) ? $class->classSection->name : " " }}</td>
-	        <td>{{ !empty($class->userList->name) ? $class->userList->name : " " }}</td> 
-	         <td>{{ !empty($class->subjects->name) ? $class->subjects->name : " "}}</td>    
-	         <td>{{ !empty($class->days) ? $class->days : " " }}</td>   
-	         <td>{{ !empty($class->class_schedule) ? $class->class_schedule : " " }}</td>   
-	        <td>
+         <td>{{ ++$i }}</td>  
+	        <td>{{ !empty($data->class) ? $data->class : " " }}</td>
+            <td>{{ !empty($data->classSection->name) ? $data->classSection->name : " " }}</td>
+	        <td>{{ !empty($data->subjects->name) ? $data->subjects->name : " " }}</td> 
+            <td>{{ !empty($data->class_schedule) ? $data->class_schedule : " " }}</td>
+            <td>{{ !empty($data->userList->name) ? $data->userList->name : " " }}</td>
+            <td>{{ !empty($data->days) ? $data->days : " " }}</td>      
+            {{--<td>{{ !empty($class->subjects->name) ? $class->subjects->name : " "}}</td>--}}    
+             {{--
+                  <td>
                 <form action="{{ route('class-assign.destroy',$class->id) }}" method="POST">
                     <a class="btn btn-info" href="{{ route('class-assign.show',$class->id) }}">Show</a>
                     @can('class-edit')
@@ -64,13 +69,13 @@
                     <button type="submit" class="btn btn-danger">Delete</button>
                     @endcan
                 </form>
-	        </td>
+	        </td>--}}
 	    </tr>
-	    @endforeach --}}
+	    @endforeach
     </table>
 
 
-    {{--    {!! $classes->links() !!}--}}
+   {!! $manageClassData->links() !!}
 
 
 @endsection
