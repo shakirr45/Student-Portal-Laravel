@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('class_five_student_records', function (Blueprint $table) {
+        Schema::create('class_eight_student_records', function (Blueprint $table) {
             $table->id();
             $table->integer('student_id')->default(0);
             $table->integer('session_id')->default(0);
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('class_five_student_records');
+        Schema::dropIfExists('class_eight_student_records');
     }
 };

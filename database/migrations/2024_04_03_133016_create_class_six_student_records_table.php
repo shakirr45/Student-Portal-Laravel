@@ -15,51 +15,14 @@ return new class extends Migration
             $table->id();
             $table->integer('student_id')->default(0);
             $table->integer('session_id')->default(0);
-            $table->integer('promote_class_id')->default(0);
+            $table->integer('subject_id')->default(0);
             $table->integer('section_id')->default(0);
-            // $table->integer('promote_status')->default(1);
+            $table->string('promote_class')->nullable();
 
-            $table->string('shastho_surokkha_1st_term')->nullable();
-            $table->string('shastho_surokkha_2nd_term')->nullable();
-            $table->string('shastho_surokkha_3rd_term')->nullable();
-
-            $table->string('gonit_1st_term')->nullable();
-            $table->string('gonit_2nd_term')->nullable();
-            $table->string('gonit_3rd_term')->nullable();
-
-            $table->string('biggan_1st_term')->nullable();
-            $table->string('biggan_2nd_term')->nullable();
-            $table->string('biggan_3rd_term')->nullable();
-
-            $table->string('digital_projukti_1st_term')->nullable();
-            $table->string('digital_projukti_2nd_term')->nullable();
-            $table->string('digital_projukti_3rd_term')->nullable();
-
-
-            $table->string('bangla_1st_term')->nullable();
-            $table->string('bangla_2nd_term')->nullable();
-            $table->string('bangla_3rd_term')->nullable();
-
-            $table->string('engregi_1st_term')->nullable();
-            $table->string('engregi_2nd_term')->nullable();
-            $table->string('engregi_3rd_term')->nullable();
-
-            $table->string('itihash_o_shamjik_biggan_1st_term')->nullable();
-            $table->string('itihash_o_shamjik_biggan_2nd_term')->nullable();
-            $table->string('itihash_o_shamjik_biggan_3rd_term')->nullable();
-
-            $table->string('jibon_o_jibika_1st_term')->nullable();
-            $table->string('jibon_o_jibika_2nd_term')->nullable();
-            $table->string('jibon_o_jibika_3rd_term')->nullable();
-
-            $table->string('shilpo_o_shonoskrity_1st_term')->nullable();
-            $table->string('shilpo_o_shonoskrity_2nd_term')->nullable();
-            $table->string('shilpo_o_shonoskrity_3rd_term')->nullable();
-
-            $table->string('dhormo_sikkaha_1st_term')->nullable();
-            $table->string('dhormo_sikkaha_2nd_term')->nullable();
-            $table->string('dhormo_sikkaha_3rd_term')->nullable();
-
+            $table->string('1st_term_exam_result')->nullable();
+            $table->string('2nd_term_exam_result')->nullable();
+            $table->string('3rd_term_exam_result')->nullable();
+            $table->string('final_result')->nullable();
 
             $table->integer('entry_user_id')->default(0);
             $table->integer('modified_user_id')->default(0);
