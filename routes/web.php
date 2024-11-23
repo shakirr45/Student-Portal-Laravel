@@ -76,7 +76,14 @@ Route::group(['middleware' => ['auth']], function() {
 
     
     Route::resource('class-assign', ClassAssignController::class);
+    Route::get('subjects-index', [ClassAssignController::class, 'sub_index'])->name('subjects-index');
+    Route::post('subject-store', [ClassAssignController::class, 'sub_store'])->name('subject-store');
+
     // Route::resource('class-wise-subject-assign', SubjectAssignController::class);
+
+
+
+
     Route::resource('class-assign-for-class-one', ClassAssignForClassOneController::class);
     Route::resource('class-assign-for-class-two', ClassAssignForClassTwoController::class);
     Route::resource('class-assign-for-class-three', ClassAssignForClassThreeController::class);

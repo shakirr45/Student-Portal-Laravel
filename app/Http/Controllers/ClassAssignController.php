@@ -209,4 +209,31 @@ class ClassAssignController extends Controller
 
         return redirect()->route('class-assign.index');
     }
+
+
+    public function sub_index(){
+        return view('class-assign.subjects.index');    
+    }
+
+    public function sub_store(Request $request){
+
+        $this->validate($request, [
+
+            'name' => 'required|max:11|unique:subjects,name',
+
+            'sub_code' => 'required|unique:subjects,sub_code',
+
+        ]);
+
+        // dd($request->all());
+        
+        $input = $request->all();
+
+        $user = Subject::create($input);
+
+        toastr()->success('Class Added successfully');
+
+        return redirect()->route('subjects-index');
+
+    }
 }
